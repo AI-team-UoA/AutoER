@@ -35,12 +35,12 @@ csv_name = args.csv_name
 
 DIR = 'predictions_optuna/'
 TOPK = 20
-OPTUNA_NUM_OF_TRIALS = 1
+OPTUNA_NUM_OF_TRIALS = 100
 REGRESSORS = {'SVR': SVR, 'XGB': XGBRegressor, 'RF': RandomForestRegressor}
 REGRESSOR = REGRESSORS[args.regressor]
-RESULTS_CSV_NAME = csv_name+'_'+args.regressor
+RESULTS_CSV_NAME = csv_name+'_'+args.regressor+'_'+dataset
 RANDOM_STATE = 42
-
+DB_NAME = 'sqlite:///{}.db'.format(RESULTS_CSV_NAME)
 
 def evaluate(y_true, y_pred):
     idx = np.argsort(y_pred)
@@ -77,18 +77,18 @@ features = ['clustering', 'lm', 'k', 'threshold', 'InputEntityProfiles', 'Number
             'AverageValueLength', 'AverageValueTokens', 'MaxValuesPerEntity']
 trials = trials[features + ['f1', 'dataset']]
 
-trials.to_csv(RESULTS_CSV_NAME, sep=',', index=False)
+# trials.to_csv(RESULTS_CSV_NAME, sep=',', index=False)
 
-filename = DIR+RESULTS_CSV_NAME+'_'+dataset+'.csv'
+filename = DIR+RESULTS_CSV_NAME+'.csv'
 f = open(filename, 'w')
 f.write('TEST_SET, REGRESSOR, R2, MAE, MSE, AUTOCONF_METRIC, DIFF_FROM_MAX\n')
 f.flush()
 print("Writing to: ", filename)
 
+
 for D in datasets:
 
-    STUDY_NAME = 'classic_autoconf_'+args.regressor
-    DB_NAME = 'sqlite:///{}.db'.format(STUDY_NAME)
+    STUDY_NAME = RESULTS_CSV_NAME+'_'+D
     
     print("\n\n-----------------------------------\n")
     print("TEST SET: ", D)
@@ -185,7 +185,6 @@ for D in datasets:
         y_pred = model.predict(X_val)
         return mean_squared_error(y_val, y_pred)
     
-    STUDY_NAME += '_'+D
     study = optuna.create_study(direction='minimize', 
                                 sampler=optuna.samplers.TPESampler(seed=RANDOM_STATE),
                                 study_name=STUDY_NAME,
