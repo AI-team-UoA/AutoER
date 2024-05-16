@@ -38,7 +38,7 @@ TOPK = 20
 OPTUNA_NUM_OF_TRIALS = 1
 REGRESSORS = {'SVR': SVR, 'XGB': XGBRegressor, 'RF': RandomForestRegressor}
 REGRESSOR = REGRESSORS[args.regressor]
-RESULTS_CSV_NAME = csv_name
+RESULTS_CSV_NAME = csv_name+'_'+args.regressor
 RANDOM_STATE = 42
 
 
