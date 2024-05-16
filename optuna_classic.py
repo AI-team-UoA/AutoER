@@ -40,8 +40,7 @@ REGRESSORS = {'SVR': SVR, 'XGB': XGBRegressor, 'RF': RandomForestRegressor}
 REGRESSOR = REGRESSORS[args.regressor]
 RESULTS_CSV_NAME = csv_name
 RANDOM_STATE = 42
-STUDY_NAME = 'classic_autoconf'
-DB_NAME = 'sqlite:///{}.db'.format(STUDY_NAME)
+
 
 def evaluate(y_true, y_pred):
     idx = np.argsort(y_pred)
@@ -87,6 +86,10 @@ f.flush()
 print("Writing to: ", filename)
 
 for D in datasets:
+
+    STUDY_NAME = 'classic_autoconf_'+args.regressor
+    DB_NAME = 'sqlite:///{}.db'.format(STUDY_NAME)
+    
     print("\n\n-----------------------------------\n")
     print("TEST SET: ", D)
     print("TRAINING with: ", [x for x in datasets if x!=D])
@@ -121,7 +124,8 @@ for D in datasets:
     # Splitting into validation and training sets using boolean indexing
     validation_set = pd.DataFrame()
     validation_mask = pd.Series(False, index=trainD.index)
-    print("Validation Mask: ", validation_mask)
+    # print("Validation Mask: ", validation_mask)
+    print("Validation size: ", len(validation_mask))
 
     for D_train in trainDatasets:
         indices = trainD[trainD['dataset'] == D_train].sample(frac=0.1, random_state=42).index
@@ -173,17 +177,19 @@ for D in datasets:
         model = REGRESSOR(**param)
 
         # Train the model
-        model.fit(X_train_scaled, y_train.values.ravel())
+        print("Training with: ", X_train_final.shape, y_train_final.shape)
+
+        model.fit(X_train_final, y_train_final)
 
         # Evaluate the model
-        y_pred = model.predict(X_val_scaled)
+        y_pred = model.predict(X_val)
         return mean_squared_error(y_val, y_pred)
     
     STUDY_NAME += '_'+D
     study = optuna.create_study(direction='minimize', 
                                 sampler=optuna.samplers.TPESampler(seed=RANDOM_STATE),
                                 study_name=STUDY_NAME,
-                                db_name=DB_NAME)
+                                storage=DB_NAME)
     study.optimize(objective, n_trials=OPTUNA_NUM_OF_TRIALS)
 
     # Get the best hyperparameters
@@ -192,10 +198,10 @@ for D in datasets:
 
     # Train the model with the best hyperparameters
     regressor = REGRESSOR(**best_params)
-    regressor.fit(X_train_scaled, y_train.values.ravel())
+    regressor.fit(X_train_dummy, y_train)
 
     # Predict using the best model
-    y_pred = regressor.predict(X_test_scaled)
+    y_pred = regressor.predict(X_test_dummy)
 
     regressor_name = str(regressor).split('(')[0]
 
