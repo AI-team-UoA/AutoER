@@ -23,9 +23,9 @@ dataset = args.dataset
 
 DIR = 'predictions/'
 FILE = 'automl'
-AUTOML_PER_RUNTIME = 5*60
-AUTOML_OVERALL_RUNTIME = 10*60
-AUTOML_MEMORY = 6144
+AUTOML_PER_RUNTIME = 30*60
+AUTOML_OVERALL_RUNTIME = 3*60*60
+AUTOML_MEMORY = 6144*4
 AUTOML_NJOBS = 1
 TOPK = 20
 
@@ -46,11 +46,18 @@ elif dataset == 'all':
 else:
     trials = trials[trials['sampler']!='gridsearch']
 
-trials.drop_duplicates(inplace=True)
+trials = trials[trials['f1']!=0]
+
+# Round column in 4 decimals
+trials['f1'] = trials['f1'].round(4)
+trials['threshold'] = trials['threshold'].round(4)
+
+
 dataset_specs = pd.read_csv('dataset_specs.csv', sep=',')
 datasets = dataset_specs['dataset'].unique()
 trials = pd.merge(trials, dataset_specs, on='dataset')
-trials = trials[trials['f1']!=0]
+
+trials.drop_duplicates(inplace=True)
 
 features = ['clustering', 'lm', 'k', 'threshold', 'InputEntityProfiles', 'NumberOfAttributes', 'NumberOfDistinctValues', 
             'NumberOfNameValuePairs', 'AverageNVPairsPerEntity', 'AverageDistinctValuesPerEntity', 
@@ -67,6 +74,7 @@ f.flush()
 print("Writing to: ", filename)
 
 for D in datasets:
+    print("\n\n-----------------------------------\n")
     print("TEST SET: ", D)
     print("TRAINING with: ", [x for x in datasets if x!=D])
 
@@ -74,14 +82,26 @@ for D in datasets:
     trainD = trials[trials['dataset']!=D]
     trainDatasets = [x for x in datasets if x!=D]
 
+    print("\n\nNumber of entities")
     y_train = trainD[['f1']]
     X_train = trainD[features]
+    print("Train Size: ", len(X_train))
 
     X_test = testD[features]
     y_test = testD[['f1']]
+    print("Test Size: ", len(X_test))
 
     X_train_dummy = pd.get_dummies(X_train)
     X_test_dummy = pd.get_dummies(X_test)
+
+    if D == 'D3' and dataset == 'gridsearch':
+        X_train_dummy = X_train_dummy.drop(columns=['lm_sent_glove'])
+
+    print(X_train_dummy.columns)
+    print("Size: ", len(X_train_dummy.columns))
+    print(X_test_dummy.columns)
+    print("Size: ", len(X_test_dummy.columns))
+    print("Difference: ", set(X_train_dummy.columns) - set(X_test_dummy.columns))
 
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train_dummy)
@@ -102,6 +122,7 @@ for D in datasets:
     y_pred = automl.predict(X_test_scaled)
 
     # Evaluate the predictions
+    print("\n\nPerformance on Test Set: ", D)
     print("R2 Score:", r2_score(y_test, y_pred))
     print("Mean Absolute Error:", mean_absolute_error(y_test, y_pred))
     print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
@@ -121,14 +142,15 @@ for D in datasets:
     topKpredicted = result.sort_values(by='Predicted', ascending=False).head(TOPK)
     topKtrue = result.sort_values(by='True', ascending=False).head(TOPK)
     
-    print("Top K Predicted: ")
+    print("\n\nTop K (Sorted on Predicted): ")
     print(topKpredicted)
 
-    print("Top K True: ")
+    print("\nTop K (Sorted on True)")
     print(topKtrue)
 
 
     # Display the details of the best model
+    print("\n\nBest Model Configuration: ")
     print(automl.show_models())
 
     performance, diff = evaluate(y_test, y_pred)
@@ -149,9 +171,11 @@ for D in datasets:
     sort_idx = r.importances_mean.argsort()[::-1]
 
     dummy_features = X_test_dummy.columns
-
+    
+    print("\n\nFeature Importance: ")
     for i in sort_idx[::-1]:
         print(
             f"{dummy_features[i]:10s}: {r.importances_mean[i]:.3f} +/- "
             f"{r.importances_std[i]:.3f}"
         )
+    print("\n\n")
