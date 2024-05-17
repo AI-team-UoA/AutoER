@@ -48,6 +48,7 @@ RESULTS_CSV_NAME = csv_name+'_'+args.regressor+'_'+dataset
 RANDOM_STATE = 42
 DB_NAME = 'sqlite:///{}.db'.format(RESULTS_CSV_NAME)
 regressor_name = args.regressor
+VALIDATION_SET_FRACTION = 0.2
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -134,12 +135,13 @@ for D in datasets:
     validation_set = pd.DataFrame()
     validation_mask = pd.Series(False, index=trainD.index)
     # print("Validation Mask: ", validation_mask)
-    print("Validation size: ", len(validation_mask))
 
     for D_train in trainDatasets:
-        indices = trainD[trainD['dataset'] == D_train].sample(frac=0.1, random_state=42).index
+        indices = trainD[trainD['dataset'] == D_train].sample(frac=VALIDATION_SET_FRACTION, random_state=RANDOM_STATE).index
         validation_mask[indices] = True
     
+    print("Validation size: ", len(trainD[validation_mask]), "Training size: ", len(trainD[~validation_mask]))
+
     validation_set = trainD[validation_mask]
     train_set = trainD[~validation_mask]
 
@@ -169,13 +171,19 @@ for D in datasets:
             super(SimpleNN, self).__init__()
             self.fc1 = nn.Linear(input_dim, hidden_dim)
             self.relu = nn.ReLU()
-            self.fc2 = nn.Linear(hidden_dim, output_dim)
+            self.dropout = nn.Dropout(p=0.3)
+            self.fc2 = nn.Linear(hidden_dim, hidden_dim // 2)
+            self.relu2 = nn.ReLU()
+            self.fc3 = nn.Linear(hidden_dim // 2, output_dim)
             self.sigmoid = nn.Sigmoid()
         
         def forward(self, x):
             out = self.fc1(x)
             out = self.relu(out)
+            out = self.dropout(out)
             out = self.fc2(out)
+            out = self.relu2(out)
+            out = self.fc3(out)
             out = self.sigmoid(out)
             return out * 100
 
@@ -314,17 +322,31 @@ for D in datasets:
     print("\nTop K (Sorted on True)")
     print(topKtrue)
 
-    performance, diff = evaluate(y_test, y_pred)
+    best_true = topKtrue['True'].max()
+    # get the row with the max Predicted
+    best_predicted = topKpredicted['Predicted'].idxmax()
+    best_predicted = topKpredicted.loc[best_predicted, 'True']
+
+    print("\n\nBest Predicted: ", best_predicted)
+    print("Local Best True: ", best_true)
+    global_max_true = trials[trials['dataset']==D]['f1'].max()
+    print("Global Max True: ", global_max_true)
+    performance = best_predicted / best_true
+    diff = best_true - best_predicted
+    print("Performance: ", performance)
+    
+    # performance, diff = evaluate(y_test, y_pred)
     performance = round(performance[0], 4)
     diff = round(diff[0], 4)
     print("\n\nPerformance: ", performance)
     print("Difference between Predicted and Best: ", diff)
     f.write("{}, {}, {}, {}, {}, {}, {}, {}\n".format(D, 
                                               regressor_name, 
-                                              r2_score(y_test, y_pred), 
-                                              mean_absolute_error(y_test, y_pred), 
                                               mean_squared_error(y_test, y_pred), 
                                               best_validation_loss,
+                                              best_predicted,
+                                              best_true,
+                                              global_max_true,
                                               performance,
                                               diff))
     f.flush()
