@@ -18,7 +18,7 @@ import time
 parser = argparse.ArgumentParser()
 parser.add_argument('--trials', type=str, required=True)
 args = parser.parse_args()
-dataset = args.dataset
+dataset = args.trials
 
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #
