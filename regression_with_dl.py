@@ -9,58 +9,47 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error, m
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-from sklearn.inspection import PartialDependenceDisplay, permutation_importance
-
 import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 from torch.optim.lr_scheduler import ReduceLROnPlateau
-# from optuna.integration import PyTorchLightningPruningCallback
 import argparse
 from sklearn.model_selection import KFold
 
-# import regressors like SVR, XGBoost and Random Forest
-
-from sklearn.svm import SVR
-from xgboost import XGBRegressor
-from sklearn.ensemble import RandomForestRegressor
-
+import time
 import optuna
 
-# read args
 parser = argparse.ArgumentParser()
 parser.add_argument('--trials', type=str, required=True)
-parser.add_argument('--csv_name', type=str, required=True)
-parser.add_argument('--regressor', type=str, required=True)
-
 args = parser.parse_args()
 dataset = args.trials
-csv_name = args.csv_name
 
-# Params
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------          PARAMS          ----------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- # 
 
-DIR = 'predictions_optuna/'
+DIR = 'final/dl/'
 TOPK = 20
-OPTUNA_NUM_OF_TRIALS = 1
-REGRESSOR = args.regressor
-RESULTS_CSV_NAME = csv_name+'_'+args.regressor+'_'+dataset
+OPTUNA_NUM_OF_TRIALS = 50
+REGRESSOR = 'NN'
+RESULTS_CSV_NAME = dataset
 RANDOM_STATE = 42
 DB_NAME = 'sqlite:///{}.db'.format(RESULTS_CSV_NAME)
-regressor_name = args.regressor
-VALIDATION_SET_FRACTION = 0.2
+VALIDATION_SET_FRACTION = 0.1
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-def evaluate(y_true, y_pred):
-    idx = np.argsort(y_pred)
-    best_predicted = y_true.iloc[idx[-1]]
-    max_y = np.max(y_true)
-    div = (best_predicted / max_y)
-    diff = max_y - best_predicted
-    return div.values[0], diff.values[0]
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------    READING DATASET       ----------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- # 
 
-trials = pd.read_csv('trials.csv', sep=',')
+trials = pd.read_csv('./data/trials.csv', sep=',')
+all_trials = trials.copy()
 
 if dataset == 'gridsearch':
     trials = trials[trials['sampler']=='gridsearch']
@@ -75,7 +64,7 @@ trials = trials[trials['f1']!=0]
 trials['f1'] = trials['f1'].round(4)
 trials['threshold'] = trials['threshold'].round(4)
 
-dataset_specs = pd.read_csv('dataset_specs.csv', sep=',')
+dataset_specs = pd.read_csv('./data/dataset_specs.csv', sep=',')
 datasets = dataset_specs['dataset'].unique()
 trials = pd.merge(trials, dataset_specs, on='dataset')
 
@@ -87,11 +76,17 @@ features = ['clustering', 'lm', 'k', 'threshold', 'InputEntityProfiles', 'Number
             'AverageValueLength', 'AverageValueTokens', 'MaxValuesPerEntity']
 trials = trials[features + ['f1', 'dataset']]
 
-# trials.to_csv(RESULTS_CSV_NAME, sep=',', index=False)
+
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------    EXPERIMENTS           ----------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- # 
+
 
 filename = DIR+RESULTS_CSV_NAME+'.csv'
 f = open(filename, 'w')
-f.write('TEST_SET, REGRESSOR, R2, MAE, MSE, BEST_VALIDATION_LOSS, AUTOCONF_METRIC, DIFF_FROM_MAX\n')
+f.write('TEST_SET, DATASET, REGRESSOR, VALIDATION_MSE, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, OPTIMIZATION_TIME, BEST_REGRESSOR_FIT_TIME, BEST_REGRESSOR_PREDICTION_TIME\n')
 f.flush()
 print("Writing to: ", filename)
 
@@ -237,20 +232,27 @@ for D in datasets:
 
         return best_val_loss
     
+    OPTUNA_TRIALS_TIME = time.time()
     study = optuna.create_study(direction='minimize', 
                                 sampler=optuna.samplers.TPESampler(seed=RANDOM_STATE),
                                 study_name=STUDY_NAME,
                                 storage=DB_NAME,
                                 load_if_exists=True)
     study.optimize(objective, n_trials=OPTUNA_NUM_OF_TRIALS)
+    OPTUNA_TRIALS_TIME = time.time() - OPTUNA_TRIALS_TIME
+
     best_params = study.best_params
     print("Best Hyperparameters: ", best_params)
     print("Best validation loss: ", study.best_value)
+
+    VALIDATION_MSE = study.best_value
     
     best_validation_loss = study.best_value
     best_hidden_dim = best_params['hidden_dim']
     best_lr = best_params['lr']
     best_epochs = best_params['num_epochs']
+
+    BEST_REGRESSOR_FIT_TIME = time.time()
 
     model = SimpleNN(input_dim=X_train_final.shape[1], hidden_dim=best_hidden_dim, output_dim=1).to(device)
     criterion = nn.MSELoss()
@@ -290,6 +292,10 @@ for D in datasets:
             print(f"Early stopping at epoch {epoch}")
             break
 
+    BEST_REGRESSOR_FIT_TIME = time.time() - BEST_REGRESSOR_FIT_TIME
+
+    BEST_REGRESSOR_PREDICTION_TIME = time.time()
+
     model.eval()
     y_pred_list = []
     with torch.no_grad():
@@ -299,18 +305,20 @@ for D in datasets:
     
     y_pred = np.concatenate(y_pred_list, axis=0)
 
+    BEST_REGRESSOR_PREDICTION_TIME = time.time() - BEST_REGRESSOR_PREDICTION_TIME
+
+
+    # -------------------------------------------------------------------------- #
+    # -------------------------------------------------------------------------- #
+    # -------------------------     EVALUATION           ----------------------- #
+    # -------------------------------------------------------------------------- #
+    # -------------------------------------------------------------------------- # 
 
     print("\n\nPerformance on Test Set: ", D)
-    print("R2 Score:", r2_score(y_test, y_pred))
-    print("Mean Absolute Error:", mean_absolute_error(y_test, y_pred))
-    print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
-    print("Root Mean Squared Error:", mean_squared_error(y_test, y_pred, squared=False))
-    print("Mean Absolute Percentage Error:", mean_absolute_percentage_error(y_test, y_pred))
-
-
+    TEST_MSE = mean_squared_error(y_test, y_pred)
+    print("Mean Squared Error:", TEST_MSE)
     result = X_test[['lm', 'clustering', 'k', 'threshold']]
 
-    # add y_pred and y_test to res
     result['Predicted'] = y_pred
     result['True'] = y_test
     topKpredicted = result.sort_values(by='Predicted', ascending=False).head(TOPK)
@@ -322,32 +330,35 @@ for D in datasets:
     print("\nTop K (Sorted on True)")
     print(topKtrue)
 
-    best_true = topKtrue['True'].max()
-    # get the row with the max Predicted
-    best_predicted = topKpredicted['Predicted'].idxmax()
-    best_predicted = topKpredicted.loc[best_predicted, 'True']
+    LOCAL_BEST_TRUE = topKtrue['True'].max()
+    BEST_PREDICTED = topKpredicted['Predicted'].idxmax()
+    BEST_PREDICTED = topKpredicted.loc[BEST_PREDICTED, 'True']
 
-    print("\n\nBest Predicted: ", best_predicted)
-    print("Local Best True: ", best_true)
-    global_max_true = trials[trials['dataset']==D]['f1'].max()
-    print("Global Max True: ", global_max_true)
-    performance = best_predicted / best_true
-    diff = best_true - best_predicted
-    print("Performance: ", performance)
-    
-    # performance, diff = evaluate(y_test, y_pred)
-    performance = round(performance[0], 4)
-    diff = round(diff[0], 4)
-    print("\n\nPerformance: ", performance)
-    print("Difference between Predicted and Best: ", diff)
-    f.write("{}, {}, {}, {}, {}, {}, {}, {}\n".format(D, 
-                                              regressor_name, 
-                                              mean_squared_error(y_test, y_pred), 
-                                              best_validation_loss,
-                                              best_predicted,
-                                              best_true,
-                                              global_max_true,
-                                              performance,
-                                              diff))
+    print("\n\nBest Predicted: ", BEST_PREDICTED)
+    GLOBAL_MAX_TRUE = all_trials[all_trials['dataset']==D]['f1'].max()
+    print("Global Max True: ", GLOBAL_MAX_TRUE)
+    PERFORMANCE = BEST_PREDICTED / GLOBAL_MAX_TRUE
+    diff = GLOBAL_MAX_TRUE - BEST_PREDICTED
+    PERFORMANCE = round(PERFORMANCE, 4)
+    print("Performance: ", PERFORMANCE)
+    print("Difference between Predicted and Best: ", round(diff, 4))
+
+    TEST_MSE = round(TEST_MSE, 4)
+    VALIDATION_MSE = round(VALIDATION_MSE, 4)
+    BEST_REGRESSOR_FIT_TIME = round(BEST_REGRESSOR_FIT_TIME, 4)
+    BEST_REGRESSOR_PREDICTION_TIME = round(BEST_REGRESSOR_PREDICTION_TIME, 4)
+    OPTUNA_TRIALS_TIME = round(OPTUNA_TRIALS_TIME, 4)
+
+    f.write("{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
+                                                              dataset,
+                                                  REGRESSOR, 
+                                                  VALIDATION_MSE,
+                                                    TEST_MSE,
+                                                    BEST_PREDICTED,
+                                                    GLOBAL_MAX_TRUE,
+                                                    PERFORMANCE,
+                                                    OPTUNA_TRIALS_TIME,
+                                                    BEST_REGRESSOR_FIT_TIME,
+                                                    BEST_REGRESSOR_PREDICTION_TIME))
     f.flush()
 f.close()
