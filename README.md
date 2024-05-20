@@ -1,4 +1,5 @@
-# pyJedAI-AutoConfiguration
+# pyJedAI Auto Configuration
+---
 Auto Configuration experiments for pyJedAI
 
 
@@ -27,3 +28,10 @@ nohup ./sklearn_exps.sh > ./final/sklearn/sklearn_exps.log 2>&1 &
 ```
 
 ## DL Experiments
+
+To run one experiment:
+```
+python regression_with_dl.py --trials optuna
+```
+
+
