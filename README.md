@@ -1,5 +1,4 @@
 # pyJedAI Auto Configuration
----
 Auto Configuration experiments for pyJedAI
 
 
