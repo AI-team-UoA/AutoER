@@ -4,7 +4,7 @@ Auto Configuration experiments for pyJedAI
 ## Classic Regressors
 
 ### Resources
-```bash
+```python
                           ./+o+-       nikoletos@pyravlos5
                   yyyyy- -yyyyyy+      OS: Ubuntu 22.04 jammy
                ://+//////-yyyyyyo      Kernel: x86_64 Linux 6.5.0-18-generic
@@ -52,7 +52,7 @@ nohup ./sklearn_exps.sh > ./final/sklearn/sklearn_exps.log 2>&1 &
 ## DL
 
 ### Resources
-```bash
+```python
                           ./+o+-       konstantinos@snorlax
                   yyyyy- -yyyyyy+      OS: Ubuntu 22.04 jammy
                ://+//////-yyyyyyo      Kernel: x86_64 Linux 6.2.0-36-generic
