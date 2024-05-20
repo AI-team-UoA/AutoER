@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the datasets
-datasets=("all" "optuna" "gridsearch")
+datasets=("optuna" "gridsearch" "all")
 
 # Create the output directory if it doesn't exist
 mkdir -p ./final/automl
