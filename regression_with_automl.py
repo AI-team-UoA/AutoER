@@ -16,11 +16,15 @@ import time
 
 # read args
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataset', type=str, required=True)
+parser.add_argument('--trials', type=str, required=True)
 args = parser.parse_args()
 dataset = args.dataset
 
-# Params
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------          PARAMS          ----------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- # 
 
 DIR = 'final/automl/'
 FILE = ''
@@ -30,7 +34,6 @@ AUTOML_MEMORY = 6144*4
 AUTOML_NJOBS = 1
 TOPK = 20
 
-
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #
 # -------------------------    READING DATASET       ----------------------- #
@@ -38,6 +41,7 @@ TOPK = 20
 # -------------------------------------------------------------------------- # 
 
 trials = pd.read_csv('./data/trials.csv', sep=',')
+all_trials = trials.copy()
 
 if dataset == 'gridsearch':
     trials = trials[trials['sampler']=='gridsearch']
@@ -175,7 +179,7 @@ for D in datasets:
 
     print("\n\nBest Predicted: ", BEST_PREDICTED)
     print("Local Best True: ", LOCAL_BEST_TRUE)
-    GLOBAL_MAX_TRUE = trials[trials['dataset']==D]['f1'].max()
+    GLOBAL_MAX_TRUE = all_trials[all_trials['dataset']==D]['f1'].max()
     print("Global Max True: ", GLOBAL_MAX_TRUE)
     PERFORMANCE = BEST_PREDICTED / GLOBAL_MAX_TRUE
     diff = GLOBAL_MAX_TRUE - BEST_PREDICTED
