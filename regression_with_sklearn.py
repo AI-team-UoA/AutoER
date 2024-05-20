@@ -32,7 +32,11 @@ parser.add_argument('--regressor', type=str, required=True)
 args = parser.parse_args()
 dataset = args.trials
 
-# Params
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------          PARAMS          ----------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- # 
 
 DIR = './final/sklearn/'
 TOPK = 20
@@ -53,7 +57,14 @@ DB_NAME = 'sqlite:///{}.db'.format(RESULTS_CSV_NAME)
 if args.regressor == 'LINEAR':
     OPTUNA_NUM_OF_TRIALS = 1
 
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------    READING DATASET       ----------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- # 
+
 trials = pd.read_csv('./data/trials.csv', sep=',')
+all_trials = trials.copy()
 
 if dataset == 'gridsearch':
     trials = trials[trials['sampler']=='gridsearch']
@@ -80,7 +91,12 @@ features = ['clustering', 'lm', 'k', 'threshold', 'InputEntityProfiles', 'Number
             'AverageValueLength', 'AverageValueTokens', 'MaxValuesPerEntity']
 trials = trials[features + ['f1', 'dataset']]
 
-# trials.to_csv(RESULTS_CSV_NAME, sep=',', index=False)
+
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------    EXPERIMENTS           ----------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- # 
 
 filename = DIR+RESULTS_CSV_NAME+'.csv'
 f = open(filename, 'w')
@@ -259,7 +275,7 @@ for D in datasets:
 
     print("\n\nBest Predicted: ", BEST_PREDICTED)
     print("Local Best True: ", LOCAL_BEST_TRUE)
-    GLOBAL_MAX_TRUE = trials[trials['dataset']==D]['f1'].max()
+    GLOBAL_MAX_TRUE = all_trials[all_trials['dataset']==D]['f1'].max()
     print("Global Max True: ", GLOBAL_MAX_TRUE)
     PERFORMANCE = BEST_PREDICTED / GLOBAL_MAX_TRUE
     diff = GLOBAL_MAX_TRUE - BEST_PREDICTED
