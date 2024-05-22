@@ -187,9 +187,9 @@ for D in datasets:
         lr = trial.suggest_loguniform('lr', 1e-5, 1e-2)
         num_epochs = trial.suggest_int('num_epochs', 2, 50)
 
-        print("Hidden Dim: ", hidden_dim)
-        print("Learning Rate: ", lr)
-        print("Number of Epochs: ", num_epochs)
+        # print("Hidden Dim: ", hidden_dim)
+        # print("Learning Rate: ", lr)
+        # print("Number of Epochs: ", num_epochs)
         
 
         model = SimpleNN(input_dim=X_train_final.shape[1], hidden_dim=hidden_dim, output_dim=1).to(device)
@@ -218,7 +218,7 @@ for D in datasets:
                     val_loss += loss.item()
             val_loss /= len(val_loader)
             scheduler.step(val_loss)
-            print(f"Epoch {epoch}, Val Loss: {val_loss}")
+            # print(f"Epoch {epoch}, Val Loss: {val_loss}")
 
             if val_loss < best_val_loss:
                 best_val_loss = val_loss
@@ -227,7 +227,7 @@ for D in datasets:
                 patience_counter += 1
 
             if patience_counter >= early_stopping_patience:
-                print(f"Early stopping at epoch {epoch}")
+                # print(f"Early stopping at epoch {epoch}")
                 break
 
         return best_val_loss
@@ -280,7 +280,7 @@ for D in datasets:
                 val_loss += loss.item()
         val_loss /= len(val_loader)
         scheduler.step(val_loss)
-        print(f"Epoch {epoch}, Val Loss: {val_loss}")
+        # print(f"Epoch {epoch}, Val Loss: {val_loss}")
 
         if val_loss < best_val_loss:
             best_val_loss = val_loss
@@ -289,7 +289,7 @@ for D in datasets:
             patience_counter += 1
 
         if patience_counter >= early_stopping_patience:
-            print(f"Early stopping at epoch {epoch}")
+            # print(f"Early stopping at epoch {epoch}")
             break
 
     BEST_REGRESSOR_FIT_TIME = time.time() - BEST_REGRESSOR_FIT_TIME
