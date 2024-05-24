@@ -40,7 +40,7 @@ dataset = args.trials
 
 DIR = './final/sklearn/'
 TOPK = 20
-OPTUNA_NUM_OF_TRIALS = 1
+OPTUNA_NUM_OF_TRIALS = 50
 REGRESSORS = {
     'LASSO': Lasso, 
     'RIDGE': Ridge,
