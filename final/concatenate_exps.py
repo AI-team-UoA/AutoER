@@ -5,7 +5,7 @@ import os
 def process_file(file_path, dataset_name):
     df = pd.read_csv(file_path, skipinitialspace=True)
     # print(df.columns.tolist())
-    df['DATASET'] = dataset_name
+    df['DATASET'] = dataset_name.split('.')[0]
     df['REGRESSOR'] = 'automl_' + df['AUTOML_REGRESSOR']
     df['VALIDATION_MSE'] = None
     df['BEST_REGRESSOR_FIT_TIME'] = None
@@ -22,7 +22,8 @@ directories = {
 
 # Process automl files
 automl_files = [f for f in os.listdir('automl') if f.endswith('.csv')]
-automl_dfs = [process_file(os.path.join('automl', file), 'automl') for file in automl_files]
+# keep only file name
+automl_dfs = [process_file(os.path.join('automl', file), file) for file in automl_files]
 
 #  concatenate all automl dataframes
 automl_result = pd.concat(automl_dfs, ignore_index=True)
