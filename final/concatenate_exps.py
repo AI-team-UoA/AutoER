@@ -27,7 +27,7 @@ automl_dfs = [process_file(os.path.join('automl', file), file) for file in autom
 
 #  concatenate all automl dataframes
 automl_result = pd.concat(automl_dfs, ignore_index=True)
-automl_result.to_csv('automl_final_results.csv', index=False)
+# automl_result.to_csv('automl_final_results.csv', index=False)
 
 # Load dl and sklearn files without processing
 dl_files = [os.path.join('dl', f) for f in os.listdir('dl') if f.endswith('.csv')]
