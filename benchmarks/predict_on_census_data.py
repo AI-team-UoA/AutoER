@@ -26,8 +26,6 @@ import time
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- # 
 
-DIR = 'final/automl/'
-FILE = ''
 # AUTOML_PER_RUNTIME = 5*60
 # AUTOML_OVERALL_RUNTIME = 10*60
 AUTOML_PER_RUNTIME = 30*60
@@ -44,7 +42,7 @@ RANDOM_STATE = 42
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- # 
 
-trials = pd.read_csv('./data/trials.csv', sep=',')
+trials = pd.read_csv('../data/trials.csv', sep=',')
 all_trials = trials.copy()
 
 trials = trials[trials['sampler']!='gridsearch']
@@ -54,7 +52,7 @@ trials = trials[trials['f1']!=0]
 trials['f1'] = trials['f1'].round(4)
 trials['threshold'] = trials['threshold'].round(4)
 
-dataset_specs = pd.read_csv('./data/dataset_specs.csv', sep=',')
+dataset_specs = pd.read_csv('../data/dataset_specs.csv', sep=',')
 datasets = dataset_specs['dataset'].unique()
 trials = pd.merge(trials, dataset_specs, on='dataset')
 
@@ -80,7 +78,7 @@ trials.head(1000)
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- # 
 
-census_data = pd.read_csv('./data/census_test_data.csv', sep=',')
+census_data = pd.read_csv('../data/census_test_data.csv', sep=',')
 print("Census Data Shape: ", census_data.shape)
 
 
@@ -117,7 +115,9 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train_dummy)
 X_test_scaled = scaler.transform(X_test_dummy)
 
-# END_TO_END_RUNTIME = time.time()
+TRAIN_RUNTIME = time.time()
+
+print("Started training at: ", time.ctime())
 
 automl = autosklearn.AutoSklearnRegressor(
     time_left_for_this_task=AUTOML_OVERALL_RUNTIME,  # Total time for the AutoML process
@@ -126,17 +126,21 @@ automl = autosklearn.AutoSklearnRegressor(
     n_jobs=AUTOML_NJOBS,
     ensemble_size=1               # Use single best model
 )
+print("Finished training at: ", time.ctime())
+print("Training time: ", time.time()-TRAIN_RUNTIME)
 
 # Fit the model
 automl.fit(X_train_scaled, y_train, dataset_name='trials_optuna_all')
 
 # END_TO_END_RUNTIME = time.time() - END_TO_END_RUNTIME    
-# PREDICTION_RUNTIME = time.time()
+PREDICTION_RUNTIME = time.time()
 
 # Predict using the best model
+print("Started prediction at: ", time.ctime())
 y_pred = automl.predict(X_test_scaled)
-    
-# PREDICTION_RUNTIME = time.time() - PREDICTION_RUNTIME
+print("Finished prediction at: ", time.ctime())
+print("Prediction time: ", time.time()-PREDICTION_RUNTIME)
+
 
 # Display the details of the best model
 print("\n\nBest Model Configuration: ")
@@ -148,62 +152,8 @@ for weight, model in ensemble:
     model_configuration = model.get_params()
     regressor_name = model_configuration['config']['regressor:__choice__']
 
-# -------------------------------------------------------------------------- # 
-# -------------------------------------------------------------------------- # 
-# -------------------------     EVALUATION           ----------------------- # 
-# -------------------------------------------------------------------------- # 
-# -------------------------------------------------------------------------- # 
-
-# print("\n\nPerformance on Test Set: ", D)
-# TEST_MSE = mean_squared_error(y_test, y_pred)
-# print("Mean Squared Error:", TEST_MSE)
 
 result = X_test[['lm', 'clustering', 'k', 'threshold']]
-
-# add y_pred and y_test to res
-result['Predicted'] = y_pred
+result['predicted'] = y_pred
 result['dataset'] = testD['dataset']
-
-
 result.to_csv('census_predictions.csv', sep=',', index=False)
-
-# result['True'] = y_test
-# topKpredicted = result.sort_values(by='Predicted', ascending=False).head(TOPK)
-# topKtrue = result.sort_values(by='True', ascending=False).head(TOPK)
-
-# print("\n\nTop K (Sorted on Predicted): ")
-# print(topKpredicted)
-
-# print("\nTop K (Sorted on True)")
-# print(topKtrue)
-
-# LOCAL_BEST_TRUE = topKtrue['True'].max()
-# # get the row with the max Predicted
-# BEST_PREDICTED = topKpredicted['Predicted'].idxmax()
-# BEST_PREDICTED = topKpredicted.loc[BEST_PREDICTED, 'True']
-
-# print("\n\nBest Predicted: ", BEST_PREDICTED)
-# print("Local Best True: ", LOCAL_BEST_TRUE)
-# GLOBAL_MAX_TRUE = all_trials[all_trials['dataset']==D]['f1'].max()
-# print("Global Max True: ", GLOBAL_MAX_TRUE)
-# PERFORMANCE = BEST_PREDICTED / GLOBAL_MAX_TRUE
-# diff = GLOBAL_MAX_TRUE - BEST_PREDICTED
-# PERFORMANCE = round(PERFORMANCE, 4)
-# print("Performance: ", PERFORMANCE)
-# print("Difference between Predicted and Global Best: ", round(diff, 4))
-
-# TEST_MSE = round(TEST_MSE, 4)
-# PREDICTION_RUNTIME = round(PREDICTION_RUNTIME, 4)
-# END_TO_END_RUNTIME = round(END_TO_END_RUNTIME, 4)
-
-# f.write("{}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
-#                                                 regressor_name, 
-#                                                 TEST_MSE,
-#                                                 BEST_PREDICTED,
-#                                                 GLOBAL_MAX_TRUE,
-#                                                 PERFORMANCE,
-#                                                 PREDICTION_RUNTIME,
-#                                                 END_TO_END_RUNTIME))
-# f.flush()
-
-# f.close()
