@@ -47,7 +47,7 @@ for census_dataset in census_datasets:
 
         threshold = row['threshold']
 
-        print("Running for: ", census_dataset, lm, k, clustering_method, threshold)
+        # print("Running for: ", census_dataset, lm, k, clustering_method, threshold)
 
         emb = EmbeddingsNNBlockBuilding(vectorizer=lm, similarity_search='faiss')
         blocks, g = emb.build_blocks(data,
@@ -71,7 +71,7 @@ for census_dataset in census_datasets:
         
         true_f1s.append(f1)
 
-        print(f"Dataset: {census_dataset}, LM: {lm}, K: {k}, Clustering: {clustering_method}, Threshold: {threshold},\n F1: {f1},\n Precision: {precision},\n Recall: {recall}")
+        # print(f"Dataset: {census_dataset}, LM: {lm}, K: {k}, Clustering: {clustering_method}, Threshold: {threshold},\n F1: {f1},\n Precision: {precision},\n Recall: {recall}")
 
     census_dataset_predictions.loc[:, 'true'] = true_f1s
     census_dataset_predictions.to_csv('./predictions/'+census_dataset+"_results.csv", index=False)
