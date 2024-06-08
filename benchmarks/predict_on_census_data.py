@@ -126,12 +126,12 @@ automl = autosklearn.AutoSklearnRegressor(
     n_jobs=AUTOML_NJOBS,
     ensemble_size=1               # Use single best model
 )
-print("Finished training at: ", time.ctime())
-print("Training time: ", time.time()-TRAIN_RUNTIME)
+
 
 # Fit the model
 automl.fit(X_train_scaled, y_train, dataset_name='trials_optuna_all')
-
+print("Finished training at: ", time.ctime())
+print("Training time: ", time.time()-TRAIN_RUNTIME)
 # END_TO_END_RUNTIME = time.time() - END_TO_END_RUNTIME    
 PREDICTION_RUNTIME = time.time()
 
@@ -156,4 +156,4 @@ for weight, model in ensemble:
 result = X_test[['lm', 'clustering', 'k', 'threshold']]
 result['predicted'] = y_pred
 result['dataset'] = testD['dataset']
-result.to_csv('census_predictions.csv', sep=',', index=False)
+result.to_csv('census_predictions_06072024.csv', sep=',', index=False)
