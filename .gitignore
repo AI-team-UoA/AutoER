@@ -6,4 +6,8 @@ data/*
 *.log
 trials/dbs/*
 trials/results/*
+*.pyc
+census/.embs/*
+*.npy
+census/pyjedai/*
 
