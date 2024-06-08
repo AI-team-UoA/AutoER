@@ -2,8 +2,8 @@
 
 # Define the datasets and regressors
 datasets=("optuna" "gridsearch" "all")
-regressors=("LASSO" "RIDGE" "LINEAR" "RF")
-# regressors=("XGB" "SVR")
+# regressors=("LASSO" "RIDGE" "LINEAR" "RF")
+regressors=("XGB" "SVR")
 
 # Create the output directory if it doesn't exist
 mkdir -p ./final/sklearn
