@@ -38,7 +38,8 @@ dataset = args.trials
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- # 
 
-DIR = './final/sklearn/'
+DATA_DIR = '../data/'
+DIR = './sklearn/'
 TOPK = 20
 OPTUNA_NUM_OF_TRIALS = 50
 REGRESSORS = {
@@ -63,7 +64,7 @@ if args.regressor == 'LINEAR':
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- # 
 
-trials = pd.read_csv('./data/trials.csv', sep=',')
+trials = pd.read_csv(DATA_DIR+'trials.csv', sep=',')
 all_trials = trials.copy()
 
 if dataset == 'gridsearch':
@@ -79,7 +80,7 @@ trials = trials[trials['f1']!=0]
 trials['f1'] = trials['f1'].round(4)
 trials['threshold'] = trials['threshold'].round(4)
 
-dataset_specs = pd.read_csv('./data/dataset_specs.csv', sep=',')
+dataset_specs = pd.read_csv(DATA_DIR+'dataset_specs.csv', sep=',')
 datasets = dataset_specs['dataset'].unique()
 trials = pd.merge(trials, dataset_specs, on='dataset')
 
