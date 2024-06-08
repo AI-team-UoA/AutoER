@@ -26,7 +26,8 @@ dataset = args.trials
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- # 
 
-DIR = 'final/automl/'
+DATA_DIR = '../data/'
+DIR = './automl/'
 FILE = ''
 AUTOML_PER_RUNTIME = 30*60
 AUTOML_OVERALL_RUNTIME = 3*60*60
@@ -40,7 +41,7 @@ TOPK = 20
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- # 
 
-trials = pd.read_csv('./data/trials.csv', sep=',')
+trials = pd.read_csv(DATA_DIR+'trials.csv', sep=',')
 all_trials = trials.copy()
 
 if dataset == 'gridsearch':
@@ -57,7 +58,7 @@ trials['f1'] = trials['f1'].round(4)
 trials['threshold'] = trials['threshold'].round(4)
 
 
-dataset_specs = pd.read_csv('./data/dataset_specs.csv', sep=',')
+dataset_specs = pd.read_csv(DATA_DIR+'dataset_specs.csv', sep=',')
 datasets = dataset_specs['dataset'].unique()
 trials = pd.merge(trials, dataset_specs, on='dataset')
 
