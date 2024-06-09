@@ -1,28 +1,38 @@
 # pyJedAI Auto Configuration
 Auto Configuration experiments for pyJedAI
 
+# 1st case; **With** Ground-Truth file
+
+All exps run at 
+```python
+konstantinos@snorlax
+OS: Ubuntu 22.04 jammy
+Kernel: x86_64 Linux 6.2.0-36-generic
+Uptime: 112d 32m
+Packages: 1630
+Shell: zsh 5.8.1
+Disk: 946G / 2,3T (44%)
+CPU: Intel Core i7-9700K @ 8x 4,9GHz [46.0°C]
+GPU: NVIDIA GeForce RTX 2080 Ti
+RAM: 6622MiB / 64228MiB
+```
+
+# 2nd case; **Without** Ground-Truth file
+
 ## Classic Regressors
 
 ### Resources
 ```python
-                          ./+o+-       nikoletos@pyravlos5
-                  yyyyy- -yyyyyy+      OS: Ubuntu 22.04 jammy
-               ://+//////-yyyyyyo      Kernel: x86_64 Linux 6.5.0-18-generic
-           .++ .:/++++++/-.+sss/`      Uptime: 39d 19h 48m
-         .:++o:  /++++++++/:--:/-      Packages: 1745
-        o:+o+:++.`..```.-/oo+++++/     Shell: zsh 5.8.1
-       .:+o:+o/.          `+sssoo+/    Disk: 47G / 1,7T (3%)
-  .++/+:+oo+o:`             /sssooo.   CPU: Intel Xeon E5-4603 v2 @ 32x 2,2GHz [31.0°C]
- /+++//+:`oo+o               /::--:.   GPU: Matrox Electronics Systems Ltd. G200eR2
- \+/+o+++`o++o               ++////.   RAM: 4381MiB / 128831MiB
-  .++.o+++oo+:`             /dddhhh.  
-       .+.o+oo:.          `oddhhhh+   
-        \+.++o+o``-````.:ohdhhhhh+    
-         `:o+++ `ohhhhhhhhyo++os:     
-           .o:`.syhhhhhhh/.oo++o`     
-               /osyyyyyyo++ooo+++/    
-                   ````` +oo+++o\:    
-                          `oo++.   
+nikoletos@pyravlos5
+OS: Ubuntu 22.04 jammy
+Kernel: x86_64 Linux 6.5.0-18-generic
+Uptime: 39d 19h 48m
+Packages: 1745
+Shell: zsh 5.8.1
+Disk: 47G / 1,7T (3%)
+CPU: Intel Xeon E5-4603 v2 @ 32x 2,2GHz [31.0°C]
+GPU: Matrox Electronics Systems Ltd. G200eR2
+RAM: 4381MiB / 128831MiB
 ```
 
 ### AutoML Experiments
@@ -53,24 +63,16 @@ nohup ./sklearn_exps.sh > ./final/sklearn/sklearn_exps.log 2>&1 &
 
 ### Resources
 ```python
-                          ./+o+-       konstantinos@snorlax
-                  yyyyy- -yyyyyy+      OS: Ubuntu 22.04 jammy
-               ://+//////-yyyyyyo      Kernel: x86_64 Linux 6.2.0-36-generic
-           .++ .:/++++++/-.+sss/`      Uptime: 112d 32m
-         .:++o:  /++++++++/:--:/-      Packages: 1630
-        o:+o+:++.`..```.-/oo+++++/     Shell: zsh 5.8.1
-       .:+o:+o/.          `+sssoo+/    Disk: 946G / 2,3T (44%)
-  .++/+:+oo+o:`             /sssooo.   CPU: Intel Core i7-9700K @ 8x 4,9GHz [46.0°C]
- /+++//+:`oo+o               /::--:.   GPU: NVIDIA GeForce RTX 2080 Ti
- \+/+o+++`o++o               ++////.   RAM: 6622MiB / 64228MiB
-  .++.o+++oo+:`             /dddhhh.  
-       .+.o+oo:.          `oddhhhh+   
-        \+.++o+o``-````.:ohdhhhhh+    
-         `:o+++ `ohhhhhhhhyo++os:     
-           .o:`.syhhhhhhh/.oo++o`     
-               /osyyyyyyo++ooo+++/    
-                   ````` +oo+++o\:    
-                          `oo++.  
+konstantinos@snorlax
+OS: Ubuntu 22.04 jammy
+Kernel: x86_64 Linux 6.2.0-36-generic
+Uptime: 112d 32m
+Packages: 1630
+Shell: zsh 5.8.1
+Disk: 946G / 2,3T (44%)
+CPU: Intel Core i7-9700K @ 8x 4,9GHz [46.0°C]
+GPU: NVIDIA GeForce RTX 2080 Ti
+RAM: 6622MiB / 64228MiB
 ```
 
 ### LinearNN Experiments
