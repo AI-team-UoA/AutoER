@@ -2,7 +2,7 @@ final/automl/logs/*
 final/sklearn/logs/*
 final/dl/logs/*
 data/*
-*.db
+# *.db
 *.log
 trials/dbs/*
 trials/results/*
