@@ -3,6 +3,7 @@ final/sklearn/logs/*
 final/dl/logs/*
 data/*
 # *.db
+with_gt/dbs/*
 *.log
 trials/dbs/*
 trials/results/*
