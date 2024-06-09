@@ -10,4 +10,8 @@ trials/results/*
 census/.embs/*
 *.npy
 census/pyjedai/*
+census/predictions/*_results.csv
+census/census_predictions_06072024.csv
+with_gt/logs
+
 
