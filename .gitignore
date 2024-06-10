@@ -2,8 +2,17 @@ final/automl/logs/*
 final/sklearn/logs/*
 final/dl/logs/*
 data/*
-*.db
+# *.db
+with_gt/dbs/*
 *.log
 trials/dbs/*
 trials/results/*
+*.pyc
+census/.embs/*
+*.npy
+census/pyjedai/*
+census/predictions/*_results.csv
+census/census_predictions_06072024.csv
+with_gt/logs
+
 
