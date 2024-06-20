@@ -7,11 +7,11 @@ data/*
 trials/dbs/*
 trials/results/*
 *.pyc
-census/.embs/*
+benchmarking/.embs/*
 *.npy
-census/pyjedai/*
-census/predictions/*_results.csv
-census/census_predictions_06072024.csv
+benchmarking/pyjedai/*
+benchmarking/predictions/*_results.csv
+benchmarking/census_predictions_06072024.csv
 with_gt/logs
 
 
