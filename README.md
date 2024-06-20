@@ -5,13 +5,8 @@ Auto Configuration experiments for pyJedAI
 
 All exps run at 
 ```python
-konstantinos@snorlax
 OS: Ubuntu 22.04 jammy
 Kernel: x86_64 Linux 6.2.0-36-generic
-Uptime: 112d 32m
-Packages: 1630
-Shell: zsh 5.8.1
-Disk: 946G / 2,3T (44%)
 CPU: Intel Core i7-9700K @ 8x 4,9GHz [46.0°C]
 GPU: NVIDIA GeForce RTX 2080 Ti
 RAM: 6622MiB / 64228MiB
@@ -63,13 +58,8 @@ nohup ./sklearn_exps.sh > ./final/sklearn/sklearn_exps.log 2>&1 &
 
 ### Resources
 ```python
-konstantinos@snorlax
 OS: Ubuntu 22.04 jammy
 Kernel: x86_64 Linux 6.2.0-36-generic
-Uptime: 112d 32m
-Packages: 1630
-Shell: zsh 5.8.1
-Disk: 946G / 2,3T (44%)
 CPU: Intel Core i7-9700K @ 8x 4,9GHz [46.0°C]
 GPU: NVIDIA GeForce RTX 2080 Ti
 RAM: 6622MiB / 64228MiB
@@ -85,6 +75,17 @@ python regression_with_dl.py --trials optuna
 To run all one-by-one:
 ```
 nohup ./dl_exps.sh > ./final/dl/dl_exps.log 2>&1 &
+```
+
+## CENSUS
+
+### Resources
+```python
+OS: Ubuntu 22.04 jammy
+Kernel: x86_64 Linux 6.5.0-35-generic
+CPU: AMD Ryzen 9 7950X 16-Core @ 32x 5,881GHz
+GPU: NVIDIA GeForce RTX 4090
+RAM: 3346MiB / 63991MiB
 ```
 
 
