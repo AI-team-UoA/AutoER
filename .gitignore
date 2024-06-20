@@ -11,7 +11,9 @@ trials/results/*
 benchmarking/.embs/*
 *.npy
 benchmarking/pyjedai/*
-benchmarking/predictions/*_results.csv
+benchmarking/*.csv
+benchmarking/*.gz
+benchmarking/predictions/*.csv
 benchmarking/census_predictions_06072024.csv
 with_gt/logs
 
