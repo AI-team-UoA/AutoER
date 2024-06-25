@@ -1,7 +1,8 @@
 final/automl/logs/*
 final/sklearn/logs/*
 final/dl/logs/*
-data/*
+data/*_data.csv
+data/trials*.csv
 # *.db
 with_gt/dbs/*
 *.log
