@@ -8,21 +8,17 @@ with_gt/dbs/*
 trials/dbs/*
 trials/results/*
 *.pyc
-<<<<<<< HEAD
 census/.embs/*
 *.npy
 census/pyjedai/*
 census/predictions/*_results.csv
 census/census_predictions_06072024.csv
-=======
 benchmarking/.embs/*
-*.npy
 benchmarking/pyjedai/*
-benchmarking/*.csv
+# benchmarking/*.csv
 benchmarking/*.gz
 benchmarking/predictions/*.csv
 benchmarking/census_predictions_06072024.csv
->>>>>>> origin/main
-with_gt/logs
-
+with_gt/logs/*
+*.db
 
