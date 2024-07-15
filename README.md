@@ -18,7 +18,6 @@ RAM: 6622MiB / 64228MiB
 
 ### Resources
 ```python
-nikoletos@pyravlos5
 OS: Ubuntu 22.04 jammy
 Kernel: x86_64 Linux 6.5.0-18-generic
 Uptime: 39d 19h 48m
