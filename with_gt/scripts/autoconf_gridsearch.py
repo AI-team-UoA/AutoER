@@ -1,3 +1,15 @@
+"""
+This script is used to perform a grid search over the hyperparameters of the clustering algorithms.
+
+Parameters:
+    --did: dataset id (1-10)
+    --dbname: database name
+    --clustering: clustering method
+    --verbose: verbose mode
+
+Example:
+    python autoconf_gridsearch.py --did 1 --dbname dbs/autoconf_gridsearch --clustering UniqueMappingClustering --verbose True
+"""
 import time
 import optuna
 import os
@@ -5,11 +17,7 @@ import sys
 import pandas as pd
 from pyjedai.datamodel import Data
 from pyjedai.vector_based_blocking import EmbeddingsNNBlockBuilding
-from pyjedai.clustering import UniqueMappingClustering
-from pyjedai.matching import EntityMatching
-from pyjedai.clustering import CorrelationClustering, CenterClustering, MergeCenterClustering, \
-                                UniqueMappingClustering, ConnectedComponentsClustering, ExactClustering, \
-                                BestMatchClustering, KiralyMSMApproximateClustering
+from pyjedai.clustering import UniqueMappingClustering, ConnectedComponentsClustering, KiralyMSMApproximateClustering
 from tqdm import tqdm
 import numpy as np
 
@@ -53,30 +61,43 @@ verbose = parser.parse_args().verbose
 
 CLUSTERING_MAPPING = {
     "UniqueMappingClustering": UniqueMappingClustering,
-    "BestMatchClustering": BestMatchClustering,
     "KiralyMSMApproximateClustering": KiralyMSMApproximateClustering,
-    "ConnectedComponentsClustering": ConnectedComponentsClustering
+    "ConnectedComponentsClustering": ConnectedComponentsClustering,
+    # "CorrelationClustering": CorrelationClustering,
+    # "CutClustering": CutClustering,
+    # "RowColumnClustering": RowColumnClustering,
+    # "RicochetRClustering": RicochetRClustering,
+    # "CenterClustering": CenterClustering
+    # "BestMatchClustering": BestMatchClustering,
 }
 
 SEARCH_SPACE = {
-    "threshold": np.arange(0.05, 0.95, 0.05),
-    'k': range(1, 100, 1),
-    'lm': ["smpnet", "st5", "sdistilroberta", "sminilm", "sent_glove"],
-    "clustering" : ["UniqueMappingClustering", "BestMatchClustering", \
-        "KiralyMSMApproximateClustering", "ConnectedComponentsClustering"]
+    "threshold": np.arange(0.05, 0.95+0.05, 0.05),
+    'k': range(1, 100+1, 1),
+    'lm': ["smpnet", "st5", "sdistilroberta", "sminilm", "sent_glove", 'fasttext', 'word2vec'],
+    "clustering" : list(CLUSTERING_MAPPING.keys())
 }
 
 DB_NAME = "autoconf_gridsearch" if db_name == -1 else db_name
 STORAGE_NAME = "sqlite:///{}.db".format(DB_NAME)
 SEED = 42
 CSV_FILE_COLUMNS = 'trial,dataset,clustering,lm,k,threshold,sampler,seed,precision,recall,f1,runtime\n'
-DESTINATION_FOLDER = 'results/gridsearch/'
+DESTINATION_FOLDER = '../results/gridsearch/'
+DATA_DIR = '../../data/'
 PYJEDAI_TQDM_DISABLE = True
-NUM_OF_TRIALS = len(SEARCH_SPACE["threshold"]) * len(SEARCH_SPACE["k"]) * len(SEARCH_SPACE['lm'])
+NUM_OF_TRIALS = len(SEARCH_SPACE["threshold"]) * len(SEARCH_SPACE["k"]) * len(SEARCH_SPACE['lm']) + len(SEARCH_SPACE["clustering"])
 CSV_FILE_NAMES = [d+'.csv' for d in D]
 OUTPUT_EXCEL_FILE_NAME = 'gridsearch.xlsx'
 SAMPLER = 'gridsearch'
 # ------------------------------- EXPERIMENTS CONFIGURATION END ------------------------------- #
+
+
+print("\nConfiguration report:")
+print("Number of LMs: ", len(SEARCH_SPACE['lm']))
+print("Number of thresholds: ", len(SEARCH_SPACE['threshold']))
+print("Number of Ks: ", len(SEARCH_SPACE['k']))
+print("Number of clustering methods: ", len(SEARCH_SPACE['clustering']))
+print("Total number of trials: ", NUM_OF_TRIALS)
 
 
 for i in range(0,len(D)):
@@ -96,19 +117,19 @@ for i in range(0,len(D)):
     with open(DESTINATION_FOLDER + d + '.csv', 'w') as f:
         f.write(CSV_FILE_COLUMNS)
         data = Data(
-            dataset_1=pd.read_csv("../data/ccer/" + d + "/" + d1 , 
+            dataset_1=pd.read_csv(DATA_DIR + d + "/" + d1 , 
                                 sep=s,
                                 engine=e,
                                 na_filter=False).astype(str),
             id_column_name_1='id',
             dataset_name_1=d+"_"+d1.split(".")[0],
-            dataset_2=pd.read_csv("../data/ccer/" + d + "/" + d2 , 
+            dataset_2=pd.read_csv(DATA_DIR + d + "/" + d2 , 
                                 sep=s, 
                                 engine=e,
                                 na_filter=False).astype(str),
             id_column_name_2='id',
             dataset_name_2=d+"_"+d2.split(".")[0],
-            ground_truth=pd.read_csv("../data/ccer/" + d + "/gt.csv", sep=s, engine=e))
+            ground_truth=pd.read_csv(DATA_DIR + d + "/gt.csv", sep=s, engine=e))
 
         if verbose:
             data.print_specs()

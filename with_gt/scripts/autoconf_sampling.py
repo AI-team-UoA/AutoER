@@ -1,3 +1,17 @@
+"""
+This script is used to run optuna trials for pyjedai auto configuration.
+
+Parameters:
+    --dbname: database name
+    --ntrials: number of trials
+    --clustering: clustering method
+    --sampler: optuna sampler to use
+    --d: dataset id (1-10)
+    --verbose: verbose mode
+
+Example:
+    python autoconf_sampling.py --dbname dbs/autoconf_sampling --ntrials 100 --clustering UniqueMappingClustering --sampler TPESampler --d 1 --verbose True
+"""
 import time
 import optuna
 import os
@@ -13,15 +27,11 @@ plt.style.use('seaborn-v0_8-notebook')
 
 from pyjedai.datamodel import Data
 from pyjedai.vector_based_blocking import EmbeddingsNNBlockBuilding
-from pyjedai.clustering import UniqueMappingClustering
-from pyjedai.matching import EntityMatching
-from pyjedai.clustering import CorrelationClustering, CenterClustering, MergeCenterClustering, \
-                                UniqueMappingClustering, ConnectedComponentsClustering, ExactClustering, \
-                                BestMatchClustering, KiralyMSMApproximateClustering
+from pyjedai.clustering import UniqueMappingClustering, ConnectedComponentsClustering, KiralyMSMApproximateClustering
 from optuna.study import MaxTrialsCallback
 from optuna.trial import TrialState
 
-from optuna.samplers import CmaEsSampler, RandomSampler, QMCSampler, TPESampler
+from optuna.samplers import RandomSampler, QMCSampler, TPESampler, GPSampler
 
 
 import argparse
@@ -51,9 +61,9 @@ engine = [
 
 parser = argparse.ArgumentParser(description='Run optuna trials for pyjedai auto configuration')
 parser.add_argument('--dbname', type=str, default="None")
-parser.add_argument('--ntrials', type=int, default=50)
+parser.add_argument('--ntrials', type=int, default=100)
 parser.add_argument('--clustering', type=str, default=None)
-parser.add_argument('--sampler', type=str, default="CmaEsSampler", help='Optuna sampler to use')
+parser.add_argument('--sampler', type=str, default="TPESampler", help='Optuna sampler to use')
 parser.add_argument('--d', type=int, default=None)
 parser.add_argument('--verbose', type=bool, default=False)
 
@@ -70,49 +80,59 @@ verbose = args.verbose
 COLOR_MAPPING = {
     "tpe" : "blue",
     "random": "red",
-    "qmc": "green"
+    "qmc": "green",
+    "gps": "purple"
 }
 
 COLOR_MAPPING_FILL = {
     "tpe" : "lightblue",
     "random": "pink",
-    "qmc": "lightgreen"
+    "qmc": "lightgreen",
+    "gps": "violet"
 }
 
 CLUSTERING_MAPPING = {
     "UniqueMappingClustering": UniqueMappingClustering,
-    "BestMatchClustering": BestMatchClustering,
+    # "BestMatchClustering": BestMatchClustering,
     "KiralyMSMApproximateClustering": KiralyMSMApproximateClustering,
-    "ConnectedComponentsClustering": ConnectedComponentsClustering
+    "ConnectedComponentsClustering": ConnectedComponentsClustering,
+    # "CorrelationClustering": CorrelationClustering,
+    # "CutClustering": CutClustering,
+    # "RowColumnClustering": RowColumnClustering,
+    # "RicochetRClustering": RicochetRClustering,
+    # "CenterClustering": CenterClustering
 }
 
 SAMPLERS_MAPPING = {
     "tpe" : TPESampler,
     "random": RandomSampler,
-    "qmc": QMCSampler
+    "qmc": QMCSampler,
+    "gps": GPSampler
 }
 
 SAMPLERS_OPTUNA_NAMES_MAPPING = {
     "tpe" : "TPESampler",
     "random": "RandomSampler",
-    "qmc": "QMCSampler"
+    "qmc": "QMCSampler",
+    "gps": "GPSampler"
 }
 
 SEARCH_SPACE = {
     "threshold": [0.05, 0.95],
     'k': [1, 100],
-    'lm': ["smpnet", "st5", "sdistilroberta", "sminilm", "sent_glove"],
-    "clustering" : ["UniqueMappingClustering", "BestMatchClustering", \
-        "KiralyMSMApproximateClustering", "ConnectedComponentsClustering"]
+    'lm': ["smpnet", "st5", "sdistilroberta", "sminilm", "sent_glove", 'fasttext', 'word2vec'],
+    "clustering" : list(CLUSTERING_MAPPING.keys())
 }
 
 SEEDS = [16, 64, 256, 1024, 4096]
-TRIALS_SERIES = range(5, 50+5, 5)
+TRIALS_SERIES = range(5, num_of_trials+5, 5)
 
-# SEEDS = [16, 64]
+# SEEDS = [16]
 # TRIALS_SERIES = range(5, 20+5, 5)
 
-DESTINATION_FOLDER = 'results'
+DESTINATION_FOLDER = '../results/'
+DATA_DIR = '../../data/'
+
 PYJEDAI_TQDM_DISABLE = True
 MAX_F1 = 100
 
@@ -123,10 +143,8 @@ TRIALS_FILE_COLUMNS = 'trial,dataset,clustering,lm,k,threshold,sampler,seed,prec
 
 # ------------------------------- EXPERIMENTS CONFIGURATION END ------------------------------- #
 
-# if AUC_RESULTS_FILE csv exists open and write in the end
-
-AUC_FILE_NAME = "results/auc.csv"
-DATASET_NAME = "results/trials_dataset.csv"
+AUC_FILE_NAME = DESTINATION_FOLDER+"auc.csv"
+DATASET_NAME = DESTINATION_FOLDER+"trials_dataset.csv"
 
 if os.path.exists(AUC_FILE_NAME):
     AUC_RESULTS_FILE = open(AUC_FILE_NAME, "a")
@@ -141,6 +159,7 @@ else:
     DATASET_FILE = open(DATASET_NAME, "w")
     DATASET_FILE.write(TRIALS_FILE_COLUMNS)
 
+# FOR ALL SAMPLERS
 for sampler in SAMPLERS_MAPPING.keys():
     DB_NAME = "autoconf_" + sampler
     STORAGE_NAME = "sqlite:///{}.db".format(DB_NAME)
@@ -151,11 +170,14 @@ for sampler in SAMPLERS_MAPPING.keys():
 
     avg_f1_per_trial = {t: 0 for t in TRIALS_SERIES}
 
+    # FOR ALL SEEDS
     for seed in SEEDS:
         
         best_trials = []
+        # FOR ALL TRIALS
         for num_of_trials in TRIALS_SERIES:
-        
+            
+            # FOR ALL DATASETS
             for i in range(0,len(D)):
                 
                 if prompt_d:
@@ -178,19 +200,19 @@ for sampler in SAMPLERS_MAPPING.keys():
                     TRIALS_FILE.write(TRIALS_FILE_COLUMNS)
                 
                 data = Data(
-                    dataset_1=pd.read_csv("../data/ccer/" + d + "/" + d1 , 
+                    dataset_1=pd.read_csv(DATA_DIR + d + "/" + d1 , 
                                         sep=s,
                                         engine=e,
                                         na_filter=False).astype(str),
                     id_column_name_1='id',
                     dataset_name_1=d+"_"+d1.split(".")[0],
-                    dataset_2=pd.read_csv("../data/ccer/" + d + "/" + d2 , 
+                    dataset_2=pd.read_csv(DATA_DIR + d + "/" + d2 , 
                                         sep=s, 
                                         engine=e, 
                                         na_filter=False).astype(str),
                     id_column_name_2='id',
                     dataset_name_2=d+"_"+d2.split(".")[0],
-                    ground_truth=pd.read_csv("../data/ccer/" + d + "/gt.csv", sep=s, engine=e))
+                    ground_truth=pd.read_csv(DATA_DIR + d + "/gt.csv", sep=s, engine=e))
                 
                 if verbose:
                     data.print_specs()
@@ -228,8 +250,6 @@ for sampler in SAMPLERS_MAPPING.keys():
                         TRIALS_FILE.write('{},{},{},{},{},{},{},{},{},{},{},{}\n'.format(trial.number, d, clustering_method, lm, \
                                                                                             k, threshold, sampler, seed, precision, recall, f1, execution_time))
                         TRIALS_FILE.flush()
-                        # DATASET_FILE.write('{},{},{},{},{},{},{},{},{},{}\n'.format(trial.number, d, clustering_method, lm, k, threshold, precision, recall, f1, execution_time))
-                        # DATASET_FILE.flush()
                         
                         return f1
 
@@ -239,10 +259,11 @@ for sampler in SAMPLERS_MAPPING.keys():
                         return optuna.TrialPruned()
                 
                 overall_runtime = time.time()
-                if sampler == "random":
+                if sampler == "random" or sampler == "gps":
                     optuna_sampler = SAMPLERS_MAPPING[sampler](seed=seed)
                 else:
                     optuna_sampler = SAMPLERS_MAPPING[sampler](seed=seed, warn_independent_sampling=False if sampler == "qmc" else True)
+
                 study = optuna.create_study(
                     directions=["maximize"],
                     sampler=optuna_sampler,
@@ -265,14 +286,12 @@ for sampler in SAMPLERS_MAPPING.keys():
                 if prompt_d:
                     break
             
-    # plot convergance of num_of_trials and f1
     x, y = list(avg_f1_per_trial.keys()), list(avg_f1_per_trial.values())    
     y = [i/len(SEEDS) for i in y]
     
-    plt.plot(x, y, 
-             label=SAMPLERS_OPTUNA_NAMES_MAPPING[sampler], 
-             color=COLOR_MAPPING[sampler])
-    # plt.fill_between(x, y, color=COLOR_MAPPING_FILL[sampler], alpha=0.1)
+    # plt.plot(x, y, 
+    #          label=SAMPLERS_OPTUNA_NAMES_MAPPING[sampler], 
+    #          color=COLOR_MAPPING[sampler])
 
     area_trapz = np.trapz(y, x)
 
@@ -286,13 +305,13 @@ for sampler in SAMPLERS_MAPPING.keys():
     AUC_RESULTS_FILE.write(f"{sampler},{d},{area_trapz},{auc},{overall_runtime}\n")
     AUC_RESULTS_FILE.flush()
 
-plt.legend()
-plt.ylim(0, 100)
-plt.grid()
-plt.xticks(TRIALS_SERIES)
-plt.xlabel('Number of trials')
-plt.ylabel('Average F1 score')
-plt.title('Convergence for '+  'D'+ str(prompt_d) + ' dataset')
-plt.savefig(DESTINATION_FOLDER+'/plots/' + 'D'+ str(prompt_d) + '.png')
+# plt.legend()
+# plt.ylim(0, 100)
+# plt.grid()
+# plt.xticks(TRIALS_SERIES)
+# plt.xlabel('Number of trials')
+# plt.ylabel('Average F1 score')
+# plt.title('Convergence for '+  'D'+ str(prompt_d) + ' dataset')
+# plt.savefig(DESTINATION_FOLDER+'plots/' + 'D'+ str(prompt_d) + '.png')
 
 AUC_RESULTS_FILE.close()
