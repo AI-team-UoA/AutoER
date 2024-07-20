@@ -17,9 +17,7 @@ nohup ./run_exps.sh 2>&1 &
 
 # Problem 2: **Without** Ground-Truth file
 
-## Classic Regressors
-
-### AutoML Experiments
+## AutoML Approach
 
 To run one experiment:
 ```
@@ -31,7 +29,9 @@ To run all one-by-one:
 nohup ./automl_exps.sh > ./final/automl/automl_exps.log 2>&1 &
 ```
 
-### Sklearn Experiments
+## Regressors Experiments - SKLEARN & DL Approach
+
+### SKLEARN
 
 To run one experiment:
 ```
@@ -43,9 +43,7 @@ To run all one-by-one:
 nohup ./sklearn_exps.sh > ./final/sklearn/sklearn_exps.log 2>&1 &
 ```
 
-## DL
-
-### LinearNN Experiments
+### DL
 
 To run one experiment:
 ```
@@ -59,7 +57,7 @@ nohup ./dl_exps.sh > ./final/dl/dl_exps.log 2>&1 &
 
 # Resources
 
-| Spec    | Exp. P1                                  | Exp. P2                                                            |
+| Spec    | Exp. P1 & P2                             | Exp. P2 - AutoML                                                   |
 |---------|------------------------------------------|--------------------------------------------------------------------|
 | OS      | Ubuntu 22.04 jammy                       | Ubuntu 22.04 jammy                                                 |
 | Kernel  | x86_64 Linux 6.2.0-36-generic            | x86_64 Linux 6.5.0-18-generic                                      |
