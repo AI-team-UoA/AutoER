@@ -18,7 +18,6 @@ RAM: 6622MiB / 64228MiB
 
 ### Resources
 ```python
-nikoletos@pyravlos5
 OS: Ubuntu 22.04 jammy
 Kernel: x86_64 Linux 6.5.0-18-generic
 Uptime: 39d 19h 48m
@@ -76,16 +75,4 @@ To run all one-by-one:
 ```
 nohup ./dl_exps.sh > ./final/dl/dl_exps.log 2>&1 &
 ```
-
-## CENSUS
-
-### Resources
-```python
-OS: Ubuntu 22.04 jammy
-Kernel: x86_64 Linux 6.5.0-35-generic
-CPU: AMD Ryzen 9 7950X 16-Core @ 32x 5,881GHz
-GPU: NVIDIA GeForce RTX 4090
-RAM: 3346MiB / 63991MiB
-```
-
 
