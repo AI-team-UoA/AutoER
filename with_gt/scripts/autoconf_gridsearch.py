@@ -82,8 +82,8 @@ DB_NAME = "autoconf_gridsearch" if db_name == -1 else db_name
 STORAGE_NAME = "sqlite:///{}.db".format(DB_NAME)
 SEED = 42
 CSV_FILE_COLUMNS = 'trial,dataset,clustering,lm,k,threshold,sampler,seed,precision,recall,f1,runtime\n'
-DESTINATION_FOLDER = '../results/gridsearch/'
-DATA_DIR = '../../data/'
+DESTINATION_FOLDER = 'results/gridsearch/'
+DATA_DIR = '../data/'
 PYJEDAI_TQDM_DISABLE = True
 NUM_OF_TRIALS = len(SEARCH_SPACE["threshold"]) * len(SEARCH_SPACE["k"]) * len(SEARCH_SPACE['lm']) + len(SEARCH_SPACE["clustering"])
 CSV_FILE_NAMES = [d+'.csv' for d in D]
@@ -184,7 +184,7 @@ for i in range(0,len(D)):
         study.optimize(
             objective, 
             n_trials=NUM_OF_TRIALS, 
-            show_progress_bar=True,
+            show_progress_bar=False,
             callbacks=[MaxTrialsCallback(NUM_OF_TRIALS, states=(TrialState.COMPLETE,))]
         )
 

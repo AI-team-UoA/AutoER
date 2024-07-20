@@ -21,7 +21,7 @@ def combine_csv_files(directories):
     print(combined_df.head())
 
     combined_df.to_csv('trials.csv', index=False)
-    print("All files have been combined into combined_records.csv")
+    print("All files have been combined into trials.csv")
 
 directories = ['qmc', 'tpe', 'random', 'gps', 'gridsearch']
 

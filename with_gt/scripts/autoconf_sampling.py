@@ -130,8 +130,8 @@ TRIALS_SERIES = range(5, num_of_trials+5, 5)
 # SEEDS = [16]
 # TRIALS_SERIES = range(5, 20+5, 5)
 
-DESTINATION_FOLDER = '../results/'
-DATA_DIR = '../../data/'
+DESTINATION_FOLDER = 'results/'
+DATA_DIR = '../data/'
 
 PYJEDAI_TQDM_DISABLE = True
 MAX_F1 = 100
@@ -275,7 +275,7 @@ for sampler in SAMPLERS_MAPPING.keys():
                 study.optimize(
                     objective, 
                     n_trials=num_of_trials, 
-                    show_progress_bar=True,
+                    show_progress_bar=False,
                     callbacks=[MaxTrialsCallback(num_of_trials, states=(TrialState.COMPLETE,))]
                 )
                 overall_runtime = time.time() - overall_runtime
