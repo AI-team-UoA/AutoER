@@ -1,9 +1,21 @@
 # pyJedAI Auto Configuration
 Auto Configuration experiments for pyJedAI
 
-# 1st case; **With** Ground-Truth file
+# Problem 1: **With** Ground-Truth file
 
-All exps run at 
+## Build
+
+Create a conda env 3.10, pip install optuna and pyjedai.
+
+## Execution
+
+Go to `/with_gt/scripts/` and run 
+
+```
+nohup ./run_exps.sh 2>&1 & 
+```
+
+## Resources
 ```python
 OS: Ubuntu 22.04 jammy
 Kernel: x86_64 Linux 6.2.0-36-generic
@@ -12,7 +24,7 @@ GPU: NVIDIA GeForce RTX 2080 Ti
 RAM: 6622MiB / 64228MiB
 ```
 
-# 2nd case; **Without** Ground-Truth file
+# Problem 2: **Without** Ground-Truth file
 
 ## Classic Regressors
 
