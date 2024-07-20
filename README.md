@@ -15,31 +15,9 @@ Go to `/with_gt/scripts/` and run
 nohup ./run_exps.sh 2>&1 & 
 ```
 
-## Resources
-```python
-OS: Ubuntu 22.04 jammy
-Kernel: x86_64 Linux 6.2.0-36-generic
-CPU: Intel Core i7-9700K @ 8x 4,9GHz [46.0°C]
-GPU: NVIDIA GeForce RTX 2080 Ti
-RAM: 6622MiB / 64228MiB
-```
-
 # Problem 2: **Without** Ground-Truth file
 
 ## Classic Regressors
-
-### Resources
-```python
-OS: Ubuntu 22.04 jammy
-Kernel: x86_64 Linux 6.5.0-18-generic
-Uptime: 39d 19h 48m
-Packages: 1745
-Shell: zsh 5.8.1
-Disk: 47G / 1,7T (3%)
-CPU: Intel Xeon E5-4603 v2 @ 32x 2,2GHz [31.0°C]
-GPU: Matrox Electronics Systems Ltd. G200eR2
-RAM: 4381MiB / 128831MiB
-```
 
 ### AutoML Experiments
 
@@ -67,15 +45,6 @@ nohup ./sklearn_exps.sh > ./final/sklearn/sklearn_exps.log 2>&1 &
 
 ## DL
 
-### Resources
-```python
-OS: Ubuntu 22.04 jammy
-Kernel: x86_64 Linux 6.2.0-36-generic
-CPU: Intel Core i7-9700K @ 8x 4,9GHz [46.0°C]
-GPU: NVIDIA GeForce RTX 2080 Ti
-RAM: 6622MiB / 64228MiB
-```
-
 ### LinearNN Experiments
 
 To run one experiment:
@@ -88,3 +57,12 @@ To run all one-by-one:
 nohup ./dl_exps.sh > ./final/dl/dl_exps.log 2>&1 &
 ```
 
+# Resources
+
+| Spec    | Exp. P1                                  | Exp. P2                                                            |
+|---------|------------------------------------------|--------------------------------------------------------------------|
+| OS      | Ubuntu 22.04 jammy                       | Ubuntu 22.04 jammy                                                 |
+| Kernel  | x86_64 Linux 6.2.0-36-generic            | x86_64 Linux 6.5.0-18-generic                                      |
+| CPU     | Intel Core i7-9700K @ 8x 4.9GHz [46.0°C] | Intel Xeon E5-4603 v2 @ 32x 2.2GHz [31.0°C]                        |
+| GPU     | NVIDIA GeForce RTX 2080 Ti               | Matrox Electronics Systems Ltd. G200eR2                            |
+| RAM     | 6622MiB / 64228MiB                       | 4381MiB / 128831MiB                                                |
