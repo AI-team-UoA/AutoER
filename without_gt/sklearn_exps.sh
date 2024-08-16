@@ -2,8 +2,8 @@
 
 # Define the datasets and regressors
 datasets=("optuna" "gridsearch" "all")
-# regressors=("LASSO" "RIDGE" "LINEAR" "RF")
-regressors=("XGB" "SVR")
+regressors=("LASSO" "RIDGE" "LINEAR" "RF", "XGB")
+# regressors=("LASSO" "RIDGE" "LINEAR" "RF", "SVR")
 
 # Create the output directory if it doesn't exist
 mkdir -p ./sklearn
@@ -16,9 +16,10 @@ for dataset in "${datasets[@]}"; do
     
     # Run the command and wait for it to complete
     echo "Running: nohup python -u regression_with_sklearn.py --dataset $dataset --regressor $regressor > $log_file 2>&1 &"
-    nohup python -u regression_with_sklearn.py --trials "$dataset" --regressor "$regressor" > "$log_file" 2>&1
-    wait
+    nohup python -u regression_with_sklearn.py --trials "$dataset" --regressor "$regressor" > "$log_file" 2>&1 &
+    # wait
   done
+  wait
 done
 
 echo "All tasks completed."

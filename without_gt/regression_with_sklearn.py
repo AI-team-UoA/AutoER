@@ -46,7 +46,7 @@ REGRESSORS = {
     'LASSO': Lasso, 
     'RIDGE': Ridge,
     'LINEAR': LinearRegression,
-    'SVR': SVR, 
+    # 'SVR': SVR, removed due to long training time
     'XGB': XGBRegressor, 
     'RF': RandomForestRegressor
 }
@@ -322,3 +322,14 @@ for D in datasets:
             f"{r.importances_std[i]:.3f}"
         )
     print("\n\n")
+
+    # Save the feature importance
+    feature_importance = pd.DataFrame()
+    feature_importance['Feature'] = dummy_features
+    feature_importance['Importance'] = r.importances_mean
+    feature_importance['Std'] = r.importances_std
+    feature_importance['Rank'] = np.arange(len(dummy_features))
+
+    feature_importance.to_csv(DIR+RESULTS_CSV_NAME+'_'+D+'_feature_importance.csv', index=False)
+
+f.close()

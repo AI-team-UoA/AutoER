@@ -221,3 +221,10 @@ for D in datasets:
             f"{r.importances_std[i]:.3f}"
         )
     print("\n\n")
+
+    # Save the feature importance to a file
+    feature_importance = pd.DataFrame({'feature': dummy_features, 'importance': r.importances_mean})
+    feature_importance = feature_importance.sort_values(by='importance', ascending=False)
+    feature_importance.to_csv(DIR+'feature_importance_'+str(D)+'.csv', index=False)
+
+f.close()

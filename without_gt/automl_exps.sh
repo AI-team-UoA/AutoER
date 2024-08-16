@@ -14,8 +14,8 @@ for dataset in "${datasets[@]}"; do
   
   # Run the command and wait for it to complete
   echo "Running: nohup $command > $log_file 2>&1 &"
-  nohup $command > $log_file 2>&1
-  wait
+  nohup $command > $log_file 2>&1 &
+  # wait
 done
 
 echo "All tasks completed."
