@@ -8,11 +8,11 @@ def combine_csv_files(directories):
         print("Path: ", os.getcwd())
 
         print(f"Reading files in {directory}")
-        files = [file for file in os.listdir(os.path.join('../results', directory)) if file.endswith('.csv')]
+        files = [file for file in os.listdir(os.path.join('results', directory)) if file.endswith('.csv')]
         
         for file in files:
             print(f"Reading {file}")
-            file_path = os.path.join(os.path.join('../results', directory), file)
+            file_path = os.path.join(os.path.join('results', directory), file)
             df = pd.read_csv(file_path)
             df_list.append(df)
 

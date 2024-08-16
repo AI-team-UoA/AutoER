@@ -10,18 +10,38 @@ log_file="./logs/with_gt_exps.log"
 echo "Script started at: $(timestamp)" | tee -a $log_file
 
 # Running GRIDSEARCH experiments
-echo "Running: GRIDSEARCH experiments" | tee -a $log_file
-echo "Start time: $(timestamp)" | tee -a $log_file
-nohup python -u ./scripts/autoconf_gridsearch.py > ./logs/gridsearch.out 2>&1
-wait
-echo "End time: $(timestamp)" | tee -a $log_file
+# echo "Running: GRIDSEARCH experiments" | tee -a $log_file
+# echo "Start time: $(timestamp)" | tee -a $log_file
+# nohup python -u ./scripts/autoconf_gridsearch.py > ./logs/gridsearch.out 2>&1
+# wait
+# echo "End time: $(timestamp)" | tee -a $log_file
 
 # Running OPTUNA experiments
+# echo "Running: OPTUNA experiments" | tee -a $log_file
+# echo "Start time: $(timestamp)" | tee -a $log_file
+# nohup python -u ./scripts/autoconf_sampling.py --ntrials 100 > ./logs/samplers_d1.out 2>&1
+# wait
+# echo "End time: $(timestamp)" | tee -a $log_file
+
 echo "Running: OPTUNA experiments" | tee -a $log_file
-echo "Start time: $(timestamp)" | tee -a $log_file
-nohup python -u ./scripts/autoconf_sampling.py --ntrials 200 > ./logs/samplers.out 2>&1
+echo "Start time: $(date)" | tee -a $log_file
+
+for d in {1..10}
+do
+    echo "Running with --d=$d" | tee -a $log_file
+    nohup python -u ./scripts/autoconf_sampling.py --ntrials 100 --d $d > ./logs/samplers_d${d}.out 2>&1 &
+    sleep 10
+
+    if [ $d -eq 7 ]; then
+        echo "Waiting after --d=$d" | tee -a $log_file
+        wait
+    fi
+done
+
 wait
-echo "End time: $(timestamp)" | tee -a $log_file
+
+echo "All OPTUNA experiments completed." | tee -a $log_file
+echo "Overall end time: $(date)" | tee -a $log_file
 
 # Concatenating results
 echo "Running: Concatenate results" | tee -a $log_file

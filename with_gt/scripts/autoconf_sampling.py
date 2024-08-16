@@ -93,14 +93,8 @@ COLOR_MAPPING_FILL = {
 
 CLUSTERING_MAPPING = {
     "UniqueMappingClustering": UniqueMappingClustering,
-    # "BestMatchClustering": BestMatchClustering,
     "KiralyMSMApproximateClustering": KiralyMSMApproximateClustering,
     "ConnectedComponentsClustering": ConnectedComponentsClustering,
-    # "CorrelationClustering": CorrelationClustering,
-    # "CutClustering": CutClustering,
-    # "RowColumnClustering": RowColumnClustering,
-    # "RicochetRClustering": RicochetRClustering,
-    # "CenterClustering": CenterClustering
 }
 
 SAMPLERS_MAPPING = {
@@ -126,9 +120,6 @@ SEARCH_SPACE = {
 
 SEEDS = [16, 64, 256, 1024, 4096]
 TRIALS_SERIES = range(5, num_of_trials+5, 5)
-
-# SEEDS = [16]
-# TRIALS_SERIES = range(5, 20+5, 5)
 
 DESTINATION_FOLDER = 'results/'
 DATA_DIR = '../data/'
