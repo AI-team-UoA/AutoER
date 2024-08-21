@@ -1,25 +1,38 @@
-final/automl/logs/*
-final/sklearn/logs/*
-final/dl/logs/*
+# general
+*.log
+*.pyc
+*.npy
+*.db
+*.out
+*.tar.gz
+
+# data
 data/*_data.csv
 data/trials*.csv
-# *.db
+data/D*/
+data/census/*
+data/dbpedia/
+
+# with_gt
 with_gt/dbs/*
-*.log
-trials/dbs/*
-trials/results/*
-*.pyc
+with_gt/logs/*
+
+# without_gt
+without_gt/sklearn/
+without_gt/dl/
+without_gt/automl/
+
+# census
 census/.embs/*
-*.npy
 census/pyjedai/*
 census/predictions/*_results.csv
 census/census_predictions_06072024.csv
+
+# dbpedia
 benchmarking/.embs/*
 benchmarking/pyjedai/*
-# benchmarking/*.csv
 benchmarking/*.gz
 benchmarking/predictions/*.csv
 benchmarking/census_predictions_06072024.csv
-with_gt/logs/*
-*.db
-*.out
+
+
