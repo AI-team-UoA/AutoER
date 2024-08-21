@@ -1,3 +1,4 @@
+import sys
 import pandas as pd
 import warnings
 import seaborn as sns
@@ -9,7 +10,7 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-from sklearn.inspection import plot_partial_dependence, permutation_importance
+from sklearn.inspection import permutation_importance
 
 import argparse
 import time
@@ -17,8 +18,10 @@ import time
 # read args
 parser = argparse.ArgumentParser()
 parser.add_argument('--trials', type=str, required=True)
+parser.add_argument('--d', type=str, required=False)
 args = parser.parse_args()
 dataset = args.trials
+D_input = args.d
 
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #
@@ -30,7 +33,7 @@ DATA_DIR = '../data/'
 DIR = './automl/'
 FILE = ''
 AUTOML_PER_RUNTIME = 30*60
-AUTOML_OVERALL_RUNTIME = 3*60*60
+AUTOML_OVERALL_RUNTIME = 6*60*60
 AUTOML_MEMORY = 6144*4
 AUTOML_NJOBS = 1
 TOPK = 20
@@ -79,12 +82,20 @@ trials = trials[features + ['f1', 'dataset']]
 # -------------------------------------------------------------------------- # 
 
 filename = DIR+dataset+'.csv'
-f = open(filename, 'w')
+f = open(filename, 'a')
 f.write('TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME\n')
 f.flush()
 print("Writing to: ", filename)
 
 for D in datasets:
+
+    if D_input is not None:
+        if D != D_input:
+            continue
+        else:
+            D = D_input
+            print("Processing: ", D)
+
     print("\n\n-----------------------------------\n")
     print("TEST SET: ", D)
     print("TRAINING with: ", [x for x in datasets if x!=D])
@@ -105,14 +116,28 @@ for D in datasets:
     X_train_dummy = pd.get_dummies(X_train)
     X_test_dummy = pd.get_dummies(X_test)
 
-    if D == 'D3' and dataset == 'gridsearch':
-        X_train_dummy = X_train_dummy.drop(columns=['lm_sent_glove'])
-
     print(X_train_dummy.columns)
     print("Size: ", len(X_train_dummy.columns))
     print(X_test_dummy.columns)
     print("Size: ", len(X_test_dummy.columns))
     print("Difference: ", set(X_train_dummy.columns) - set(X_test_dummy.columns))
+
+    cols_to_remove = set(X_train_dummy.columns) - set(X_test_dummy.columns)
+
+    for col in cols_to_remove:
+        print("Removing:", col)    
+
+    if len(cols_to_remove) > 0:    
+        X_train_dummy = X_train_dummy.drop(columns=[col])
+        print("New size: ", len(X_train_dummy.columns))
+
+    if len(X_train_dummy.columns) != len(X_test_dummy.columns):
+        print("Columns don't match")
+        print("Train: ", X_train_dummy.columns)
+        print("Test: ", X_test_dummy.columns)
+
+    # continue
+    # sys.exit(0)
 
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train_dummy)
@@ -225,6 +250,6 @@ for D in datasets:
     # Save the feature importance to a file
     feature_importance = pd.DataFrame({'feature': dummy_features, 'importance': r.importances_mean})
     feature_importance = feature_importance.sort_values(by='importance', ascending=False)
-    feature_importance.to_csv(DIR+'feature_importance_'+str(D)+'.csv', index=False)
+    feature_importance.to_csv(DIR+dataset+'/'+'feature_importance_'+str(D)+'.csv', index=False)
 
 f.close()
