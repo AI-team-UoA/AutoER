@@ -22,8 +22,11 @@ import optuna
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--trials', type=str, required=True)
+parser.add_argument('--d', type=str, required=False)
 args = parser.parse_args()
 dataset = args.trials
+D_input = args.d
+
 
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #
@@ -92,6 +95,13 @@ f.flush()
 print("Writing to: ", filename)
 
 for D in datasets:
+
+    if D_input is not None:
+        if D != D_input:
+            continue
+        else:
+            D = D_input
+            print("Processing: ", D)
 
     STUDY_NAME = RESULTS_CSV_NAME+'_'+D
     
