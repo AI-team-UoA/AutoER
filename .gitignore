@@ -20,7 +20,7 @@ with_gt/logs/*
 # without_gt
 without_gt/sklearn/
 without_gt/dl/
-without_gt/automl/
+without_gt/automl/logs/
 
 # census
 census/.embs/*
