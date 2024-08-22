@@ -19,9 +19,16 @@ with_gt/dbs/*
 with_gt/logs/*
 
 # without_gt
-without_gt/sklearn/
-without_gt/dl/
+without_gt/sklearn/dbs/
+without_gt/sklearn/logs/
+without_gt/sklearn/importance/
+without_gt/sklearn/ignored/
+
+without_gt/dl/dbs/
+without_gt/dl/logs/
+
 without_gt/automl/logs/
+
 
 # census
 census/.embs/*
