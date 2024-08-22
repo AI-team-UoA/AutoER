@@ -227,6 +227,16 @@ for D in datasets:
                                                     END_TO_END_RUNTIME))
     f.flush()
 
+    print("Logged row: ")
+    print("{}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
+                                                  regressor_name, 
+                                                    TEST_MSE,
+                                                    BEST_PREDICTED,
+                                                    GLOBAL_MAX_TRUE,
+                                                    PERFORMANCE,
+                                                    PREDICTION_RUNTIME,
+                                                    END_TO_END_RUNTIME))
+
     # -------------------------------------------------------------------------- #
     # -------------------------------------------------------------------------- #
     # -------------------------     FEATURE SELECTION    ----------------------- #

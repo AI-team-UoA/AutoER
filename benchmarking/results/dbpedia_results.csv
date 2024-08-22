@@ -1,2 +1,0 @@
-dataset,lm,k,clustering,threshold,f1,precision,recall,time
-dbpedia,st5,1,UniqueMappingClustering,0.05,84.8379,83.3071,86.4261,98730.8637

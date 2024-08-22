@@ -5,6 +5,7 @@
 *.db
 *.out
 *.tar.gz
+*.pkl
 
 # data
 data/*_data.csv
