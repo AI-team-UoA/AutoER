@@ -3,7 +3,7 @@
 datasets=("optuna" "gridsearch" "all")
 # regressors=("LASSO" "RIDGE" "LINEAR" "RF" "XGB")
 # regressors=("LASSO" "RIDGE" "LINEAR" "RF" "XGB" "SVR")
-regressors=("RF")
+regressors=("XGB")
 
 mkdir -p ./sklearn
 
