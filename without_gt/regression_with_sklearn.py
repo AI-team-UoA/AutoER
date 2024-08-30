@@ -330,6 +330,6 @@ for D in datasets:
     feature_importance['Std'] = r.importances_std
     feature_importance['Rank'] = np.arange(len(dummy_features))
 
-    feature_importance.to_csv(DIR+'importance/'+RESULTS_CSV_NAME+'_'+D, index=False)
+    feature_importance.to_csv(DIR+'importance/'+RESULTS_CSV_NAME+'/'+D+".csv", index=False)
 
 f.close()
