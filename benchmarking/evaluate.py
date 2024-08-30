@@ -8,7 +8,7 @@ from tqdm import tqdm
 import argparse
 parser = argparse.ArgumentParser(description='Create test data for benchmarking')
 parser.add_argument('--topk', type=int, default=1, help='Number of top rows to consider')
-parser.add_argument('--data', type=str, default='census')
+parser.add_argument('--data', type=str, default='dbpedia')
 args = parser.parse_args()
 
 dataset_name = args.data
@@ -129,7 +129,6 @@ for dataset in datasets:
             'time': [runtime]
         })
         
-        # Use concat to add the new row to results_df
         results_df = pd.concat([results_df, new_data], ignore_index=True)
 
 results_df.to_csv(f"./results/{dataset_name}_results.csv", index=False)

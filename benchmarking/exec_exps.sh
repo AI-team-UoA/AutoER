@@ -8,9 +8,9 @@ if [ -z "$D" ]; then
 fi
 
 
-nohup python python create_test_trials.csv --data $D  > ${D}_trials.log 2>&1 &
+nohup python create_test_trials.csv --data $D  > ${D}_trials.log 2>&1 &
 wait
-python evaluate.py --data $D
+nohup python predict_on_dbpedia_data.py --testdata $D > ${D}.log 2>&1 &     
 wait
-# nohup python python predict_on_dbpedia_data.py --testdata $D  > ${D}.log 2>&1 &
-# wait
+nohup python ./evaluate.py --topk 1 --data dbpedia > ./dbpedia.log 2>&1 &  
+wait
