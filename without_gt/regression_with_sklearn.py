@@ -13,8 +13,6 @@ from sklearn.inspection import permutation_importance
 
 import argparse
 
-# import regressors like SVR, XGBoost and Random Forest
-
 from sklearn.svm import SVR
 from xgboost import XGBRegressor
 from sklearn.ensemble import RandomForestRegressor
