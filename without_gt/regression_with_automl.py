@@ -33,7 +33,7 @@ DATA_DIR = '../data/'
 DIR = './automl/'
 FILE = ''
 AUTOML_PER_RUNTIME = 30*60
-AUTOML_OVERALL_RUNTIME = 6*60*60
+AUTOML_OVERALL_RUNTIME = 18*60*60
 AUTOML_MEMORY = 6144*4
 AUTOML_NJOBS = 1
 TOPK = 20
@@ -81,7 +81,7 @@ trials = trials[features + ['f1', 'dataset']]
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- # 
 
-filename = DIR+dataset+'.csv'
+filename = DIR+dataset+'.csv' if D_input is None else DIR+dataset+'_'+D_input+'.csv'
 f = open(filename, 'a')
 f.write('TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME\n')
 f.flush()
@@ -260,6 +260,6 @@ for D in datasets:
     # Save the feature importance to a file
     feature_importance = pd.DataFrame({'feature': dummy_features, 'importance': r.importances_mean})
     feature_importance = feature_importance.sort_values(by='importance', ascending=False)
-    feature_importance.to_csv(DIR+dataset+'/'+'feature_importance_'+str(D)+'.csv', index=False)
+    feature_importance.to_csv(DIR+dataset+'/'+'importance/'+str(D)+'.csv', index=False)
 
 f.close()
