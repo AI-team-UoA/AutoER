@@ -14,6 +14,9 @@ args = parser.parse_args()
 dataset_name = args.data
 TOPK = args.topk
 
+# print time started
+print("Time started: ", time.ctime())
+
 
 if dataset_name == 'census':
     CLUSTERING_MAPPING = {
@@ -97,14 +100,17 @@ for dataset in datasets:
                                     save_embeddings=True,
                                     tqdm_disable=False,
                                     with_entity_matching=True)
-        emb.evaluate(blocks, verbose=verbose)
+        # emb.evaluate(blocks, verbose=verbose)
 
         print('Finished building blocks')
+
         print('Clustering...')        
+        print("Time started: ", time.ctime())
         ccc = CLUSTERING_MAPPING[clustering_method]()
         clusters = ccc.process(g, data, similarity_threshold=threshold)
         results = ccc.evaluate(clusters, with_classification_report=False, verbose=verbose)
-        print('Finished clustering')
+        print('Finished clustering at: ', time.ctime())
+
         t2 = time.time()
         runtime = t2 - start_time
         f1, precision, recall = results['F1 %'], results['Precision %'], results['Recall %']
