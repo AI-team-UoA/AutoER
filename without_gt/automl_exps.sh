@@ -16,10 +16,10 @@ for dataset in "${datasets[@]}"; do
 
     echo "Running: nohup $command > $log_file 2>&1 &"
     nohup $command >> $log_file 2>&1 &
-    sleep 120
+    sleep 10
 
   done
-  wait
+  # wait
 done
 
 echo "All tasks completed."
