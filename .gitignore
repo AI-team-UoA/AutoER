@@ -28,7 +28,7 @@ without_gt/dl/dbs/
 without_gt/dl/logs/
 
 without_gt/automl/logs/
-
+without_gt/automl/saved/
 
 # census
 census/.embs/*

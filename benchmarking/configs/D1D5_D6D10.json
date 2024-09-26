@@ -1,0 +1,11 @@
+{
+    "benchmark_name": "D1D5_D6D10",
+    "test_datasets": [ "D6", "D7", "D8", "D9", "D10"],
+    "train_datasets": ["D1", "D2", "D3", "D4", "D5"],
+    "trials_type": "optuna",
+    "per_runtime_h": 4,
+    "overall_runtime_h": 12,
+    "ablation": 0,
+    "ensemble": 0,
+    "topk" : 1
+}
