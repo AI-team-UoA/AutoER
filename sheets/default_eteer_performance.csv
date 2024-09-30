@@ -1,0 +1,11 @@
+trial,dataset,clustering,lm,k,threshold,sampler,seed,precision,recall,f1,runtime
+24761,D4,UniqueMappingClustering,st5,10,0.5,gridsearch,42,96.4411,98.696,97.5556,4.450684547424316
+9503,D1,UniqueMappingClustering,st5,10,0.5,gridsearch,42,31.2057,98.8764,47.4394,1.903655767440796
+32957,D9,UniqueMappingClustering,st5,10,0.5,gridsearch,42,88.2353,96.1872,92.0398,13.10880708694458
+20217,D2,UniqueMappingClustering,st5,10,0.5,gridsearch,42,86.8696,84.8513,85.8486,3.278949499130249
+31774,D10,UniqueMappingClustering,st5,10,0.5,gridsearch,42,60.4309,48.2089,53.6324,27.956838130950928
+38048,D8,UniqueMappingClustering,st5,10,0.5,gridsearch,42,23.9857,70.6917,35.8182,4.462647199630737
+6318,D3,UniqueMappingClustering,st5,10,0.5,gridsearch,42,52.3169,63.4633,57.3535,1.4850900173187256
+13714,D7,UniqueMappingClustering,st5,10,0.5,gridsearch,42,22.2397,90.137,35.6768,2.210989236831665
+7750,D6,UniqueMappingClustering,st5,10,0.5,gridsearch,42,19.2071,72.7612,30.3916,1.812117576599121
+22159,D5,UniqueMappingClustering,st5,10,0.5,gridsearch,42,42.2968,90.9553,57.7419,5.054654836654663
