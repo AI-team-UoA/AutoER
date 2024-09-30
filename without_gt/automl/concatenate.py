@@ -1,82 +1,74 @@
 import pandas as pd
 import glob
 
-directory_path = './'
+import argparse
 
-file_patterns = {
-    'all': 'all_D*.csv',
-    'optuna': 'optuna_D*.csv',
-    'gridsearch': 'gridsearch_D*.csv'
-}
+# Parse command line arguments
+parser = argparse.ArgumentParser(description='Concatenate CSV files')
+parser.add_argument('--exp', type=str, help='Path to the directory containing CSV files')
+args = parser.parse_args()
 
-def concatenate_csv_files(file_pattern, output_filename):
-    csv_files = glob.glob(directory_path + file_pattern)
+exp = args.exp
+
+
+RESULTS_DIR = './results/'
+EXP_DIR = RESULTS_DIR + exp
+print(f"Concatenating CSV files for {exp}...")
+
+scores_file_patterns = 'D*.csv'
+
+def concatenate_csv_files(exp_type):
+    path_exploring = EXP_DIR + "/" + exp_type + "/scores/" + scores_file_patterns
+    csv_files = glob.glob(path_exploring)
     
     if not csv_files:
-        print(f"No files found for pattern: {file_pattern}")
+        print(f"No files found for path: {path_exploring}")
         return
+    print(f"Concatenating {len(csv_files)} CSV files for {exp_type}...")
         
     concatenated_df = pd.concat((pd.read_csv(file) for file in csv_files), ignore_index=True)
     concatenated_df = concatenated_df.sort_values('TEST_SET')
-    concatenated_df.to_csv(output_filename, index=False)
-    print(f"Concatenated CSV saved to {output_filename}")
+    concatenated_df.to_csv(exp_type+'.csv', index=False)
+    print(f"Concatenated CSV saved to {exp_type+'.csv'}")
 
-concatenate_csv_files(file_patterns['all'], 'all.csv')
-concatenate_csv_files(file_patterns['optuna'], 'optuna.csv')
-concatenate_csv_files(file_patterns['gridsearch'], 'gridsearch.csv')
+# Concatenate files for each group
+
+concatenate_csv_files('all')
+concatenate_csv_files('optuna')
+concatenate_csv_files('gridsearch')
 
 
 # ------------------------------------------------------------
 # ------------------------------------------------------------
 
+def concatenate_importance_files(exp_type):
+    path_exploring = EXP_DIR + "/" + exp_type + "/importance/" + scores_file_patterns
 
-directory_paths = {
-    'optuna': './optuna/importance/',  # Replace with your directory path
-    'all': './all/importance/',        # Replace with your directory path
-    'gridsearch': './gridsearch/importance/'  # Replace with your directory path
-}
+    csv_files = glob.glob(path_exploring)
 
-
-# Function to concatenate all feature importance CSV files from a directory and include file name info
-def concatenate_importance_files(directory_path):
-    csv_files = glob.glob(directory_path + '*.csv')
-    
-    # Check if any files match the pattern
     if not csv_files:
-        print(f"No files found in directory: {directory_path}")
-        return pd.DataFrame()  # Return an empty DataFrame if no files are found
+        print(f"No files found in directory: {path_exploring}")
+        return pd.DataFrame()
     
-    # Initialize an empty list to store DataFrames
     df_list = []
 
-    # Read each CSV file and add its contents to the list
     for file in csv_files:
         df = pd.read_csv(file)
-        df['DATASET'] = directory_path.split('/')[-3].upper()  # Using directory name as the source label
-        df['TEST_SET'] = file.split('/')[-1].split('.')[0].split('_')[-1]  # Extracting the test set name from the file name
-        
-        # Convert column names to uppercase
+        df['DATASET'] = exp_type
+        df['TEST_SET'] = file.split('/')[-1].split('.')[0].split('_')[-1]
         df.columns = df.columns.str.upper()
-        
-        # Add a rank column based on the 'IMPORTANCE' column
-        # df['RANK'] = df['IMPORTANCE'].rank(ascending=False, method='dense').astype(int)
-        
         df_list.append(df)
     
-    # Concatenate all DataFrames in the list
     concatenated_df = pd.concat(df_list, ignore_index=True)
     concatenated_df['REGRESSOR'] = 'AutoML'
     return concatenated_df
 
 
-# Concatenate files for each group
-optuna_importance = concatenate_importance_files(directory_paths['optuna'])
-all_importance = concatenate_importance_files(directory_paths['all'])
-gridsearch_importance = concatenate_importance_files(directory_paths['gridsearch'])
+optuna_importance = concatenate_importance_files('optuna')
+all_importance = concatenate_importance_files('all')
+gridsearch_importance = concatenate_importance_files('gridsearch')
 
-# Combine all dataframes into one
 combined_importance = pd.concat([optuna_importance, all_importance, gridsearch_importance], ignore_index=True)
 
-# Save the combined feature importance data to a new CSV file
-combined_importance.to_csv('./importance/automl_feature_importance.csv', index=False)
+combined_importance.to_csv('./automl_feature_importance.csv', index=False)
 print("Combined feature importance CSV saved to 'automl_feature_importance.csv'")

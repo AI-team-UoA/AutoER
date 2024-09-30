@@ -69,7 +69,7 @@ print("Directory working: ", DIR)
 
 TIME_STARTED = time.ctime()
 
-SUB_DIR = DIR+str(PER_RUNTIME_HOURS)+'_'+str(OVERALL_RUNTIME_HOURS)+'_'+str(ENSEMBLE_SIZE)+'/'+trials_type+'/'
+SUB_DIR = DIR+str(OVERALL_RUNTIME_HOURS)+'_'+str(PER_RUNTIME_HOURS)+'_'+str(ENSEMBLE_SIZE)+'/'+trials_type+'/'
 
 if not os.path.exists(SUB_DIR):
     os.makedirs(SUB_DIR)
@@ -334,8 +334,8 @@ for D in datasets:
     } 
 
     json_filename = DETAILED_RESULTS_SUB_DIR+str(D)+'.json'
-    with open(json_filename, 'w') as f:
-        json.dump(run_params, f, indent=4)
+    with open(json_filename, 'w') as j:
+        json.dump(run_params, j, indent=4)
 
     print("DETAILED_RESULTS SAVED TO: ", json_filename)
 
@@ -398,8 +398,8 @@ metadata = {
 }
 
 # save the metadata
-with open(SUB_DIR+'metadata.json', 'w') as f:
-    json.dump(metadata, f, indent=4)
+with open(SUB_DIR+'metadata.json', 'w') as m:
+    json.dump(metadata, m, indent=4)
 
 print("Saved metadata to: ", SUB_DIR+'metadata.json')
 
