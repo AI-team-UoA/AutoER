@@ -1,0 +1,6 @@
+dataset,clustering,lm,k,threshold,training_time,prediction_time,predicted_f1,real_f1
+D6, KiralyMSMApproximateClustering, st5, 1.0, 0.5, 1727439413.4008, 258.4004, 97.4376, 43.8459
+D7, KiralyMSMApproximateClustering, st5, 1.0, 0.5, 1727439413.4008, 240.2108, 97.4376, 48.4848
+D8, KiralyMSMApproximateClustering, st5, 1.0, 0.5, 1727439413.4008, 243.4116, 97.4376, 38.0861
+D9, KiralyMSMApproximateClustering, st5, 1.0, 0.5, 1727439413.4008, 243.7144, 97.4376, 92.8452
+D10, KiralyMSMApproximateClustering, st5, 1.0, 0.5, 1727439413.4008, 245.7817, 97.4376, 55.3994

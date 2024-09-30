@@ -183,13 +183,10 @@ y_train = trainD[['f1']]
 X_train = trainD[features]
 print("Train Size: ", len(X_train))
 
-
 X_train_dummy = pd.get_dummies(X_train)
-
 
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train_dummy)
-# X_test_scaled = scaler.transform(X_test_dummy)
 
 TRAIN_RUNTIME = time.time()
 
@@ -219,7 +216,6 @@ else:
 automl.fit(X_train_scaled, y_train, dataset_name='trials_optuna')
 print("Finished training at: ", time.ctime())
 print("Training time: ", time.time()-TRAIN_RUNTIME)
-PREDICTION_RUNTIME = time.time()
 print("\n\nBest Model Configuration: ")
 print(automl.show_models())
 
@@ -238,9 +234,12 @@ for weight, model in ensemble:
 RESULTS_FILE_NAME = f'./results/{benchmark_name}.csv'
 
 with open(RESULTS_FILE_NAME, 'w') as f:
-    f.write('dataset,clustering,lm,k,threshold,predicted_f1,real_f1\n')
+    f.write('dataset,clustering,lm,k,threshold,training_time,prediction_time,predicted_f1,real_f1\n')
 
     for test_dataset_name in test_datasets:
+
+        PREDICTION_RUNTIME = time.time()
+
         testD = test_set_as_ETEER[test_dataset_name]
 
         X_test = testD[features]
@@ -249,6 +248,8 @@ with open(RESULTS_FILE_NAME, 'w') as f:
         
         y_pred = automl.predict(X_test_scaled)
 
+        PREDICTION_RUNTIME = time.time() - PREDICTION_RUNTIME
+        print(f"Prediction time for {test_dataset_name}: {PREDICTION_RUNTIME}")
         testD['predicted_f1'] = y_pred
         results = testD.sort_values(by='predicted_f1', ascending=False).head(TOPK)
 
@@ -264,8 +265,16 @@ with open(RESULTS_FILE_NAME, 'w') as f:
                             (all_trials['threshold']==results.iloc[0]['threshold'])]
             real_f1 = best_config['f1'].values[0]
 
-        f.write(f"{test_dataset_name}, {results.iloc[0]['clustering']}, {results.iloc[0]['lm']}, {results.iloc[0]['k']}, {results.iloc[0]['threshold']}, {results.iloc[0]['predicted_f1']}, {real_f1}\n")        
-        print(f"{test_dataset_name}, {results.iloc[0]['clustering']}, {results.iloc[0]['lm']}, {results.iloc[0]['k']}, {results.iloc[0]['threshold']}, {results.iloc[0]['predicted_f1']}, {real_f1}\n")        
+        #  round 4 decimal places
+        TRAIN_RUNTIME = round(TRAIN_RUNTIME, 4)
+        PREDICTION_RUNTIME = round(PREDICTION_RUNTIME, 4)
+        results['threshold'] = results['threshold'].round(4)
+        results['predicted_f1'] = results['predicted_f1'].round(4)
+        real_f1 = round(real_f1, 4)
+
+
+        f.write(f"{test_dataset_name}, {results.iloc[0]['clustering']}, {results.iloc[0]['lm']}, {results.iloc[0]['k']}, {results.iloc[0]['threshold']}, {TRAIN_RUNTIME}, {PREDICTION_RUNTIME}, {results.iloc[0]['predicted_f1']}, {real_f1}\n")        
+        print(f"{test_dataset_name}, {results.iloc[0]['clustering']}, {results.iloc[0]['lm']}, {results.iloc[0]['k']}, {results.iloc[0]['threshold']}, {TRAIN_RUNTIME}, {PREDICTION_RUNTIME}, {results.iloc[0]['predicted_f1']}, {real_f1}\n")        
         print(f"> Results for {test_dataset_name} are saved in {RESULTS_FILE_NAME}")
 
         ANALYTICAL_RESULTS_DIR = f'./results/analytical/{benchmark_name}/'
@@ -283,6 +292,8 @@ with open(RESULTS_FILE_NAME, 'w') as f:
             'threshold': results.iloc[0]['threshold'],
             'predicted_f1': results.iloc[0]['predicted_f1'],
             'real_f1': real_f1,
+            'training_time': TRAIN_RUNTIME,
+            'prediction_time': PREDICTION_RUNTIME,
             'topk': TOPK,
             'ensemble_size': ENSEMBLE_SIZE,
             'per_runtime': PER_RUNTIME_HOURS,
@@ -294,30 +305,7 @@ with open(RESULTS_FILE_NAME, 'w') as f:
             'benchmark_name': benchmark_name
         }
 
-        with open(ANALYTICAL_RESULTS_FILE_NAME, 'w') as f:
-            json.dump(report_analytical_json, f)
+        with open(ANALYTICAL_RESULTS_FILE_NAME, 'w') as json_file:
+            json.dump(report_analytical_json, json_file)
         
         print(f"Results for {test_dataset_name} are saved in {ANALYTICAL_RESULTS_FILE_NAME}")
-
-    # r = permutation_importance(automl, X_test_dummy, y_test, n_repeats=10, random_state=RANDOM_STATE)
-
-    # sort_idx = r.importances_mean.argsort()[::-1]
-
-    # dummy_features = X_test_dummy.columns
-
-    # print("\n\nFeature Importance: ")
-    # for i in sort_idx[::-1]:
-    #     print(
-    #         f"{dummy_features[i]:10s}: {r.importances_mean[i]:.3f} +/- "
-    #         f"{r.importances_std[i]:.3f}"
-    #     )
-    # print("\n\n")
-
-    # feature_importance_extended = pd.DataFrame()
-    # feature_importance_extended['Feature'] = dummy_features
-    # feature_importance_extended['Importance'] = r.importances_mean
-    # feature_importance_extended['Std'] = r.importances_std
-    # feature_importance_extended['Rank'] = np.arange(len(dummy_features))
-    # results.to_csv(f'../benchmarking/results/{test_dataset_name}_predictions.csv', sep=',', index=False)
-
-f.close()

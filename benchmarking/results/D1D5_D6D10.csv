@@ -1,0 +1,6 @@
+dataset,clustering,lm,k,threshold,training_time,prediction_time,predicted_f1,real_f1
+D6, KiralyMSMApproximateClustering, sminilm, 1.0, 0.05, 1727439411.4391, 17.9314, 76.1579, 50.2077
+D7, UniqueMappingClustering, sminilm, 1.0, 0.55, 1727439411.4391, 23.5022, 71.2627, 57.5722
+D8, UniqueMappingClustering, sminilm, 2.0, 0.05, 1727439411.4391, 17.5495, 80.4169, 34.4212
+D9, UniqueMappingClustering, sminilm, 3.0, 0.05, 1727439411.4391, 17.2191, 81.8387, 89.9813
+D10, UniqueMappingClustering, sminilm, 3.0, 0.05, 1727439411.4391, 17.4561, 81.767, 39.4272

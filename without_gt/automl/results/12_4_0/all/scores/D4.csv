@@ -1,0 +1,2 @@
+TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME
+D4, gradient_boosting | gradient_boosting | random_forest | extra_trees | gradient_boosting, 2559.2805, 97.4463, 98.6011, 0.9883, 94.7485, 43529.2995
