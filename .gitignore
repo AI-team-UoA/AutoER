@@ -43,4 +43,6 @@ benchmarking/*.gz
 benchmarking/predictions/*.csv
 benchmarking/census_predictions_06072024.csv
 
+# Backup
+backup/
 
