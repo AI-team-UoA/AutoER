@@ -1,0 +1,21 @@
+{
+    "SETUP": {
+        "PER_RUNTIME_HOURS": 4,
+        "OVERALL_RUNTIME_HOURS": 12,
+        "ENSEMBLE_SIZE": 0,
+        "TOPK": 1,
+        "RANDOM_STATE": 42,
+        "AUTOML_MEMORY": 24576,
+        "AUTOML_NJOBS": 1
+    },
+    "RUN_INFO": {
+        "HIDDEN_DATASET": "D7",
+        "TIME_STARTED": "Fri Oct 11 14:41:51 2024",
+        "TIME_ENDED": "Sat Oct 12 07:46:38 2024"
+    },
+    "STORAGE": {
+        "RESULTS": "./automl/results/12_4_0_ablation/optuna/scores/",
+        "IMPORTANCE": "./automl/results/12_4_0_ablation/optuna/importance/",
+        "DETAILED_RESULTS": "./automl/results/12_4_0_ablation/optuna/detailed/"
+    }
+}

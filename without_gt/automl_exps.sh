@@ -43,7 +43,12 @@ for t in "${trials_types[@]}"; do
   echo "Waiting for all tasks to complete..."
   echo "Tasks: $t"
   echo "Hidden datasets: ${hidden_datasets[@]}"
-  wait
+  if [ $t == "gridsearch" ]; then
+    echo "Waiting optuna and gridsearch tasks to complete..."
+    wait
+    echo "Optuna and gridsearch tasks completed."
+    echo "Moving to all trials type..."
+  fi
   echo "All tasks completed for trials type: $t"
   echo "--------------------------------------"
   

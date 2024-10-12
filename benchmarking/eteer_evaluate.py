@@ -216,6 +216,7 @@ else:
 automl.fit(X_train_scaled, y_train, dataset_name='trials_optuna')
 print("Finished training at: ", time.ctime())
 print("Training time: ", time.time()-TRAIN_RUNTIME)
+TRAIN_RUNTIME = time.time() - TRAIN_RUNTIME
 print("\n\nBest Model Configuration: ")
 print(automl.show_models())
 

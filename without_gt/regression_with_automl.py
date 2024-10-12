@@ -37,6 +37,7 @@ PER_RUNTIME_HOURS = config['per_runtime_h']
 OVERALL_RUNTIME_HOURS = config['overall_runtime_h']
 ENSEMBLE_SIZE = int(config['ensemble'])
 TOPK = int(config['topk'])
+WITH_DATA_FEATURES = int(config['with_data_features'])
 
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #
@@ -68,8 +69,8 @@ print("Directory reading trials: ", DATA_DIR)
 print("Directory working: ", DIR)
 
 TIME_STARTED = time.ctime()
-
-SUB_DIR = DIR+str(OVERALL_RUNTIME_HOURS)+'_'+str(PER_RUNTIME_HOURS)+'_'+str(ENSEMBLE_SIZE)+'/'+trials_type+'/'
+ABLATION_PREFIX = '_ablation' if not WITH_DATA_FEATURES else ''
+SUB_DIR = DIR+str(OVERALL_RUNTIME_HOURS)+'_'+str(PER_RUNTIME_HOURS)+'_'+str(ENSEMBLE_SIZE)+ABLATION_PREFIX+'/'+trials_type+'/'
 
 if not os.path.exists(SUB_DIR):
     os.makedirs(SUB_DIR)
@@ -118,16 +119,28 @@ trials['f1'] = trials['f1'].round(4)
 trials['threshold'] = trials['threshold'].round(4)
 
 dataset_specs = pd.read_csv(DATA_DIR+'dataset_specs.csv', sep=',')
+dataset_specs_features = dataset_specs.columns.tolist()
+dataset_specs_features.remove('dataset')
+
 datasets = dataset_specs['dataset'].unique()
-trials = pd.merge(trials, dataset_specs, on='dataset')
+datasets = list(datasets)
+
+if 'dbpedia' in datasets:
+    datasets.remove('dbpedia')
+
+if WITH_DATA_FEATURES:    
+    trials = pd.merge(trials, dataset_specs, on='dataset')
 
 trials.drop_duplicates(inplace=True)
 
-features = ['clustering', 'lm', 'k', 'threshold', 'InputEntityProfiles', 'NumberOfAttributes', 'NumberOfDistinctValues', 
-            'NumberOfNameValuePairs', 'AverageNVPairsPerEntity', 'AverageDistinctValuesPerEntity', 
-            'AverageNVpairsPerAttribute', 'AverageDistinctValuesPerAttribute', 'NumberOfMissingNVpairs', 
-            'AverageValueLength', 'AverageValueTokens', 'MaxValuesPerEntity']
+features = ['clustering', 'lm', 'k', 'threshold'] 
+features = features + dataset_specs_features  if WITH_DATA_FEATURES else features 
 trials = trials[features + ['f1', 'dataset']]
+
+
+print("\nTRIALS:")
+print("Number of trials: ", trials)
+print("Columns: ", trials.columns.tolist())
 
 # trials.to_csv('trials_optuna_clean.csv', sep=',', index=False)
 
@@ -139,7 +152,7 @@ trials = trials[features + ['f1', 'dataset']]
 
 filename = RESULTS_SUB_DIR+trials_type+'.csv' if hidden_dataset is None else RESULTS_SUB_DIR+hidden_dataset+'.csv'
 f = open(filename, 'a')
-f.write('TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME\n')
+f.write('TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME, LM, K, CLUSTERING, THRESHOLD\n')
 f.flush()
 print("Writing to: ", filename)
 
@@ -240,9 +253,10 @@ for D in datasets:
     regressor_name = None
     for weight, model in ensemble:
         if regressor_name == None:
-            regressor_name = model.get_params()['config']['regressor:__choice__']
-        model_configuration = model.get_params()
-        regressor_name = " | ".join([regressor_name, model_configuration['config']['regressor:__choice__']])
+            regressor_name = str(weight)+str('*')+model.get_params()['config']['regressor:__choice__']
+        else:
+            model_configuration = model.get_params()
+            regressor_name = " | ".join([regressor_name, str(weight)+str('*')+model_configuration['config']['regressor:__choice__']])
 
     # -------------------------------------------------------------------------- #
     # -------------------------------------------------------------------------- #
@@ -273,6 +287,16 @@ for D in datasets:
     BEST_PREDICTED = topKpredicted['Predicted'].idxmax()
     BEST_PREDICTED = topKpredicted.loc[BEST_PREDICTED, 'True']
 
+    print("\nConfiguartion predicted as the best: ")
+    print("LM: ", topKpredicted.loc[BEST_PREDICTED, 'lm'])
+    BEST_LM = topKpredicted.loc[BEST_PREDICTED, 'lm']
+    print("K: ", topKpredicted.loc[BEST_PREDICTED, 'k'])
+    BEST_K = topKpredicted.loc[BEST_PREDICTED, 'k']
+    print("Clustering: ", topKpredicted.loc[BEST_PREDICTED, 'clustering'])
+    BEST_CLUSTERING = topKpredicted.loc[BEST_PREDICTED, 'clustering']
+    print("Threshold: ", topKpredicted.loc[BEST_PREDICTED, 'threshold'])
+    BEST_THRESHOLD = topKpredicted.loc[BEST_PREDICTED, 'threshold']
+
     print("\n\nBest Predicted: ", BEST_PREDICTED)
     print("Local Best True: ", LOCAL_BEST_TRUE)
     GLOBAL_MAX_TRUE = all_trials[all_trials['dataset']==D]['f1'].max()
@@ -287,25 +311,33 @@ for D in datasets:
     PREDICTION_RUNTIME = round(PREDICTION_RUNTIME, 4)
     END_TO_END_RUNTIME = round(END_TO_END_RUNTIME, 4)
 
-    f.write("{}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
+    f.write("{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
                                                   regressor_name, 
                                                     TEST_MSE,
                                                     BEST_PREDICTED,
                                                     GLOBAL_MAX_TRUE,
                                                     PERFORMANCE,
                                                     PREDICTION_RUNTIME,
-                                                    END_TO_END_RUNTIME))
+                                                    END_TO_END_RUNTIME,
+                                                    BEST_LM,
+                                                    BEST_K,
+                                                    BEST_CLUSTERING,
+                                                    BEST_THRESHOLD))
     f.flush()
 
     print("Logged row: ")
-    print("{}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
+    print("{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
                                                   regressor_name, 
                                                     TEST_MSE,
                                                     BEST_PREDICTED,
                                                     GLOBAL_MAX_TRUE,
                                                     PERFORMANCE,
                                                     PREDICTION_RUNTIME,
-                                                    END_TO_END_RUNTIME))
+                                                    END_TO_END_RUNTIME,
+                                                    BEST_LM,
+                                                    BEST_K,
+                                                    BEST_CLUSTERING,
+                                                    BEST_THRESHOLD))
 
     # -------------------------------------------------------------------------- #
     # -------------------------------------------------------------------------- #
@@ -366,13 +398,13 @@ for D in datasets:
     feature_importance_extended['Rank'] = np.arange(len(dummy_features))
     feature_importance_extended.to_csv(IMPORTANCE_SUB_DIR+str(D)+'.csv', index=False)
 
-    plt.boxplot(
-        r.importances[sort_idx].T, labels=[dummy_features[i] for i in sort_idx]
-    )
+    # plt.boxplot(
+    #     r.importances[sort_idx].T, labels=[dummy_features[i] for i in sort_idx]
+    # )
 
-    plt.xticks(rotation=90)
-    plt.tight_layout()
-    plt.savefig(IMPORTANCE_SUB_DIR+str(D)+'.png')
+    # plt.xticks(rotation=90)
+    # plt.tight_layout()
+    # plt.savefig(IMPORTANCE_SUB_DIR+str(D)+'.png')
 
 
 metadata = {

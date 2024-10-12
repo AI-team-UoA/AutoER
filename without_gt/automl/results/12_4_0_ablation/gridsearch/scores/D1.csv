@@ -1,0 +1,2 @@
+TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME
+D1, random_forest | random_forest | adaboost | ard_regression | decision_tree | gradient_boosting | random_forest, 257.6623, 55.873, 78.4314, 0.7124, 86.7171, 43198.6213
