@@ -1,0 +1,12 @@
+Feature,Weight
+Intercept,42.11435272606062
+k,-0.2655989563407432
+threshold,-1.3467918805348607
+clustering_KiralyMSMApproximateClustering,12.632765915279501
+clustering_UniqueMappingClustering,11.158431855813792
+lm_sdistilroberta,8.051152526345799
+lm_sent_glove,4.3480780828509396
+lm_sminilm,9.386552489752788
+lm_smpnet,8.655213352988817
+lm_st5,10.016865684682182
+lm_word2vec,3.480310673451132

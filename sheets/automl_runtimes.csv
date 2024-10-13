@@ -1,31 +1,61 @@
 TEST_SET,DATASET,REGRESSOR,OPTIMIZATION_TIME,BEST_REGRESSOR_PREDICTION_TIME
+D1,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43203.1265,37.6561
 D1,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting   extra_trees   gradient_boosting},43567.2933,110.9639
 D1,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43257.0783,18.6876
+D1,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   ard_regression   decision_tree   gradient_boosting   random_forest},43198.6213,86.7171
 D1,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   gradient_boosting},43205.9562,22.2687
+D1,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   k_nearest_neighbors   gradient_boosting   adaboost},43219.2491,49.576
 D10,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting   extra_trees},43547.1138,157.0576
+D10,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43245.4106,132.9546
 D10,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43275.055,144.7314
+D10,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   ard_regression},43196.4162,8.6029
 D10,optuna,AutoML Ensemble {extra_trees   extra_trees   gradient_boosting},43207.7945,69.3814
+D10,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   ard_regression},43252.9971,51.1189
+D2,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43200.1798,39.585
 D2,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting   extra_trees   gradient_boosting},43513.028,57.0685
 D2,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43335.3717,89.7032
+D2,gridsearch,AutoML Ensemble {random_forest   random_forest   gradient_boosting   ard_regression   gradient_boosting   adaboost},43207.4694,25.0114
+D2,optuna,AutoML Ensemble {extra_trees   extra_trees   extra_trees   gradient_boosting   adaboost   gradient_boosting   k_nearest_neighbors},43206.0504,58.3156
 D2,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   gradient_boosting},43213.3781,54.1724
 D3,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   extra_trees   gradient_boosting},43572.1748,124.3729
+D3,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43197.4303,42.1128
 D3,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43281.4819,31.7524
+D3,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   ard_regression},43198.7109,11.2802
+D3,optuna,AutoML Ensemble {extra_trees   extra_trees   gradient_boosting   k_nearest_neighbors   extra_trees},43226.6314,52.9692
 D3,optuna,AutoML Ensemble {extra_trees   extra_trees   gradient_boosting   random_forest},43204.4283,26.4913
 D4,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   extra_trees   gradient_boosting},43529.2995,94.7485
+D4,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   random_forest   gradient_boosting},43229.05,136.7929
 D4,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43305.3135,99.2664
+D4,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   ard_regression},43271.6744,15.7608
+D4,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   ard_regression},43205.6582,24.7524
 D4,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting},43207.0722,37.1743
 D5,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting   extra_trees},43598.9939,193.7029
+D5,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43225.4513,114.781
 D5,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest   extra_trees},43300.8396,137.665
+D5,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest},43201.2355,48.8183
+D5,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   random_forest   k_nearest_neighbors   random_forest},43245.3355,118.7708
 D5,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting},43211.4037,49.0662
+D6,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43201.5857,97.8737
 D6,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting},43297.6385,17.2385
+D6,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43246.9965,136.9134
 D6,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43311.858,148.3564
+D6,optuna,AutoML Ensemble {extra_trees   extra_trees   extra_trees   k_nearest_neighbors   gradient_boosting   ard_regression   extra_trees},43248.4301,98.5581
 D6,optuna,AutoML Ensemble {extra_trees   extra_trees   gradient_boosting   random_forest   gradient_boosting},43212.5421,93.232
 D7,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   extra_trees},43573.8412,106.9819
+D7,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting   gradient_boosting},43198.5056,86.2452
 D7,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43290.3449,150.7719
+D7,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   gradient_boosting   ard_regression   liblinear_svr   gradient_boosting},43201.4669,69.5448
+D7,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   k_nearest_neighbors   gradient_boosting},43237.6968,203.5877
 D7,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting},43212.1845,74.8717
+D8,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43246.4396,106.1205
 D8,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting   gradient_boosting},43348.7592,32.8421
 D8,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43292.0531,130.3076
+D8,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   ard_regression   mlp},43254.8238,11.7817
+D8,optuna,AutoML Ensemble {extra_trees   extra_trees   k_nearest_neighbors   gradient_boosting   random_forest   adaboost   random_forest},43224.7582,279.4591
 D8,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   gradient_boosting   k_nearest_neighbors},43215.4177,256.0785
+D9,all,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting},43198.6458,77.3172
 D9,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting   extra_trees},43536.1394,83.7736
 D9,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43282.8634,157.1148
+D9,gridsearch,AutoML Ensemble {random_forest   random_forest   mlp   adaboost   mlp},43208.9891,11.1976
+D9,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   extra_trees   ard_regression   gradient_boosting},43212.5025,68.6226
 D9,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   k_nearest_neighbors},43215.3411,184.3042
