@@ -1,0 +1,13 @@
+{
+    "name": "dbpedia",
+    "format": "csv",
+    "type" : "ccer",
+    "dir": "dbpedia",
+    "d1": "newDBPedia1",
+    "d1_id" : "Id",
+    "d2": "newDBPedia2",
+    "d2_id" : "Id",
+    "gt" : "newDBPediaMatchesgt",
+    "separator": "|",
+    "engine": "python"
+}
