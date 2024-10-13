@@ -256,7 +256,7 @@ for D in datasets:
             regressor_name = str(weight)+str('*')+model.get_params()['config']['regressor:__choice__']
         else:
             model_configuration = model.get_params()
-            regressor_name = " | ".join([regressor_name, str(weight)+str('*')+model_configuration['config']['regressor:__choice__']])
+            regressor_name = " + ".join([regressor_name, str(weight)+str('*')+model_configuration['config']['regressor:__choice__']])
 
     # -------------------------------------------------------------------------- #
     # -------------------------------------------------------------------------- #
@@ -341,7 +341,7 @@ for D in datasets:
 
     # -------------------------------------------------------------------------- #
     # -------------------------------------------------------------------------- #
-    # -------------------------   SAVIND DETAILED REPORT  ---------------------- #
+    # -------------------------   SAVING DETAILED REPORT  ---------------------- #
     # -------------------------------------------------------------------------- #
     # -------------------------------------------------------------------------- # 
 
@@ -377,26 +377,26 @@ for D in datasets:
     # -------------------------------------------------------------------------- #
     # -------------------------------------------------------------------------- # 
 
-    r = permutation_importance(automl, X_test_dummy, y_test, n_repeats=10, random_state=RANDOM_STATE)
+    # r = permutation_importance(automl, X_test_dummy, y_test, n_repeats=10, random_state=RANDOM_STATE)
 
-    sort_idx = r.importances_mean.argsort()[::-1]
+    # sort_idx = r.importances_mean.argsort()[::-1]
 
-    dummy_features = X_test_dummy.columns
+    # dummy_features = X_test_dummy.columns
     
-    print("\n\nFeature Importance: ")
-    for i in sort_idx[::-1]:
-        print(
-            f"{dummy_features[i]:10s}: {r.importances_mean[i]:.3f} +/- "
-            f"{r.importances_std[i]:.3f}"
-        )
-    print("\n\n")
+    # print("\n\nFeature Importance: ")
+    # for i in sort_idx[::-1]:
+    #     print(
+    #         f"{dummy_features[i]:10s}: {r.importances_mean[i]:.3f} +/- "
+    #         f"{r.importances_std[i]:.3f}"
+    #     )
+    # print("\n\n")
 
-    feature_importance_extended = pd.DataFrame()
-    feature_importance_extended['Feature'] = dummy_features
-    feature_importance_extended['Importance'] = r.importances_mean
-    feature_importance_extended['Std'] = r.importances_std
-    feature_importance_extended['Rank'] = np.arange(len(dummy_features))
-    feature_importance_extended.to_csv(IMPORTANCE_SUB_DIR+str(D)+'.csv', index=False)
+    # feature_importance_extended = pd.DataFrame()
+    # feature_importance_extended['Feature'] = dummy_features
+    # feature_importance_extended['Importance'] = r.importances_mean
+    # feature_importance_extended['Std'] = r.importances_std
+    # feature_importance_extended['Rank'] = np.arange(len(dummy_features))
+    # feature_importance_extended.to_csv(IMPORTANCE_SUB_DIR+str(D)+'.csv', index=False)
 
     # plt.boxplot(
     #     r.importances[sort_idx].T, labels=[dummy_features[i] for i in sort_idx]
