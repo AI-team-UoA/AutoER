@@ -1,0 +1,11 @@
+TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME
+D1, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,319.4926,57.1429,78.4314,0.7286,37.6561,43203.1265
+D10, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,794.2429,55.3979,56.117,0.9872,132.9546,43245.4106
+D2, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,304.1842,78.4878,85.8486,0.9143,39.585,43200.1798
+D3, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,210.9126,57.4176,59.1887,0.9701,42.1128,43197.4303
+D4, gradient_boosting | gradient_boosting | random_forest | random_forest | gradient_boosting,2144.7816,98.1761,98.6011,0.9957,136.7929,43229.05
+D5, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,239.3281,68.9032,78.9235,0.873,114.781,43225.4513
+D6, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,395.8337,46.6491,60.4225,0.772,97.8737,43201.5857
+D7, random_forest | random_forest | gradient_boosting | gradient_boosting,265.6165,57.3192,67.76,0.8459,86.2452,43198.5056
+D8, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,579.8295,42.342,49.5337,0.8548,106.1205,43246.4396
+D9, gradient_boosting | gradient_boosting | gradient_boosting,940.4119,91.6553,94.9241,0.9656,77.3172,43198.6458

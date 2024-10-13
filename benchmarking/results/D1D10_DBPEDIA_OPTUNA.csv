@@ -1,2 +1,2 @@
 dataset,clustering,lm,k,threshold,training_time,prediction_time,predicted_f1,real_f1
-dbpedia, KiralyMSMApproximateClustering, st5, 1.0, 0.05, 1727699536.6379, 15.5378, 58.4471, -1
+dbpedia, KiralyMSMApproximateClustering, st5, 1.0, 0.05, 43200.689688920975, 15.5378, 58.4471, -1

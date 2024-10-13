@@ -1,0 +1,11 @@
+TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME
+D1, random_forest | random_forest | adaboost | ard_regression | decision_tree | gradient_boosting | random_forest,257.6623,55.873,78.4314,0.7124,86.7171,43198.6213
+D10, random_forest | random_forest | adaboost | ard_regression,805.7339,41.7267,56.117,0.7436,8.6029,43196.4162
+D2, random_forest | random_forest | gradient_boosting | ard_regression | gradient_boosting | adaboost,290.5681,78.1955,85.8486,0.9109,25.0114,43207.4694
+D3, random_forest | random_forest | adaboost | ard_regression,216.4003,56.7164,59.1887,0.9582,11.2802,43198.7109
+D4, random_forest | random_forest | adaboost | ard_regression,2253.4574,98.1761,98.6011,0.9957,15.7608,43271.6744
+D5, gradient_boosting | gradient_boosting | random_forest,247.1245,73.071,78.9235,0.9258,48.8183,43201.2355
+D6, gradient_boosting | gradient_boosting | gradient_boosting | random_forest,388.0007,50.3109,60.4225,0.8327,136.9134,43246.9965
+D7, random_forest | random_forest | adaboost | gradient_boosting | ard_regression | liblinear_svr | gradient_boosting,274.1749,52.4142,67.76,0.7735,69.5448,43201.4669
+D8, random_forest | random_forest | adaboost | ard_regression | mlp,527.7614,40.0942,49.5337,0.8094,11.7817,43254.8238
+D9, random_forest | random_forest | mlp | adaboost | mlp,941.9895,94.2827,94.9241,0.9932,11.1976,43208.9891
