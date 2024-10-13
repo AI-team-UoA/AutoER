@@ -221,9 +221,15 @@ print("\n\nBest Model Configuration: ")
 print(automl.show_models())
 
 ensemble = automl.get_models_with_weights()
+regressors = []
+weights = []
 for weight, model in ensemble:
     model_configuration = model.get_params()
     regressor_name = model_configuration['config']['regressor:__choice__']
+    print(f"Regressor: {regressor_name}")
+    print(f"Weight: {weight}")
+    regressors.append(regressor_name)
+    weights.append(weight)
 
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #
@@ -303,7 +309,9 @@ with open(RESULTS_FILE_NAME, 'w') as f:
             'ablation': WITH_ABLATION_ANALYSIS,
             'test_datasets': test_datasets,
             'train_datasets': train_datasets,
-            'benchmark_name': benchmark_name
+            'benchmark_name': benchmark_name,
+            'regressors': regressors,
+            'weights': weights
         }
 
         with open(ANALYTICAL_RESULTS_FILE_NAME, 'w') as json_file:
