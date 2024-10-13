@@ -105,8 +105,9 @@ for index, row in top_rows.iterrows():
     blocks, g = emb.build_blocks(data,
                                 top_k=k,
                                 load_embeddings_if_exist=True,
-                                save_embeddings=True,
+                                save_embeddings=False,
                                 tqdm_disable=False,
+                                verbose=True,
                                 with_entity_matching=True)
     # print("Device used: ", emb.device)    
     # emb.evaluate(blocks, verbose=verbose)
