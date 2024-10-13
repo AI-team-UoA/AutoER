@@ -104,10 +104,11 @@ for index, row in top_rows.iterrows():
     emb = EmbeddingsNNBlockBuilding(vectorizer=lm, similarity_search='faiss')
     blocks, g = emb.build_blocks(data,
                                 top_k=k,
-                                load_embeddings_if_exist=False,
+                                load_embeddings_if_exist=True,
                                 save_embeddings=True,
-                                tqdm_disable=True,
+                                tqdm_disable=False,
                                 with_entity_matching=True)
+    # print("Device used: ", emb.device)    
     # emb.evaluate(blocks, verbose=verbose)
     print('Time ended: ', time.ctime())
     print('Finished building blocks')
@@ -148,27 +149,46 @@ for index, row in top_rows.iterrows():
     
     results_df = pd.concat([results_df, new_data], ignore_index=True)
 
-# print(results_df.head())
+print(results_df.head())
+print(top_rows.head())
 
-# print(top_rows.head())
-
-for col in ['dataset', 'lm', 'k', 'clustering', 'threshold']:
+# Ensure columns are stripped of whitespaces and of the correct type
+for col in ['dataset', 'lm', 'clustering']:
     results_df[col] = results_df[col].astype(str).str.strip()
     top_rows[col] = top_rows[col].astype(str).str.strip()
 
+# Ensure that 'k' and 'threshold' have the same type (both float or both int)
+results_df['k'] = results_df['k'].astype(float)
+top_rows['k'] = top_rows['k'].astype(float)
+
+results_df['threshold'] = results_df['threshold'].astype(float)
+top_rows['threshold'] = top_rows['threshold'].astype(float)
+
+# Merge the dataframes on the specified columns
 merged_df = pd.merge(results_df, top_rows, 
                      on=['dataset', 'lm', 'k', 'clustering', 'threshold'], how='inner')
-merged_df['real_f1'] = merged_df['f1']
 
-merged_df.drop(columns=['f1'], inplace=True)
+# Check if the merge produced any results
+if merged_df.empty:
+    print("No matching rows found in the merge. Check the data for inconsistencies.")
+else:
+    # Assign the 'f1' from results_df to 'real_f1' and remove the old 'f1' column
+    merged_df['real_f1'] = merged_df['f1']
+    merged_df.drop(columns=['f1'], inplace=True)
 
-print("Results: ")
-print(merged_df)
-for index, row in merged_df.iterrows():
-    for col in merged_df.columns:
-        print(col, " : ", row[col])
+    # Rename columns if necessary, or adjust as per requirements
+    merged_df.rename(columns={
+        'precision': 'real_precision',
+        'recall': 'real_recall'
+    }, inplace=True)
 
-print("Time ended: ", time.ctime())
-confcsv_name = confcsv.split('/')[-1].split('.')[0]
-confcsv_name = confcsv_name.lower()
-merged_df.to_csv(f"./{RESULTS_DIR}/{EVALUATED_DIR}/{confcsv_name}.csv", index=False)
+    # Print the merged dataframe to check the result
+    print("Results: ")
+    print(merged_df)
+
+    # Save the final dataframe to a CSV file
+    confcsv_name = confcsv.split('/')[-1].split('.')[0].lower()
+    merged_df.to_csv(f"./{RESULTS_DIR}/{EVALUATED_DIR}/{confcsv_name}.csv", index=False)
+
+    # Print the time the script ended
+    print("Time ended: ", time.ctime())
