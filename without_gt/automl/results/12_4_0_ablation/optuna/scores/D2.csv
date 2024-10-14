@@ -1,2 +1,2 @@
-TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME
-D2, extra_trees | extra_trees | extra_trees | gradient_boosting | adaboost | gradient_boosting | k_nearest_neighbors, 334.5651, 78.5676, 85.8486, 0.9152, 58.3156, 43206.0504
+TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME, LM, K, CLUSTERING, THRESHOLD
+D2, 0.92*extra_trees + 0.02*extra_trees + 0.02*gradient_boosting + 0.02*k_nearest_neighbors + 0.02*adaboost, 337.4461, 78.6325, 85.8486, 0.9159, 60.6276, 43205.8106, st5, 12, KiralyMSMApproximateClustering, 0.1117

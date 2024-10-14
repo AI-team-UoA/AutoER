@@ -10,8 +10,8 @@
     },
     "RUN_INFO": {
         "HIDDEN_DATASET": "D7",
-        "TIME_STARTED": "Fri Oct 11 14:41:51 2024",
-        "TIME_ENDED": "Sat Oct 12 07:46:38 2024"
+        "TIME_STARTED": "Mon Oct 14 00:01:40 2024",
+        "TIME_ENDED": "Mon Oct 14 12:05:15 2024"
     },
     "STORAGE": {
         "RESULTS": "./automl/results/12_4_0_ablation/optuna/scores/",
