@@ -1,0 +1,10 @@
+{
+    "benchmark_name": "D1D10_DBPEDIA_OPTUNA_LinearRegression",
+    "test_datasets": ["dbpedia"],
+    "train_datasets": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10"],
+    "trials_type": "optuna",
+    "regressor": "LINEAR",
+    "optuna_num_of_trials": 50,
+    "ablation": 0,
+    "topk" : 1
+}

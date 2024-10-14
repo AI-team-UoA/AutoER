@@ -1,0 +1,11 @@
+TEST_SET, DATASET, REGRESSOR, VALIDATION_MSE, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, OPTIMIZATION_TIME, BEST_REGRESSOR_FIT_TIME, BEST_REGRESSOR_PREDICTION_TIME, LM, K, CLUSTERING, THRESHOLD
+D1, gridsearch, LinearRegression, 601.6444, 280.3159, 55.3459, 78.4314, 0.7057, 0.0777, 0.0606, 0.0013, st5, 1, KiralyMSMApproximateClustering, 0.05
+D2, gridsearch, LinearRegression, 586.6704, 393.6645, 81.9401, 85.8486, 0.9545, 0.0736, 0.0425, 0.0013, st5, 1, KiralyMSMApproximateClustering, 0.05
+D3, gridsearch, LinearRegression, 616.6513, 287.2331, 55.9823, 59.1887, 0.9458, 0.0705, 0.0408, 0.0013, st5, 1, KiralyMSMApproximateClustering, 0.05
+D4, gridsearch, LinearRegression, 389.7217, 2384.1953, 98.3769, 98.6011, 0.9977, 0.0753, 0.0425, 0.0013, st5, 1, KiralyMSMApproximateClustering, 0.05
+D5, gridsearch, LinearRegression, 592.7632, 343.208, 69.3934, 78.9235, 0.8792, 0.069, 0.0425, 0.0012, st5, 1, KiralyMSMApproximateClustering, 0.05
+D6, gridsearch, LinearRegression, 586.1393, 433.3739, 43.8459, 60.4225, 0.7257, 0.0826, 0.0428, 0.0012, st5, 1, KiralyMSMApproximateClustering, 0.05
+D7, gridsearch, LinearRegression, 601.8142, 282.4391, 48.4848, 67.76, 0.7155, 0.0747, 0.0427, 0.0013, st5, 1, KiralyMSMApproximateClustering, 0.05
+D8, gridsearch, LinearRegression, 584.1296, 444.5389, 38.0861, 49.5337, 0.7689, 0.0931, 0.0551, 0.0014, st5, 1, KiralyMSMApproximateClustering, 0.05
+D9, gridsearch, LinearRegression, 523.643, 1045.9317, 92.8452, 94.9241, 0.9781, 0.088, 0.0579, 0.0013, st5, 1, KiralyMSMApproximateClustering, 0.05
+D10, gridsearch, LinearRegression, 550.8442, 763.3144, 55.3994, 56.117, 0.9872, 0.0854, 0.0425, 0.0012, st5, 1, KiralyMSMApproximateClustering, 0.05
