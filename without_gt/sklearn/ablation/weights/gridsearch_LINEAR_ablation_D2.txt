@@ -1,0 +1,11 @@
+Intercept: 42.65748302961729
+k: -0.28736386354067195
+threshold: -1.0016042291825151
+clustering_KiralyMSMApproximateClustering: 12.077786216406812
+clustering_UniqueMappingClustering: 9.969769976903684
+lm_sdistilroberta: 6.828884213872844
+lm_sent_glove: 4.429569840098825
+lm_sminilm: 8.398293392975303
+lm_smpnet: 7.750454175092829
+lm_st5: 8.81010912462243
+lm_word2vec: 2.884160807954904

@@ -1,2 +1,2 @@
 dataset,lm,k,clustering,threshold,training_time,prediction_time,predicted_f1,real_f1,real_precision,real_recall,pyjedai_runtime
-dbpedia,smpnet,85.0,KiralyMSMApproximateClustering,0.55,1727699548.5665,17.2191,71.9465,74.26,78.48,70.47,135167.1113
+dbpedia,smpnet,85.0,KiralyMSMApproximateClustering,0.55,43205.552364349365,17.2191,71.9465,74.26,78.48,70.47,135167.1113

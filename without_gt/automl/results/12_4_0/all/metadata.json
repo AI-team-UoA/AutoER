@@ -10,8 +10,8 @@
     },
     "RUN_INFO": {
         "HIDDEN_DATASET": "D10",
-        "TIME_STARTED": "Sun Sep 29 09:44:51 2024",
-        "TIME_ENDED": "Mon Sep 30 04:42:43 2024"
+        "TIME_STARTED": "Mon Oct 14 00:04:24 2024",
+        "TIME_ENDED": "Mon Oct 14 12:16:47 2024"
     },
     "STORAGE": {
         "RESULTS": "./automl/results/12_4_0/all/scores/",

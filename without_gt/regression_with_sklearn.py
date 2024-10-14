@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 warnings.filterwarnings('ignore')
-
+import os
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -26,9 +26,11 @@ import optuna
 parser = argparse.ArgumentParser()
 parser.add_argument('--trials', type=str, required=True)
 parser.add_argument('--regressor', type=str, required=True)
+parser.add_argument('--with_data_features', type=int, required=True, default=1)
 
 args = parser.parse_args()
 dataset = args.trials
+with_data_features = args.with_data_features
 
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #
@@ -40,6 +42,7 @@ DATA_DIR = '../data/'
 DIR = './sklearn/'
 TOPK = 20
 OPTUNA_NUM_OF_TRIALS = 50
+RANDOM_STATE = 42
 REGRESSORS = {
     'LASSO': Lasso, 
     'RIDGE': Ridge,
@@ -49,12 +52,18 @@ REGRESSORS = {
     'RF': RandomForestRegressor
 }
 REGRESSOR = REGRESSORS[args.regressor]
-RESULTS_CSV_NAME = dataset + '_' + args.regressor
-RANDOM_STATE = 42
+RESULTS_CSV_NAME = dataset + '_' + args.regressor + ('_ablation' if not with_data_features else '')
 DB_NAME = 'sqlite:///{}.db'.format(RESULTS_CSV_NAME)
 
 if args.regressor == 'LINEAR':
     OPTUNA_NUM_OF_TRIALS = 1
+
+if not with_data_features:
+    DIR = DIR + 'ablation/'
+    if not os.path.exists(DIR):
+        os.makedirs(DIR)
+    print("Created: ", DIR)
+
 
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #
@@ -79,17 +88,24 @@ trials['f1'] = trials['f1'].round(4)
 trials['threshold'] = trials['threshold'].round(4)
 
 dataset_specs = pd.read_csv(DATA_DIR+'dataset_specs.csv', sep=',')
+dataset_specs_features = dataset_specs.columns.tolist()
+dataset_specs_features.remove('dataset')
+
 datasets = dataset_specs['dataset'].unique()
-trials = pd.merge(trials, dataset_specs, on='dataset')
+datasets = list(datasets)
+
+if 'dbpedia' in datasets:
+    datasets.remove('dbpedia')
+
+if with_data_features:    
+    trials = pd.merge(trials, dataset_specs, on='dataset')
 
 trials.drop_duplicates(inplace=True)
 
-features = ['clustering', 'lm', 'k', 'threshold', 'InputEntityProfiles', 'NumberOfAttributes', 'NumberOfDistinctValues', 
-            'NumberOfNameValuePairs', 'AverageNVPairsPerEntity', 'AverageDistinctValuesPerEntity', 
-            'AverageNVpairsPerAttribute', 'AverageDistinctValuesPerAttribute', 'NumberOfMissingNVpairs', 
-            'AverageValueLength', 'AverageValueTokens', 'MaxValuesPerEntity']
-trials = trials[features + ['f1', 'dataset']]
+features = ['clustering', 'lm', 'k', 'threshold'] 
+features = features + dataset_specs_features  if with_data_features else features 
 
+trials = trials[features + ['f1', 'dataset']]
 
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #
@@ -99,10 +115,9 @@ trials = trials[features + ['f1', 'dataset']]
 
 filename = DIR+RESULTS_CSV_NAME+'.csv'
 f = open(filename, 'w')
-f.write('TEST_SET, DATASET, REGRESSOR, VALIDATION_MSE, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, OPTIMIZATION_TIME, BEST_REGRESSOR_FIT_TIME, BEST_REGRESSOR_PREDICTION_TIME\n')
+f.write('TEST_SET, DATASET, REGRESSOR, VALIDATION_MSE, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, OPTIMIZATION_TIME, BEST_REGRESSOR_FIT_TIME, BEST_REGRESSOR_PREDICTION_TIME, LM, K, CLUSTERING, THRESHOLD\n')
 f.flush()
 print("Writing to: ", filename)
-
 
 for D in datasets:
 
@@ -210,6 +225,23 @@ for D in datasets:
 
         model.fit(X_train_final, y_train_final)
 
+        if REGRESSOR == LinearRegression:
+            weights = model.coef_
+            intercepts = model.intercept_
+
+            print("Weights: ", weights)
+            print("Intercept: ", model.intercept_)
+
+            # export
+            if not os.path.exists(DIR+'weights'):
+                os.makedirs(DIR+'weights/')
+            
+            with open(DIR+'weights/'+RESULTS_CSV_NAME+'_'+D+'.csv', 'w') as f:
+                f.write("Feature,Weight\n")
+                f.write("Intercept,{}\n".format(intercepts))
+                for i, w in enumerate(weights):
+                    f.write("{},{}\n".format(X_train_dummy.columns[i], w))
+
         # Evaluate the model
         y_pred = model.predict(X_val)
         return mean_squared_error(y_val, y_pred)
@@ -272,6 +304,16 @@ for D in datasets:
     BEST_PREDICTED = topKpredicted['Predicted'].idxmax()
     BEST_PREDICTED = topKpredicted.loc[BEST_PREDICTED, 'True']
 
+    print("\nConfiguartion predicted as the best: ")
+    print("LM: ", topKpredicted.loc[topKpredicted['Predicted'].idxmax(), 'lm'])
+    BEST_LM = topKpredicted.loc[topKpredicted['Predicted'].idxmax(), 'lm']
+    print("K: ", topKpredicted.loc[topKpredicted['Predicted'].idxmax(), 'k'])
+    BEST_K = topKpredicted.loc[topKpredicted['Predicted'].idxmax(), 'k']
+    print("Clustering: ", topKpredicted.loc[topKpredicted['Predicted'].idxmax(), 'clustering'])
+    BEST_CLUSTERING = topKpredicted.loc[topKpredicted['Predicted'].idxmax(), 'clustering']
+    print("Threshold: ", topKpredicted.loc[topKpredicted['Predicted'].idxmax(), 'threshold'])
+    BEST_THRESHOLD = topKpredicted.loc[topKpredicted['Predicted'].idxmax(), 'threshold']
+
     print("\n\nBest Predicted: ", BEST_PREDICTED)
     print("Local Best True: ", LOCAL_BEST_TRUE)
     GLOBAL_MAX_TRUE = all_trials[all_trials['dataset']==D]['f1'].max()
@@ -288,7 +330,7 @@ for D in datasets:
     BEST_REGRESSOR_PREDICTION_TIME = round(BEST_REGRESSOR_PREDICTION_TIME, 4)
     OPTUNA_TRIALS_TIME = round(OPTUNA_TRIALS_TIME, 4)
 
-    f.write("{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
+    f.write("{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
                                                               dataset,
                                                   regressor_name, 
                                                   VALIDATION_MSE,
@@ -298,8 +340,28 @@ for D in datasets:
                                                     PERFORMANCE,
                                                     OPTUNA_TRIALS_TIME,
                                                     BEST_REGRESSOR_FIT_TIME,
-                                                    BEST_REGRESSOR_PREDICTION_TIME))
+                                                    BEST_REGRESSOR_PREDICTION_TIME,
+                                                    BEST_LM,
+                                                    BEST_K,
+                                                    BEST_CLUSTERING,
+                                                    BEST_THRESHOLD))
     f.flush()
+
+    print("{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
+                                                              dataset,
+                                                            regressor_name, 
+                                                            VALIDATION_MSE,
+                                                                TEST_MSE,
+                                                                BEST_PREDICTED,
+                                                                GLOBAL_MAX_TRUE,
+                                                                PERFORMANCE,
+                                                                OPTUNA_TRIALS_TIME,
+                                                                BEST_REGRESSOR_FIT_TIME,
+                                                                BEST_REGRESSOR_PREDICTION_TIME,
+                                                                BEST_LM,
+                                                                BEST_K,
+                                                                BEST_CLUSTERING,
+                                                                BEST_THRESHOLD))
 
     # -------------------------------------------------------------------------- #
     # -------------------------------------------------------------------------- #
@@ -327,6 +389,10 @@ for D in datasets:
     feature_importance['Importance'] = r.importances_mean
     feature_importance['Std'] = r.importances_std
     feature_importance['Rank'] = np.arange(len(dummy_features))
+
+    IMPORTANCE_DIR = DIR+'importance/'
+    if not os.path.exists(IMPORTANCE_DIR):
+        os.makedirs(IMPORTANCE_DIR)
 
     feature_importance.to_csv(DIR+'importance/'+RESULTS_CSV_NAME+'_'+D+".csv", index=False)
 
