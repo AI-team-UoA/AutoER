@@ -9,9 +9,9 @@
         "AUTOML_NJOBS": 1
     },
     "RUN_INFO": {
-        "HIDDEN_DATASET": "D6",
-        "TIME_STARTED": "Fri Oct 11 14:43:22 2024",
-        "TIME_ENDED": "Sat Oct 12 05:15:48 2024"
+        "HIDDEN_DATASET": "D10",
+        "TIME_STARTED": "Mon Oct 14 00:03:52 2024",
+        "TIME_ENDED": "Mon Oct 14 12:04:23 2024"
     },
     "STORAGE": {
         "RESULTS": "./automl/results/12_4_0_ablation/gridsearch/scores/",
