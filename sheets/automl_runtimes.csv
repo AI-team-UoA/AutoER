@@ -1,61 +1,61 @@
 TEST_SET,DATASET,REGRESSOR,OPTIMIZATION_TIME,BEST_REGRESSOR_PREDICTION_TIME
-D1,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43203.1265,37.6561
-D1,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting   extra_trees   gradient_boosting},43567.2933,110.9639
-D1,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43257.0783,18.6876
-D1,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   ard_regression   decision_tree   gradient_boosting   random_forest},43198.6213,86.7171
-D1,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   gradient_boosting},43205.9562,22.2687
-D1,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   k_nearest_neighbors   gradient_boosting   adaboost},43219.2491,49.576
-D10,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting   extra_trees},43547.1138,157.0576
-D10,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43245.4106,132.9546
-D10,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43275.055,144.7314
-D10,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   ard_regression},43196.4162,8.6029
-D10,optuna,AutoML Ensemble {extra_trees   extra_trees   gradient_boosting},43207.7945,69.3814
-D10,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   ard_regression},43252.9971,51.1189
-D2,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43200.1798,39.585
-D2,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting   extra_trees   gradient_boosting},43513.028,57.0685
-D2,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43335.3717,89.7032
-D2,gridsearch,AutoML Ensemble {random_forest   random_forest   gradient_boosting   ard_regression   gradient_boosting   adaboost},43207.4694,25.0114
-D2,optuna,AutoML Ensemble {extra_trees   extra_trees   extra_trees   gradient_boosting   adaboost   gradient_boosting   k_nearest_neighbors},43206.0504,58.3156
-D2,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   gradient_boosting},43213.3781,54.1724
-D3,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   extra_trees   gradient_boosting},43572.1748,124.3729
-D3,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43197.4303,42.1128
-D3,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43281.4819,31.7524
-D3,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   ard_regression},43198.7109,11.2802
-D3,optuna,AutoML Ensemble {extra_trees   extra_trees   gradient_boosting   k_nearest_neighbors   extra_trees},43226.6314,52.9692
-D3,optuna,AutoML Ensemble {extra_trees   extra_trees   gradient_boosting   random_forest},43204.4283,26.4913
-D4,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   extra_trees   gradient_boosting},43529.2995,94.7485
-D4,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   random_forest   gradient_boosting},43229.05,136.7929
-D4,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43305.3135,99.2664
-D4,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   ard_regression},43271.6744,15.7608
-D4,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   ard_regression},43205.6582,24.7524
-D4,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting},43207.0722,37.1743
-D5,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting   extra_trees},43598.9939,193.7029
-D5,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43225.4513,114.781
-D5,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest   extra_trees},43300.8396,137.665
-D5,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest},43201.2355,48.8183
-D5,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   random_forest   k_nearest_neighbors   random_forest},43245.3355,118.7708
-D5,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting},43211.4037,49.0662
-D6,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43201.5857,97.8737
-D6,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting},43297.6385,17.2385
-D6,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43246.9965,136.9134
-D6,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43311.858,148.3564
-D6,optuna,AutoML Ensemble {extra_trees   extra_trees   extra_trees   k_nearest_neighbors   gradient_boosting   ard_regression   extra_trees},43248.4301,98.5581
-D6,optuna,AutoML Ensemble {extra_trees   extra_trees   gradient_boosting   random_forest   gradient_boosting},43212.5421,93.232
-D7,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   extra_trees},43573.8412,106.9819
-D7,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting   gradient_boosting},43198.5056,86.2452
-D7,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43290.3449,150.7719
-D7,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   gradient_boosting   ard_regression   liblinear_svr   gradient_boosting},43201.4669,69.5448
-D7,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   k_nearest_neighbors   gradient_boosting},43237.6968,203.5877
-D7,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting},43212.1845,74.8717
-D8,all,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43246.4396,106.1205
-D8,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting   gradient_boosting},43348.7592,32.8421
-D8,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   random_forest   gradient_boosting},43292.0531,130.3076
-D8,gridsearch,AutoML Ensemble {random_forest   random_forest   adaboost   ard_regression   mlp},43254.8238,11.7817
-D8,optuna,AutoML Ensemble {extra_trees   extra_trees   k_nearest_neighbors   gradient_boosting   random_forest   adaboost   random_forest},43224.7582,279.4591
-D8,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   gradient_boosting   k_nearest_neighbors},43215.4177,256.0785
-D9,all,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting},43198.6458,77.3172
-D9,all,AutoML Ensemble {random_forest   random_forest   gradient_boosting   extra_trees},43536.1394,83.7736
-D9,gridsearch,AutoML Ensemble {gradient_boosting   gradient_boosting   gradient_boosting   random_forest},43282.8634,157.1148
-D9,gridsearch,AutoML Ensemble {random_forest   random_forest   mlp   adaboost   mlp},43208.9891,11.1976
-D9,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   extra_trees   ard_regression   gradient_boosting},43212.5025,68.6226
-D9,optuna,AutoML Ensemble {extra_trees   extra_trees   random_forest   gradient_boosting   k_nearest_neighbors},43215.3411,184.3042
+D1,all,0.54*gradient_boosting + 0.36*random_forest + 0.1*gradient_boosting,43218.6062,61.9368
+D1,all,0.88*random_forest + 0.08*gradient_boosting + 0.04*gradient_boosting,43440.672,13.4146
+D1,gridsearch,0.52*random_forest + 0.22*decision_tree + 0.16*adaboost + 0.1*ard_regression,43228.7849,7.0127
+D1,gridsearch,0.62*gradient_boosting + 0.38*random_forest,43279.9262,47.1224
+D1,optuna,0.38*extra_trees + 0.36*random_forest + 0.14*gradient_boosting + 0.1*k_nearest_neighbors + 0.02*gradient_boosting,43238.956,239.6281
+D1,optuna,0.74*extra_trees + 0.18*random_forest + 0.04*k_nearest_neighbors + 0.02*gradient_boosting + 0.02*adaboost,43201.3939,55.9394
+D10,all,0.6*gradient_boosting + 0.36*random_forest + 0.04*gradient_boosting,43200.3256,50.2222
+D10,all,0.88*random_forest + 0.06*gradient_boosting + 0.04*gradient_boosting + 0.02*k_nearest_neighbors,43430.0451,503.7444
+D10,gridsearch,0.68*random_forest + 0.22*adaboost + 0.08*liblinear_svr + 0.02*ard_regression,43219.298,5.5964
+D10,gridsearch,0.76*gradient_boosting + 0.24*random_forest,43338.3617,10.9145
+D10,optuna,0.78*extra_trees + 0.12*gradient_boosting + 0.1*extra_trees,43227.266,67.7714
+D10,optuna,0.94*extra_trees + 0.02*random_forest + 0.02*gradient_boosting + 0.02*ard_regression,43236.6576,28.4424
+D2,all,0.58*gradient_boosting + 0.32*random_forest + 0.1*gradient_boosting,43197.9433,36.7287
+D2,all,0.841*random_forest + 0.082*gradient_boosting + 0.065*gradient_boosting + 0.024*k_nearest_neighbors,43453.541,476.2028
+D2,gridsearch,0.76*gradient_boosting + 0.18*random_forest + 0.06*extra_trees,43427.6676,18.5218
+D2,gridsearch,0.8*random_forest + 0.1*adaboost + 0.1*ard_regression,43225.16,7.0918
+D2,optuna,0.82*extra_trees + 0.12*gradient_boosting + 0.04*random_forest + 0.02*k_nearest_neighbors,43221.143,178.6551
+D2,optuna,0.92*extra_trees + 0.02*extra_trees + 0.02*gradient_boosting + 0.02*k_nearest_neighbors + 0.02*adaboost,43205.8106,60.6276
+D3,all,0.62*gradient_boosting + 0.36*random_forest + 0.02*gradient_boosting,43197.2472,55.5973
+D3,all,0.88*random_forest + 0.08*gradient_boosting + 0.04*gradient_boosting,43452.0678,37.872
+D3,gridsearch,0.6*random_forest + 0.28*adaboost + 0.12*ard_regression,43224.2766,7.498
+D3,gridsearch,0.78*gradient_boosting + 0.22*random_forest,43290.3557,61.8833
+D3,optuna,0.54*extra_trees + 0.16*extra_trees + 0.14*random_forest + 0.12*gradient_boosting + 0.04*k_nearest_neighbors,43237.3137,218.3301
+D3,optuna,0.82*extra_trees + 0.08*extra_trees + 0.06*gradient_boosting + 0.02*extra_trees + 0.02*k_nearest_neighbors,43209.6093,73.2937
+D4,all,0.66*gradient_boosting + 0.32*random_forest + 0.02*gradient_boosting,43201.8067,69.0912
+D4,all,0.96*random_forest + 0.04*gradient_boosting,43447.5507,28.3302
+D4,gridsearch,0.58*random_forest + 0.3*adaboost + 0.12*ard_regression,43197.8977,8.6415
+D4,gridsearch,0.76*gradient_boosting + 0.24*random_forest,43312.0484,62.6318
+D4,optuna,0.5*extra_trees + 0.38*random_forest + 0.08*gradient_boosting + 0.04*k_nearest_neighbors,43224.6895,215.1101
+D4,optuna,0.74*extra_trees + 0.22*random_forest + 0.02*gradient_boosting + 0.02*ard_regression,43238.1494,40.3322
+D5,all,0.58*gradient_boosting + 0.32*random_forest + 0.1*gradient_boosting,43196.6731,74.6702
+D5,all,0.82*random_forest + 0.14*extra_trees + 0.04*gradient_boosting,43493.2859,52.7047
+D5,gridsearch,0.72*random_forest + 0.14*adaboost + 0.12*ard_regression + 0.02*adaboost,43198.1702,16.8349
+D5,gridsearch,0.82*gradient_boosting + 0.14*random_forest + 0.04*extra_trees,43466.5675,25.148
+D5,optuna,0.74*extra_trees + 0.1*k_nearest_neighbors + 0.06*random_forest + 0.04*random_forest + 0.04*gradient_boosting + 0.02*k_nearest_neighbors,43212.5706,95.4209
+D5,optuna,0.78*extra_trees + 0.1*gradient_boosting + 0.06*random_forest + 0.06*k_nearest_neighbors,43225.5253,249.2466
+D6,all,0.34*random_forest + 0.32*gradient_boosting + 0.28*gradient_boosting + 0.06*gradient_boosting,43228.2408,60.8154
+D6,all,0.88*random_forest + 0.08*gradient_boosting + 0.04*gradient_boosting,43445.624,58.3347
+D6,gridsearch,0.74*gradient_boosting + 0.26*random_forest,43306.8554,64.944
+D6,gridsearch,0.78*gradient_boosting + 0.16*random_forest + 0.02*ard_regression + 0.02*gradient_boosting + 0.02*gradient_boosting,43197.319,24.5741
+D6,optuna,0.4*extra_trees + 0.18*random_forest + 0.18*gradient_boosting + 0.12*gradient_boosting + 0.12*k_nearest_neighbors,43225.9136,252.5683
+D6,optuna,0.86*extra_trees + 0.04*extra_trees + 0.04*gradient_boosting + 0.04*k_nearest_neighbors + 0.02*ard_regression,43211.8789,56.0087
+D7,all,0.58*gradient_boosting + 0.36*random_forest + 0.06*gradient_boosting,43204.3003,67.9615
+D7,all,0.9*random_forest + 0.06*gradient_boosting + 0.04*gradient_boosting,43438.5699,67.9033
+D7,gridsearch,0.56*gradient_boosting + 0.26*adaboost + 0.1*ard_regression + 0.06*random_forest + 0.02*liblinear_svr,43219.6041,18.9368
+D7,gridsearch,0.76*gradient_boosting + 0.24*random_forest,43313.777,53.3935
+D7,optuna,0.5*extra_trees + 0.24*random_forest + 0.2*gradient_boosting + 0.04*k_nearest_neighbors + 0.02*gradient_boosting,43221.8297,227.4257
+D7,optuna,0.88*extra_trees + 0.04*random_forest + 0.02*gradient_boosting + 0.02*k_nearest_neighbors + 0.02*gradient_boosting + 0.02*k_nearest_neighbors,43213.823,197.5819
+D8,all,0.6*gradient_boosting + 0.38*random_forest + 0.02*gradient_boosting,43200.0982,66.3313
+D8,all,0.9*random_forest + 0.06*gradient_boosting + 0.04*gradient_boosting,43431.4983,58.4841
+D8,gridsearch,0.72*gradient_boosting + 0.16*random_forest + 0.12*gradient_boosting,43216.4479,20.8246
+D8,gridsearch,0.72*gradient_boosting + 0.28*random_forest,43359.9604,22.0695
+D8,optuna,0.52*extra_trees + 0.2*random_forest + 0.12*k_nearest_neighbors + 0.1*gradient_boosting + 0.06*gradient_boosting,43222.2741,229.6457
+D8,optuna,0.9*extra_trees + 0.02*gradient_boosting + 0.02*adaboost + 0.02*k_nearest_neighbors + 0.02*random_forest + 0.02*random_forest,43213.0313,62.4086
+D9,all,0.8*gradient_boosting + 0.2*gradient_boosting,43195.2538,63.7164
+D9,all,0.94*random_forest + 0.06*gradient_boosting,43430.4042,40.3751
+D9,gridsearch,0.721*random_forest + 0.163*adaboost + 0.12*ard_regression + 0.024*mlp,43196.9623,5.2864
+D9,gridsearch,0.74*gradient_boosting + 0.26*random_forest,43329.1528,17.3715
+D9,optuna,0.52*extra_trees + 0.28*random_forest + 0.14*gradient_boosting + 0.06*k_nearest_neighbors,43221.845,222.3003
+D9,optuna,0.86*extra_trees + 0.1*random_forest + 0.04*gradient_boosting,43240.4427,25.2851
