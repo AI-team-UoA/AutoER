@@ -9,9 +9,9 @@
         "AUTOML_NJOBS": 1
     },
     "RUN_INFO": {
-        "HIDDEN_DATASET": "D8",
-        "TIME_STARTED": "Fri Sep 27 16:30:45 2024",
-        "TIME_ENDED": "Sat Sep 28 13:00:15 2024"
+        "HIDDEN_DATASET": "D9",
+        "TIME_STARTED": "Mon Oct 14 00:00:51 2024",
+        "TIME_ENDED": "Mon Oct 14 12:05:19 2024"
     },
     "STORAGE": {
         "RESULTS": "./automl/results/12_4_0/optuna/scores/",

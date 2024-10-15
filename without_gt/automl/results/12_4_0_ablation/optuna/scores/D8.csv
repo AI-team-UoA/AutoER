@@ -1,2 +1,2 @@
-TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME
-D8, extra_trees | extra_trees | k_nearest_neighbors | gradient_boosting | random_forest | adaboost | random_forest, 781.2956, 40.7814, 49.5337, 0.8233, 279.4591, 43224.7582
+TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME, LM, K, CLUSTERING, THRESHOLD
+D8, 0.9*extra_trees + 0.02*gradient_boosting + 0.02*adaboost + 0.02*k_nearest_neighbors + 0.02*random_forest + 0.02*random_forest, 791.6615, 47.0485, 49.5337, 0.9498, 62.4086, 43213.0313, st5, 1, UniqueMappingClustering, 0.896
