@@ -1,6 +1,6 @@
 # AutoER: Auto Configuring Entity Resolution pipelines
 
-This is the code and reproducibility code of the relevant submitted paper.
+This is the repository of the relevant submitted paper.
 
 Contains:
 - `data/`: datasets used for this paper (can be downloaded from here:).
@@ -8,7 +8,7 @@ Contains:
 - `sheets/`: csv and spearsheets containing results
 - `without_gt/`: all code and scripts to build P1s results
 - `with_gt/`: all code and scripts to build P2s results (AutoML & LinearRegression)
-- `baseline/': code used to replicate ZeroER
+- `baseline/`: code used to replicate ZeroER
 - `benchmarking/`: code used for evaluating ETEER pipeline in DBpedia
 - `results.ipynd`: a view in results, figures and tables generator
 
