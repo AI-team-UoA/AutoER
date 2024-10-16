@@ -285,7 +285,6 @@ for D in datasets:
     LOCAL_BEST_TRUE = topKtrue['True'].max()
     # get the row with the max Predicted
     BEST_PREDICTED = topKpredicted['Predicted'].idxmax()
-    BEST_PREDICTED = topKpredicted.loc[BEST_PREDICTED, 'True']
 
     print("\nConfiguartion predicted as the best: ")
     print("LM: ", topKpredicted.loc[BEST_PREDICTED, 'lm'])
@@ -296,6 +295,8 @@ for D in datasets:
     BEST_CLUSTERING = topKpredicted.loc[BEST_PREDICTED, 'clustering']
     print("Threshold: ", topKpredicted.loc[BEST_PREDICTED, 'threshold'])
     BEST_THRESHOLD = topKpredicted.loc[BEST_PREDICTED, 'threshold']
+
+    BEST_PREDICTED = topKpredicted.loc[BEST_PREDICTED, 'True']
 
     print("\n\nBest Predicted: ", BEST_PREDICTED)
     print("Local Best True: ", LOCAL_BEST_TRUE)
