@@ -46,3 +46,6 @@ benchmarking/census_predictions_06072024.csv
 # Backup
 backup/
 
+
+# Baseline
+baseline/ZeroER/datasets/*
