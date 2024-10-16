@@ -1,2 +1,2 @@
-TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME
-D7, random_forest | random_forest | adaboost | gradient_boosting | ard_regression | liblinear_svr | gradient_boosting, 274.1749, 52.4142, 67.76, 0.7735, 69.5448, 43201.4669
+TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME, LM, K, CLUSTERING, THRESHOLD
+D7, 0.56*gradient_boosting + 0.26*adaboost + 0.1*ard_regression + 0.06*random_forest + 0.02*liblinear_svr, 274.9201, 52.7853, 67.76, 0.779, 18.9368, 43219.6041, st5, 1, KiralyMSMApproximateClustering, 0.7

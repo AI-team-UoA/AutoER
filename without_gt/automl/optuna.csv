@@ -1,21 +1,21 @@
-TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME,WITH_DATA_FEATURES
-D1, extra_trees | extra_trees | random_forest | gradient_boosting | gradient_boosting,347.4311,55.3459,78.4314,0.7057,22.2687,43205.9562,1
-D10, extra_trees | extra_trees | gradient_boosting,269.1317,55.0078,56.117,0.9802,69.3814,43207.7945,1
-D2, extra_trees | extra_trees | random_forest | gradient_boosting | gradient_boosting,431.0375,81.9401,85.8486,0.9545,54.1724,43213.3781,1
-D3, extra_trees | extra_trees | gradient_boosting | random_forest,293.129,56.0706,59.1887,0.9473,26.4913,43204.4283,1
-D4, extra_trees | extra_trees | random_forest | gradient_boosting,2376.9221,98.3769,98.6011,0.9977,37.1743,43207.0722,1
-D5, extra_trees | extra_trees | random_forest | gradient_boosting,299.9556,69.6589,78.9235,0.8826,49.0662,43211.4037,1
-D6, extra_trees | extra_trees | gradient_boosting | random_forest | gradient_boosting,365.891,55.9806,60.4225,0.9265,93.232,43212.5421,1
-D7, extra_trees | extra_trees | random_forest | gradient_boosting,390.5495,48.8679,67.76,0.7212,74.8717,43212.1845,1
-D8, extra_trees | extra_trees | random_forest | gradient_boosting | gradient_boosting | k_nearest_neighbors,723.2406,38.0861,49.5337,0.7689,256.0785,43215.4177,1
-D9, extra_trees | extra_trees | random_forest | gradient_boosting | k_nearest_neighbors,1983.9144,94.3686,94.9241,0.9941,184.3042,43215.3411,1
-D1, extra_trees | extra_trees | random_forest | k_nearest_neighbors | gradient_boosting | adaboost,437.3104,57.1429,78.4314,0.7286,49.576,43219.2491,0
-D10, extra_trees | extra_trees | random_forest | gradient_boosting | ard_regression,802.9557,55.3979,56.117,0.9872,51.1189,43252.9971,0
-D2, extra_trees | extra_trees | extra_trees | gradient_boosting | adaboost | gradient_boosting | k_nearest_neighbors,334.5651,78.5676,85.8486,0.9152,58.3156,43206.0504,0
-D3, extra_trees | extra_trees | gradient_boosting | k_nearest_neighbors | extra_trees,241.8911,55.9823,59.1887,0.9458,52.9692,43226.6314,0
-D4, extra_trees | extra_trees | random_forest | gradient_boosting | ard_regression,1938.3059,98.1761,98.6011,0.9957,24.7524,43205.6582,0
-D5, extra_trees | extra_trees | random_forest | gradient_boosting | random_forest | k_nearest_neighbors | random_forest,281.6592,73.7428,78.9235,0.9344,118.7708,43245.3355,0
-D6, extra_trees | extra_trees | extra_trees | k_nearest_neighbors | gradient_boosting | ard_regression | extra_trees,427.6422,51.1573,60.4225,0.8467,98.5581,43248.4301,0
-D7, extra_trees | extra_trees | random_forest | gradient_boosting | k_nearest_neighbors | gradient_boosting,269.9462,65.3846,67.76,0.9649,203.5877,43237.6968,0
-D8, extra_trees | extra_trees | k_nearest_neighbors | gradient_boosting | random_forest | adaboost | random_forest,781.2956,40.7814,49.5337,0.8233,279.4591,43224.7582,0
-D9, extra_trees | extra_trees | random_forest | extra_trees | ard_regression | gradient_boosting,1008.8927,94.3887,94.9241,0.9944,68.6226,43212.5025,0
+TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME, LM, K, CLUSTERING, THRESHOLD,WITH_DATA_FEATURES
+D1, 0.38*extra_trees + 0.36*random_forest + 0.14*gradient_boosting + 0.1*k_nearest_neighbors + 0.02*gradient_boosting,424.827,55.3459,78.4314,0.7057,239.6281,43238.956, st5,1, UniqueMappingClustering,0.2659,1
+D10, 0.78*extra_trees + 0.12*gradient_boosting + 0.1*extra_trees,292.832,36.3098,56.117,0.647,67.7714,43227.266, smpnet,1, KiralyMSMApproximateClustering,0.05,1
+D2, 0.82*extra_trees + 0.12*gradient_boosting + 0.04*random_forest + 0.02*k_nearest_neighbors,415.2661,81.9401,85.8486,0.9545,178.6551,43221.143, st5,1, KiralyMSMApproximateClustering,0.1722,1
+D3, 0.54*extra_trees + 0.16*extra_trees + 0.14*random_forest + 0.12*gradient_boosting + 0.04*k_nearest_neighbors,223.0337,57.7941,59.1887,0.9764,218.3301,43237.3137, st5,32, UniqueMappingClustering,0.05,1
+D4, 0.5*extra_trees + 0.38*random_forest + 0.08*gradient_boosting + 0.04*k_nearest_neighbors,2280.8802,98.3769,98.6011,0.9977,215.1101,43224.6895, st5,1, KiralyMSMApproximateClustering,0.05,1
+D5, 0.78*extra_trees + 0.1*gradient_boosting + 0.06*random_forest + 0.06*k_nearest_neighbors,311.993,71.9689,78.9235,0.9119,249.2466,43225.5253, smpnet,1, KiralyMSMApproximateClustering,0.6659,1
+D6, 0.4*extra_trees + 0.18*random_forest + 0.18*gradient_boosting + 0.12*gradient_boosting + 0.12*k_nearest_neighbors,309.2738,55.9806,60.4225,0.9265,252.5683,43225.9136, sminilm,1, KiralyMSMApproximateClustering,0.6307,1
+D7, 0.5*extra_trees + 0.24*random_forest + 0.2*gradient_boosting + 0.04*k_nearest_neighbors + 0.02*gradient_boosting,341.6059,50.141,67.76,0.74,227.4257,43221.8297, smpnet,1, UniqueMappingClustering,0.228,1
+D8, 0.52*extra_trees + 0.2*random_forest + 0.12*k_nearest_neighbors + 0.1*gradient_boosting + 0.06*gradient_boosting,792.5619,40.7674,49.5337,0.823,229.6457,43222.2741, st5,91, KiralyMSMApproximateClustering,0.0501,1
+D9, 0.52*extra_trees + 0.28*random_forest + 0.14*gradient_boosting + 0.06*k_nearest_neighbors,2037.7087,94.3686,94.9241,0.9941,222.3003,43221.845, st5,100, KiralyMSMApproximateClustering,0.4767,1
+D1, 0.74*extra_trees + 0.18*random_forest + 0.04*k_nearest_neighbors + 0.02*gradient_boosting + 0.02*adaboost,444.348,57.1429,78.4314,0.7286,55.9394,43201.3939, st5,1, KiralyMSMApproximateClustering,0.779,0
+D10, 0.94*extra_trees + 0.02*random_forest + 0.02*gradient_boosting + 0.02*ard_regression,802.9557,55.3979,56.117,0.9872,28.4424,43236.6576, st5,1, UniqueMappingClustering,0.0853,0
+D2, 0.92*extra_trees + 0.02*extra_trees + 0.02*gradient_boosting + 0.02*k_nearest_neighbors + 0.02*adaboost,337.4461,78.6325,85.8486,0.9159,60.6276,43205.8106, st5,12, KiralyMSMApproximateClustering,0.1117,0
+D3, 0.82*extra_trees + 0.08*extra_trees + 0.06*gradient_boosting + 0.02*extra_trees + 0.02*k_nearest_neighbors,238.7432,57.4176,59.1887,0.9701,73.2937,43209.6093, st5,100, KiralyMSMApproximateClustering,0.3209,0
+D4, 0.74*extra_trees + 0.22*random_forest + 0.02*gradient_boosting + 0.02*ard_regression,1938.3059,98.1761,98.6011,0.9957,40.3322,43238.1494, st5,21, KiralyMSMApproximateClustering,0.3019,0
+D5, 0.74*extra_trees + 0.1*k_nearest_neighbors + 0.06*random_forest + 0.04*random_forest + 0.04*gradient_boosting + 0.02*k_nearest_neighbors,278.9575,62.8471,78.9235,0.7963,95.4209,43212.5706, sdistilroberta,32, KiralyMSMApproximateClustering,0.05,0
+D6, 0.86*extra_trees + 0.04*extra_trees + 0.04*gradient_boosting + 0.04*k_nearest_neighbors + 0.02*ard_regression,427.5353,51.1573,60.4225,0.8467,56.0087,43211.8789, sminilm,1, UniqueMappingClustering,0.2,0
+D7, 0.88*extra_trees + 0.04*random_forest + 0.02*gradient_boosting + 0.02*k_nearest_neighbors + 0.02*gradient_boosting + 0.02*k_nearest_neighbors,269.0321,65.3846,67.76,0.9649,197.5819,43213.823, st5,1, KiralyMSMApproximateClustering,0.8292,0
+D8, 0.9*extra_trees + 0.02*gradient_boosting + 0.02*adaboost + 0.02*k_nearest_neighbors + 0.02*random_forest + 0.02*random_forest,791.6615,47.0485,49.5337,0.9498,62.4086,43213.0313, st5,1, UniqueMappingClustering,0.896,0
+D9, 0.86*extra_trees + 0.1*random_forest + 0.04*gradient_boosting,1011.2043,94.3887,94.9241,0.9944,25.2851,43240.4427, st5,21, KiralyMSMApproximateClustering,0.3019,0
