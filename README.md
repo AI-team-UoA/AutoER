@@ -1,6 +1,6 @@
 # AutoER: Auto Configuring Entity Resolution pipelines
 
-This is the code and reproducibility code of the relevant submitted paper.
+This is the repository of the relevant submitted paper.
 
 Contains:
 - `data/`: datasets used for this paper (can be downloaded from here:).
