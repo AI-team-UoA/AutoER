@@ -3,7 +3,7 @@
 This is the repository of the relevant submitted paper.
 
 Contains:
-- `data/`: datasets used for this paper (can be downloaded from here:).
+- `data/`: datasets used for this paper.
 - `figures/`: contains all figures created for paper
 - `sheets/`: csv and spearsheets containing results
 - `without_gt/`: all code and scripts to build P1s results
@@ -19,7 +19,7 @@ Bellow, you'll find instructions to build & execute this project, experiment by 
 Please in the initial directory execute command (to be added):
 
 ```
-./install_autoer_datasets.sh
+./prepare_datasets.sh
 ```
 
 # Problem 1: **With** Ground-Truth file
