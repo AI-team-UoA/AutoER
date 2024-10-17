@@ -1,15 +1,15 @@
 #!/bin/bash
 
 echo "Downloading datasets..."
-curl -L -o autoer_data.tar.gz https://zenodo.org/records/13946189/files/autoer_data.tar.gz
-curl -L -o zeroer_like_datasets.tar.gz https://zenodo.org/records/13946189/files/zeroer_like_datasets.tar.gz
+#curl -L -o autoer_data.tar.gz https://zenodo.org/records/13946189/files/autoer_data.tar.gz
+#curl -L -o zeroer_like_datasets.tar.gz https://zenodo.org/records/13946189/files/zeroer_like_datasets.tar.gz
 
 echo "Extracting datasets... in specific folder"
 
-mkdir -p ./data
-tar -xzf autoer_data.tar.gz -C data
+tar -xf autoer_data.tar.gz
+tar -xf zeroer_like_datasets.tar.gz
 
-mkdir -p ./baselines/zeroer/datasets
-tar -xzf zeroer_like_datasets.tar.gz -C baselines/zeroer/datasets
+rm autoer_data.tar.gz
+rm zeroer_like_datasets.tar.gz
 
 echo "Done!"
