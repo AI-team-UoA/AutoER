@@ -29,7 +29,7 @@ Please in the initial directory execute command (to be added):
 Create conda env:
 
 ```
-conda env create -f autoconf_env_automl.yml
+conda env create -f autoconf_env_p1_p2.yml
 conda activate autoconf_p1_p2
 ```
 
@@ -41,7 +41,7 @@ Go to `/with_gt/scripts/` and run
 nohup ./run_exps.sh 2>&1 & 
 ```
 
-In the end a concatenation is made to get the appropriate files needed. 
+in the end a concatenation is made to get the files in the appropriate format. 
 
 # Problem 2: **Without** Ground-Truth file
 
@@ -131,7 +131,6 @@ Executing this will create the top-1 workflow suggested per training trials type
 nohup ./run_dbpedia_exps.sh > ./logs/dbpedia.log  2>&1 &
 ```
 
-
 ## Using LR approach
 
 Create predictions for all instances:
@@ -159,7 +158,7 @@ or for LR:
 nohup python -u evaluate.py --confcsv ./results/D1D10_DBPEDIA_{$TYPE}_LinearRegression.csv  --datajson ./configs/data/dbpedia.json > ./logs/D1D10_DBPEDIA_LR.log 2>&1 &
 ```
 
-same for {$TYPE} = ALL, OPTUNA, GRIDSEARCH
+same for `{$TYPE} = ALL, OPTUNA, GRIDSEARCH`
 
 where:
 -  `--confcsv`: is used in a similar way as before
@@ -170,8 +169,10 @@ where:
 ## ZeroER
 
 1. Go to `cd ./baselines`
-2. Create conda env `conda env create -f environment.yml conda activate ZeroER`:
-3. Run all exps `./run.sh ./logs`
+2. Create conda env
+    1. `conda env create -f environment.yml`
+    2. `conda activate ZeroER`
+4. Run all exps `./run.sh ./logs`
 
 # Resources
 
