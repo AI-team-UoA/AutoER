@@ -16,9 +16,10 @@ Bellow, you'll find instructions to build & execute this project, experiment by 
 
 # Datasets
 
-Please in the initial directory execute command (to be added):
+Please in the initial directory execute commands to download and prepare datasets:
 
 ```
+chmod +x prepare_datasets.sh
 ./prepare_datasets.sh
 ```
 
