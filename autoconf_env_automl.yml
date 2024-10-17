@@ -1,4 +1,4 @@
-name: autoconf38
+name: autoconf_automl
 channels:
   - defaults
 dependencies:
@@ -72,4 +72,4 @@ dependencies:
       - urllib3==2.2.1
       - xgboost==2.0.3
       - zict==3.0.0
-prefix: /home/nikoletos/.conda/envs/autoconf38
+prefix: /home/nikoletos/.conda/envs/autoconf_automl

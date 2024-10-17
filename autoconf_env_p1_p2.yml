@@ -1,4 +1,4 @@
-name: autoconf
+name: autoconf_p1_p2
 channels:
   - conda-forge
   - defaults
@@ -168,4 +168,4 @@ dependencies:
       - wrapt==1.16.0
       - xgboost==2.0.3
       - yarl==1.9.4
-prefix: /home/conda/miniconda3/envs/autoconf
+prefix: /home/conda/miniconda3/envs/autoconf_p1_p2

@@ -1,21 +1,21 @@
-TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME,WITH_DATA_FEATURES
-D1, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,395.941,55.873,78.4314,0.7124,18.6876,43257.0783,1
-D10, gradient_boosting | gradient_boosting | gradient_boosting | random_forest,511.8296,28.7518,56.117,0.5124,144.7314,43275.055,1
-D2, gradient_boosting | gradient_boosting | gradient_boosting | random_forest,855.7836,68.8019,85.8486,0.8014,89.7032,43335.3717,1
-D3, gradient_boosting | gradient_boosting | gradient_boosting | random_forest,189.6482,40.7589,59.1887,0.6886,31.7524,43281.4819,1
-D4, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,2642.6705,97.4684,98.6011,0.9885,99.2664,43305.3135,1
-D5, gradient_boosting | gradient_boosting | gradient_boosting | random_forest | extra_trees,331.6355,78.5464,78.9235,0.9952,137.665,43300.8396,1
-D6, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,327.1364,45.5549,60.4225,0.7539,148.3564,43311.858,1
-D7, gradient_boosting | gradient_boosting | gradient_boosting | random_forest,315.377,62.3109,67.76,0.9196,150.7719,43290.3449,1
-D8, gradient_boosting | gradient_boosting | random_forest | gradient_boosting,1057.5913,34.6102,49.5337,0.6987,130.3076,43292.0531,1
-D9, gradient_boosting | gradient_boosting | gradient_boosting | random_forest,1452.7044,94.3686,94.9241,0.9941,157.1148,43282.8634,1
-D1, random_forest | random_forest | adaboost | ard_regression | decision_tree | gradient_boosting | random_forest,257.6623,55.873,78.4314,0.7124,86.7171,43198.6213,0
-D10, random_forest | random_forest | adaboost | ard_regression,805.7339,41.7267,56.117,0.7436,8.6029,43196.4162,0
-D2, random_forest | random_forest | gradient_boosting | ard_regression | gradient_boosting | adaboost,290.5681,78.1955,85.8486,0.9109,25.0114,43207.4694,0
-D3, random_forest | random_forest | adaboost | ard_regression,216.4003,56.7164,59.1887,0.9582,11.2802,43198.7109,0
-D4, random_forest | random_forest | adaboost | ard_regression,2253.4574,98.1761,98.6011,0.9957,15.7608,43271.6744,0
-D5, gradient_boosting | gradient_boosting | random_forest,247.1245,73.071,78.9235,0.9258,48.8183,43201.2355,0
-D6, gradient_boosting | gradient_boosting | gradient_boosting | random_forest,388.0007,50.3109,60.4225,0.8327,136.9134,43246.9965,0
-D7, random_forest | random_forest | adaboost | gradient_boosting | ard_regression | liblinear_svr | gradient_boosting,274.1749,52.4142,67.76,0.7735,69.5448,43201.4669,0
-D8, random_forest | random_forest | adaboost | ard_regression | mlp,527.7614,40.0942,49.5337,0.8094,11.7817,43254.8238,0
-D9, random_forest | random_forest | mlp | adaboost | mlp,941.9895,94.2827,94.9241,0.9932,11.1976,43208.9891,0
+TEST_SET, AUTOML_REGRESSOR, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, PREDICTIONS_RUNTIME, OPTIMIZATION_TIME, LM, K, CLUSTERING, THRESHOLD,WITH_DATA_FEATURES
+D1, 0.62*gradient_boosting + 0.38*random_forest,345.2841,19.2982,78.4314,0.2461,47.1224,43279.9262, sdistilroberta,1, ConnectedComponentsClustering,0.55,1
+D10, 0.76*gradient_boosting + 0.24*random_forest,647.5369,29.8483,56.117,0.5319,10.9145,43338.3617, sminilm,47, KiralyMSMApproximateClustering,0.55,1
+D2, 0.76*gradient_boosting + 0.18*random_forest + 0.06*extra_trees,1254.1471,68.8019,85.8486,0.8014,18.5218,43427.6676, sminilm,1, ConnectedComponentsClustering,0.65,1
+D3, 0.78*gradient_boosting + 0.22*random_forest,183.4991,40.7589,59.1887,0.6886,61.8833,43290.3557, st5,1, ConnectedComponentsClustering,0.45,1
+D4, 0.76*gradient_boosting + 0.24*random_forest,2829.653,97.6881,98.6011,0.9907,62.6318,43312.0484, sminilm,1, UniqueMappingClustering,0.4,1
+D5, 0.82*gradient_boosting + 0.14*random_forest + 0.04*extra_trees,803.1593,71.2832,78.9235,0.9032,25.148,43466.5675, st5,1, ConnectedComponentsClustering,0.7,1
+D6, 0.74*gradient_boosting + 0.26*random_forest,326.6301,45.5549,60.4225,0.7539,64.944,43306.8554, sminilm,1, UniqueMappingClustering,0.7,1
+D7, 0.76*gradient_boosting + 0.24*random_forest,409.1263,57.5722,67.76,0.8496,53.3935,43313.777, sminilm,1, UniqueMappingClustering,0.55,1
+D8, 0.72*gradient_boosting + 0.28*random_forest,1329.3703,34.6102,49.5337,0.6987,22.0695,43359.9604, smpnet,1, UniqueMappingClustering,0.65,1
+D9, 0.74*gradient_boosting + 0.26*random_forest,1417.0373,94.3686,94.9241,0.9941,17.3715,43329.1528, st5,99, KiralyMSMApproximateClustering,0.55,1
+D1, 0.52*random_forest + 0.22*decision_tree + 0.16*adaboost + 0.1*ard_regression,256.7627,55.873,78.4314,0.7124,7.0127,43228.7849, st5,73, KiralyMSMApproximateClustering,0.75,0
+D10, 0.68*random_forest + 0.22*adaboost + 0.08*liblinear_svr + 0.02*ard_regression,805.8773,41.7267,56.117,0.7436,5.5964,43219.298, st5,76, KiralyMSMApproximateClustering,0.75,0
+D2, 0.8*random_forest + 0.1*adaboost + 0.1*ard_regression,290.4618,78.1955,85.8486,0.9109,7.0918,43225.16, st5,77, KiralyMSMApproximateClustering,0.75,0
+D3, 0.6*random_forest + 0.28*adaboost + 0.12*ard_regression,216.7241,56.1757,59.1887,0.9491,7.498,43224.2766, st5,1, KiralyMSMApproximateClustering,0.75,0
+D4, 0.58*random_forest + 0.3*adaboost + 0.12*ard_regression,2253.3801,98.1761,98.6011,0.9957,8.6415,43197.8977, st5,78, KiralyMSMApproximateClustering,0.7,0
+D5, 0.72*random_forest + 0.14*adaboost + 0.12*ard_regression + 0.02*adaboost,243.0956,72.8713,78.9235,0.9233,16.8349,43198.1702, st5,81, KiralyMSMApproximateClustering,0.7,0
+D6, 0.78*gradient_boosting + 0.16*random_forest + 0.02*ard_regression + 0.02*gradient_boosting + 0.02*gradient_boosting,388.1291,49.5256,60.4225,0.8197,24.5741,43197.319, st5,3, KiralyMSMApproximateClustering,0.75,0
+D7, 0.56*gradient_boosting + 0.26*adaboost + 0.1*ard_regression + 0.06*random_forest + 0.02*liblinear_svr,274.9201,52.7853,67.76,0.779,18.9368,43219.6041, st5,1, KiralyMSMApproximateClustering,0.7,0
+D8, 0.72*gradient_boosting + 0.16*random_forest + 0.12*gradient_boosting,518.3562,38.8343,49.5337,0.784,20.8246,43216.4479, st5,1, KiralyMSMApproximateClustering,0.75,0
+D9, 0.7200000000000001*random_forest + 0.16000000000000003*adaboost + 0.10000000000000002*ard_regression + 0.020000000000000004*mlp,939.4617,94.2827,94.9241,0.9932,5.2864,43196.9623, st5,1, KiralyMSMApproximateClustering,0.75,0

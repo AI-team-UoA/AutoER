@@ -1,11 +1,29 @@
-# pyJedAI Auto Configuration
-Auto Configuration experiments for pyJedAI
+# AutoER: Auto Configuring Entity Resolution pipelines
+
+This is the repository of the relevant submitted paper.
+
+Contains:
+- `data/`: datasets used for this paper (can be downloaded from here:).
+- `figures/`: contains all figures created for paper
+- `sheets/`: csv and spearsheets containing results
+- `without_gt/`: all code and scripts to build P1s results
+- `with_gt/`: all code and scripts to build P2s results (AutoML & LinearRegression)
+- `baseline/`: code used to replicate ZeroER
+- `benchmarking/`: code used for evaluating ETEER pipeline in DBpedia
+- `results.ipynd`: a view in results, figures and tables generator
+
+Following instructions for build & execution.
 
 # Problem 1: **With** Ground-Truth file
 
 ## Build
 
-Create a conda env 3.10, pip install optuna and pyjedai.
+Create conda env
+
+```
+conda env create -f autoconf_env_automl.yml
+conda activate autoconf_p1_p2
+```
 
 ## Execution
 
@@ -15,9 +33,19 @@ Go to `/with_gt/scripts/` and run
 nohup ./run_exps.sh 2>&1 & 
 ```
 
+In the end a concatenation is made to get the appropriate files needed. 
 # Problem 2: **Without** Ground-Truth file
 
 ## AutoML Approach
+
+### Build
+
+Create conda env:
+
+```
+conda env create -f autoconf_env_automl.yml
+conda activate autoconf_automl
+```
 
 To run one experiment:
 ```
@@ -26,34 +54,20 @@ python regression_with_automl.py --dataset gridsearch
 
 To run all one-by-one:
 ```
-nohup ./automl_exps.sh > ./final/automl/automl_exps.log 2>&1 &
+nohup ./automl_exps.sh > ./automl_exps.log 2>&1 &
 ```
 
-## Regressors Experiments - SKLEARN & DL Approach
+## Linear Regression
 
-### SKLEARN
+# Scalability tests on DBpedia dataset
 
-To run one experiment:
-```
-python regression_with_sklearn.py --dataset optuna  --regressor LASSO
-```
+# Baseline
 
-To run all one-by-one:
-```
-nohup ./sklearn_exps.sh > ./final/sklearn/sklearn_exps.log 2>&1 &
-```
+## ZeroER
 
-### DL
-
-To run one experiment:
-```
-python regression_with_dl.py --trials optuna
-```
-
-To run all one-by-one:
-```
-nohup ./dl_exps.sh > ./final/dl/dl_exps.log 2>&1 &
-```
+1. Go to `cd ./baselines`
+2. Create conda env `conda env create -f environment.yml conda activate ZeroER`:
+3. Run all exps `./run.sh ./logs`
 
 # Resources
 

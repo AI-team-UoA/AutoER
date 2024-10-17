@@ -4,12 +4,12 @@ import os
 def process_automl_file(file_path, dataset_name):
     df = pd.read_csv(file_path, skipinitialspace=True)
     df['DATASET'] = dataset_name.split('.')[0]
-    df['REGRESSOR'] = 'AutoML Ensemble {' + df['AUTOML_REGRESSOR'].str.replace('|', ' ').str.lower() + '}'
+    df['REGRESSOR'] = df['AUTOML_REGRESSOR'].str.replace('|', ' ').str.replace(r'0{3,}', '', regex=True).str.lower()
 
     df['VALIDATION_MSE'] = None
     df['BEST_REGRESSOR_FIT_TIME'] = None
     df.rename(columns={'PREDICTIONS_RUNTIME': 'BEST_REGRESSOR_PREDICTION_TIME'}, inplace=True)
-    df = df[['TEST_SET', 'DATASET', 'REGRESSOR', 'VALIDATION_MSE', 'TEST_MSE', 'PREDICTED_F1', 'GLOBAL_BEST_F1', 'PERFORMANCE', 'OPTIMIZATION_TIME', 'BEST_REGRESSOR_FIT_TIME', 'BEST_REGRESSOR_PREDICTION_TIME', 'WITH_DATA_FEATURES']]
+    df = df[['TEST_SET', 'DATASET', 'REGRESSOR', 'VALIDATION_MSE', 'TEST_MSE', 'PREDICTED_F1', 'GLOBAL_BEST_F1', 'PERFORMANCE', 'OPTIMIZATION_TIME', 'BEST_REGRESSOR_FIT_TIME', 'BEST_REGRESSOR_PREDICTION_TIME', 'WITH_DATA_FEATURES', 'LM', 'K', 'CLUSTERING', 'THRESHOLD']]
     return df
 
 
