@@ -84,8 +84,8 @@ else:
 trials = trials[trials['f1']!=0]
 
 # Round column in 4 decimals
-trials['f1'] = trials['f1'].round(4)
-trials['threshold'] = trials['threshold'].round(4)
+# trials['f1'] = trials['f1'].round(4)
+# trials['threshold'] = trials['threshold'].round(4)
 
 dataset_specs = pd.read_csv(DATA_DIR+'dataset_specs.csv', sep=',')
 dataset_specs_features = dataset_specs.columns.tolist()
@@ -296,6 +296,8 @@ for D in datasets:
     
     print("\n\nTop K (Sorted on Predicted): ")
     print(topKpredicted)
+    # save topKpredicted
+    topKpredicted.to_csv(DIR+'temp/'+RESULTS_CSV_NAME+'_'+D+'_predicted.csv', index=False)
 
     print("\nTop K (Sorted on True)")
     print(topKtrue)
@@ -324,11 +326,11 @@ for D in datasets:
     print("Performance: ", PERFORMANCE)
     print("Difference between Predicted and Best: ", round(diff, 4))
 
-    TEST_MSE = round(TEST_MSE, 4)
-    VALIDATION_MSE = round(VALIDATION_MSE, 4)
-    BEST_REGRESSOR_FIT_TIME = round(BEST_REGRESSOR_FIT_TIME, 4)
-    BEST_REGRESSOR_PREDICTION_TIME = round(BEST_REGRESSOR_PREDICTION_TIME, 4)
-    OPTUNA_TRIALS_TIME = round(OPTUNA_TRIALS_TIME, 4)
+    # TEST_MSE = round(TEST_MSE, 4)
+    # VALIDATION_MSE = round(VALIDATION_MSE, 4)
+    # BEST_REGRESSOR_FIT_TIME = round(BEST_REGRESSOR_FIT_TIME, 4)
+    # BEST_REGRESSOR_PREDICTION_TIME = round(BEST_REGRESSOR_PREDICTION_TIME, 4)
+    # OPTUNA_TRIALS_TIME = round(OPTUNA_TRIALS_TIME, 4)
 
     f.write("{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
                                                               dataset,
@@ -369,31 +371,31 @@ for D in datasets:
     # -------------------------------------------------------------------------- #
     # -------------------------------------------------------------------------- # 
 
-    r = permutation_importance(regressor, X_test_dummy, y_test, n_repeats=10, random_state=0)
+    # r = permutation_importance(regressor, X_test_dummy, y_test, n_repeats=10, random_state=0)
 
-    sort_idx = r.importances_mean.argsort()[::-1]
+    # sort_idx = r.importances_mean.argsort()[::-1]
 
-    dummy_features = X_test_dummy.columns
+    # dummy_features = X_test_dummy.columns
     
-    print("\n\nFeature Importance: ")
-    for i in sort_idx[::-1]:
-        print(
-            f"{dummy_features[i]:10s}: {r.importances_mean[i]:.3f} +/- "
-            f"{r.importances_std[i]:.3f}"
-        )
-    print("\n\n")
+    # print("\n\nFeature Importance: ")
+    # for i in sort_idx[::-1]:
+    #     print(
+    #         f"{dummy_features[i]:10s}: {r.importances_mean[i]:.3f} +/- "
+    #         f"{r.importances_std[i]:.3f}"
+    #     )
+    # print("\n\n")
 
-    # Save the feature importance
-    feature_importance = pd.DataFrame()
-    feature_importance['Feature'] = dummy_features
-    feature_importance['Importance'] = r.importances_mean
-    feature_importance['Std'] = r.importances_std
-    feature_importance['Rank'] = np.arange(len(dummy_features))
+    # # Save the feature importance
+    # feature_importance = pd.DataFrame()
+    # feature_importance['Feature'] = dummy_features
+    # feature_importance['Importance'] = r.importances_mean
+    # feature_importance['Std'] = r.importances_std
+    # feature_importance['Rank'] = np.arange(len(dummy_features))
 
-    IMPORTANCE_DIR = DIR+'importance/'
-    if not os.path.exists(IMPORTANCE_DIR):
-        os.makedirs(IMPORTANCE_DIR)
+    # IMPORTANCE_DIR = DIR+'importance/'
+    # if not os.path.exists(IMPORTANCE_DIR):
+    #     os.makedirs(IMPORTANCE_DIR)
 
-    feature_importance.to_csv(DIR+'importance/'+RESULTS_CSV_NAME+'_'+D+".csv", index=False)
+    # feature_importance.to_csv(DIR+'importance/'+RESULTS_CSV_NAME+'_'+D+".csv", index=False)
 
 f.close()

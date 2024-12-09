@@ -17,7 +17,7 @@ do
 
     t_capitalized=$(echo $t | tr '[:lower:]' '[:upper:]')
 
-    command="python eteer_evaluate.py --config ./configs/ablation/D1D10_DBPEDIA_${t_capitalized}.json"
+    command="python eteer_evaluate_automl.py --config ./configs/ablation/D1D10_DBPEDIA_${t_capitalized}.json"
     mkdir -p "./logs/ablation/"
     log_file="./logs/ablation/D1D10_DBPEDIA_${t_capitalized}_ablation.log"
     

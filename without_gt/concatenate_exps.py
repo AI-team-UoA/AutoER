@@ -48,6 +48,8 @@ result = pd.concat(all_dfs, ignore_index=True)
 
 # remove rows with REGRESSOR == 'Lasso' and 'XGBRegressor'
 # result = result[~result['REGRESSOR'].isin(['Lasso', 'XGBRegressor'])]
+print("Saved in: ", os.getcwd())
+print("File name: autoconf_final_results.csv")
 
 result.to_csv('autoconf_final_results.csv', index=False)
 print("The files from all directories have been merged successfully.")

@@ -16,6 +16,7 @@ from sklearn.preprocessing import StandardScaler
 from datetime import datetime, timedelta
 
 import os
+import optuna
 
 # from sklearn.inspection import plot_partial_dependence, permutation_importance
 
@@ -73,10 +74,11 @@ REGRESSORS = {
 REGRESSOR = REGRESSORS[regressor]
 RESULTS_CSV_NAME = benchmark_name
 
-# DB_NAME = 'sqlite:///{}.db'.format(RESULTS_CSV_NAME)
+DB_NAME = 'sqlite:///{}.db'.format(RESULTS_CSV_NAME)
 
-# if args.regressor == 'LINEAR':
-#     OPTUNA_NUM_OF_TRIALS = 1
+OPTUNA_NUM_OF_TRIALS = optuna_num_of_trials
+if regressor == 'LINEAR':
+    OPTUNA_NUM_OF_TRIALS = 1
 
 
 # -------------------------------------------------------------------------- #
@@ -104,6 +106,9 @@ elif trials_type == 'optuna':
 else:
     trials = trials[trials['sampler']=='gridsearch']
 
+print("Trials Shape after filtering: ", trials.shape)
+
+print("Removing zero F1 trials")
 trials = trials[trials['f1']!=0]
 
 print("Trials Shape: ", trials.shape)
@@ -115,19 +120,24 @@ trials = trials[trials['dataset'].isin(train_datasets)]
 print("Trials Shape after dataset selection: ", trials.shape)
 print("CHECK: Trials datasets: ", trials['dataset'].unique())
 
-trials['f1'] = trials['f1'].round(4)
-trials['threshold'] = trials['threshold'].round(4)
+# trials['f1'] = trials['f1'].round(4)
+# trials['threshold'] = trials['threshold'].round(4)
 
 dataset_specs = pd.read_csv('../data/dataset_specs.csv', sep=',')
 trials = pd.merge(trials, dataset_specs, on='dataset')
 
+print("Trials Shape after joining with dataset specs: ", trials.shape)
+print("Trials shape before dropping dups: ", trials.shape)
 trials.drop_duplicates(inplace=True)
+print("Trials shape after dropping dups: ", trials.shape)
 
 features = ['clustering', 'lm', 'k', 'threshold']
 dataset_specs_features = dataset_specs.columns.tolist()
 dataset_specs_features.remove('dataset')
 if not WITH_ABLATION_ANALYSIS:
+    print("Without Ablation Analysis")
     features = features + dataset_specs_features
+    print("Features: ", features)
 
 training_trials = trials[features + ['f1', 'dataset']]
 print("Training Trials Shape: ", training_trials.shape)
@@ -185,7 +195,6 @@ for test_dataset_name in test_datasets:
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- # 
 
-
 print("\n\n-----------------------------------\n")
 print("TRAINING with: ", train_datasets)
 
@@ -196,25 +205,103 @@ y_train = trainD[['f1']].values.ravel()
 X_train = trainD[features]
 print("Train Size: ", len(X_train))
 
-X_train_dummy = pd.get_dummies(X_train)
+X_train_dummy = pd.get_dummies(X_train, drop_first=True)
 print("Train Shape: ", X_train_dummy.shape)
 print("Train columns: ", X_train_dummy.columns.tolist())
-trdummy =  X_train_dummy.columns.tolist()
+trdummy = X_train_dummy.columns.tolist()
+
+# Scaling
 scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train_dummy)
+X_train_dummy[:] = scaler.fit_transform(X_train_dummy)
+
+# Splitting into validation and training sets using boolean indexing
+validation_set = pd.DataFrame()
+validation_mask = pd.Series(False, index=trainD.index)
+
+for D_train in train_datasets:
+    indices = trainD[trainD['dataset'] == D_train].sample(frac=0.1, random_state=42).index
+    validation_mask[indices] = True
+
+validation_set = trainD[validation_mask]
+train_set = trainD[~validation_mask]
+
+# Convert to NumPy arrays after subsetting
+X_train_final = X_train_dummy.loc[train_set.index]
+X_val = X_train_dummy.loc[validation_set.index]
+y_train_final = trainD.loc[train_set.index, 'f1']
+y_val = trainD.loc[validation_set.index, 'f1']
+
+# Using Optuna to find the best hyperparameters
+def objective(trial):
+    if REGRESSOR == SVR:
+        param = {
+            'C': trial.suggest_loguniform('C', 1e-2, 1e2),
+            'epsilon': trial.suggest_loguniform('epsilon', 1e-2, 1e2),
+            'kernel': trial.suggest_categorical('kernel', ['linear', 'rbf', 'poly']),
+            'degree': trial.suggest_int('degree', 2, 5),
+            'gamma': trial.suggest_categorical('gamma', ['scale', 'auto'])
+        }
+    elif REGRESSOR == XGBRegressor:
+        param = {
+            'n_estimators': trial.suggest_int('n_estimators', 100, 1000),
+            'max_depth': trial.suggest_int('max_depth', 3, 10),
+            'learning_rate': trial.suggest_loguniform('learning_rate', 1e-3, 1e-1),
+            'subsample': trial.suggest_uniform('subsample', 0.5, 1),
+            'colsample_bytree': trial.suggest_uniform('colsample_bytree', 0.5, 1),
+            'gamma': trial.suggest_int('gamma', 0, 5),
+            'reg_alpha': trial.suggest_loguniform('reg_alpha', 1e-2, 1e2),
+            'reg_lambda': trial.suggest_loguniform('reg_lambda', 1e-2, 1e2)
+        }
+    elif REGRESSOR == RandomForestRegressor:
+        param = {
+            'n_estimators': trial.suggest_int('n_estimators', 100, 1000),
+            'max_depth': trial.suggest_int('max_depth', 3, 10),
+            'min_samples_split': trial.suggest_int('min_samples_split', 2, 20),
+            'min_samples_leaf': trial.suggest_int('min_samples_leaf', 1, 20),
+            'max_features': trial.suggest_categorical('max_features', ['sqrt', 'log2'])
+        }
+    elif REGRESSOR == Lasso:
+        param = {
+            'alpha': trial.suggest_loguniform('alpha', 1e-4, 1e1)
+        }
+    elif REGRESSOR == Ridge:
+        param = {
+            'alpha': trial.suggest_loguniform('alpha', 1e-4, 1e1)
+        }
+    elif REGRESSOR == LinearRegression:
+        param = {}
+
+    # Create the model
+    model = REGRESSOR(**param)
+    
+    # Train the model
+    model.fit(X_train_final, y_train_final)
+    
+    # Evaluate the model
+    y_pred = model.predict(X_val)
+    return mean_squared_error(y_val, y_pred)
+
+study = optuna.create_study(
+    direction='minimize', 
+    sampler=optuna.samplers.TPESampler(seed=RANDOM_STATE),
+    study_name=RESULTS_CSV_NAME + '_TRAIN',
+    load_if_exists=False,
+    storage=DB_NAME
+)
+
+OPTUNA_TRIALS_TIME = time.time()
+study.optimize(objective, n_trials=OPTUNA_NUM_OF_TRIALS)
+OPTUNA_TRIALS_TIME = time.time() - OPTUNA_TRIALS_TIME
+
+# Get the best hyperparameters
+best_params = study.best_params
+print("Best Hyperparameters: ", best_params)
 
 TRAIN_RUNTIME = time.time()
 
-print("Started training at: ", time.ctime())
-print("Training regressor: ", regressor)
-
-model = REGRESSOR()
-
-# Train the model
-print("Training with: ", X_train_scaled.shape, y_train.shape)
-
-model.fit(X_train_scaled, y_train)
-
+# Train the model with the best hyperparameters on the entire training set
+model = REGRESSOR(**best_params)
+model.fit(X_train_dummy, y_train)
 
 TRAIN_RUNTIME = time.time() - TRAIN_RUNTIME
 print("Training time: ", TRAIN_RUNTIME)
@@ -281,9 +368,9 @@ with open(RESULTS_FILE_NAME, 'w') as f:
         #  round 4 decimal places
         TRAIN_RUNTIME = round(TRAIN_RUNTIME, 4)
         PREDICTION_RUNTIME = round(PREDICTION_RUNTIME, 4)
-        results['threshold'] = results['threshold'].round(4)
-        results['predicted_f1'] = results['predicted_f1'].round(4)
-        real_f1 = round(real_f1, 4)
+        # results['threshold'] = results['threshold'].round(4)
+        # results['predicted_f1'] = results['predicted_f1'].round(4)
+        # real_f1 = round(real_f1, 4)
 
 
         f.write(f"{test_dataset_name}, {results.iloc[0]['clustering']}, {results.iloc[0]['lm']}, {results.iloc[0]['k']}, {results.iloc[0]['threshold']}, {TRAIN_RUNTIME}, {PREDICTION_RUNTIME}, {results.iloc[0]['predicted_f1']}, {real_f1}\n")        

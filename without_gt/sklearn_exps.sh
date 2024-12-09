@@ -6,7 +6,10 @@
 # regressors=("XGB")
 
 datasets=("optuna" "gridsearch" "all")
-regressors=("LINEAR")
+regressors=("RF")
+
+echo "Regressors:  ${regressors[@]}"
+echo "Datasets:    ${datasets[@]}"
 
 # read input cmd flag --ablation
 
