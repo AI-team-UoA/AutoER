@@ -193,6 +193,18 @@ Configuration:
 CUDA_VISIBLE_DEVICES=0 python train_ditto.py --task AutoER/D2  --batch_size 16 --max_len 256 --lr 3e-5 --n_epochs 5 --lm roberta --fp16 --da del --dk product --summarize
 ```
 
+Blocks for DITTO created in ready_for_ditto_input directory, using:
+```
+transform_all_for_ditto.sh
+```
+and more specifically:
+```
+python blocking.py --datajson '../../data/configs/D2.json'
+```
+
+where datajson is the configuration file for the dataset.
+
+
 Moving files inside docker container:
 ```
 docker cp ./configs.json acc70a93a256:/workspace/ditto     
