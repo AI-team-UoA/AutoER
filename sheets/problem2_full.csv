@@ -1,64 +1,64 @@
 TEST_SET,DATASET,EXPERIMENT,REGRESSOR,VALIDATION_MSE,TEST_MSE,PREDICTED_F1,GLOBAL_BEST_F1,PERFORMANCE,OPTIMIZATION_TIME,BEST_REGRESSOR_FIT_TIME,BEST_REGRESSOR_PREDICTION_TIME,WITH_DATA_FEATURES,LM,K,CLUSTERING,THRESHOLD,ETEER_RUNTIME
-D1,all,AutoML,0.88*random_forest + 0.08*gradient_boosting + 0.04*gradient_boosting,,538.598,54.8287,78.4314,0.6991,43440.672,,13.4146,1,st5,11.0,UniqueMappingClustering,0.75,5.134427547454834
-D10,all,AutoML,0.88*random_forest + 0.06*gradient_boosting + 0.04*gradient_boosting + 0.02*k_nearest_neighbors,,2288.8816,17.2346,56.117,0.3071,43430.0451,,503.7444,1,st5,84.0,KiralyMSMApproximateClustering,0.8071,19.5623
-D2,all,AutoML,0.841*random_forest + 0.082*gradient_boosting + 0.065*gradient_boosting + 0.024*k_nearest_neighbors,,1568.3941,81.5544,85.8486,0.95,43453.541,,476.2028,1,st5,1.0,UniqueMappingClustering,0.753,8.2572
-D3,all,AutoML,0.88*random_forest + 0.08*gradient_boosting + 0.04*gradient_boosting,,23.5243,56.9019,59.1887,0.9614,43452.0678,,37.872,1,sminilm,3.0,UniqueMappingClustering,0.6,1.2415285110473633
-D4,all,AutoML,0.96*random_forest + 0.04*gradient_boosting,,3249.5067,98.451,98.6011,0.9985,43447.5507,,28.3302,1,st5,1.0,ConnectedComponentsClustering,0.8742,0.3781
-D5,all,AutoML,0.82*random_forest + 0.14*extra_trees + 0.04*gradient_boosting,,365.8662,26.7417,78.9235,0.3388,43493.2859,,52.7047,1,sminilm,6.0,ConnectedComponentsClustering,0.85,4.424020528793335
-D6,all,AutoML,0.88*random_forest + 0.08*gradient_boosting + 0.04*gradient_boosting,,340.7414,32.7573,60.4225,0.5421,43445.624,,58.3347,1,st5,95.0,ConnectedComponentsClustering,0.8556,7.4975
-D7,all,AutoML,0.9*random_forest + 0.06*gradient_boosting + 0.04*gradient_boosting,,397.513,62.1735,67.76,0.9176,43438.5699,,67.9033,1,st5,1.0,UniqueMappingClustering,0.75,2.0479941368103027
-D8,all,AutoML,0.9*random_forest + 0.06*gradient_boosting + 0.04*gradient_boosting,,269.5959,40.2703,49.5337,0.813,43431.4983,,58.4841,1,st5,5.0,KiralyMSMApproximateClustering,0.7,4.5681023597717285
-D9,all,AutoML,0.94*random_forest + 0.06*gradient_boosting,,2076.766,94.3887,94.9241,0.9944,43430.4042,,40.3751,1,st5,92.0,KiralyMSMApproximateClustering,0.7,35.18276047706604
-D1,all,AutoML,0.54*gradient_boosting + 0.36*random_forest + 0.1*gradient_boosting,,319.4926,57.1429,78.4314,0.7286,43218.6062,,61.9368,0,st5,1.0,KiralyMSMApproximateClustering,0.779,0.1106
-D10,all,AutoML,0.6*gradient_boosting + 0.36*random_forest + 0.04*gradient_boosting,,794.0894,55.3979,56.117,0.9872,43200.3256,,50.2222,0,st5,1.0,KiralyMSMApproximateClustering,0.1932,13.2568
-D2,all,AutoML,0.58*gradient_boosting + 0.32*random_forest + 0.1*gradient_boosting,,304.1842,78.4878,85.8486,0.9143,43197.9433,,36.7287,0,st5,8.0,KiralyMSMApproximateClustering,0.1311,0.4159
-D3,all,AutoML,0.62*gradient_boosting + 0.36*random_forest + 0.02*gradient_boosting,,211.4789,57.4176,59.1887,0.9701,43197.2472,,55.5973,0,st5,100.0,KiralyMSMApproximateClustering,0.3017,9.0054
-D4,all,AutoML,0.66*gradient_boosting + 0.32*random_forest + 0.02*gradient_boosting,,2148.723,98.1761,98.6011,0.9957,43201.8067,,69.0912,0,st5,21.0,KiralyMSMApproximateClustering,0.3019,1.135
-D5,all,AutoML,0.58*gradient_boosting + 0.32*random_forest + 0.1*gradient_boosting,,239.3281,68.9032,78.9235,0.873,43196.6731,,74.6702,0,sminilm,37.0,KiralyMSMApproximateClustering,0.0622,3.3744
-D6,all,AutoML,0.34*random_forest + 0.32*gradient_boosting + 0.28*gradient_boosting + 0.06*gradient_boosting,,394.0728,41.0,60.4225,0.6786,43228.2408,,60.8154,0,st5,7.0,KiralyMSMApproximateClustering,0.6073,2.0484
-D7,all,AutoML,0.58*gradient_boosting + 0.36*random_forest + 0.06*gradient_boosting,,266.1762,65.4746,67.76,0.9663,43204.3003,,67.9615,0,sminilm,1.0,UniqueMappingClustering,0.6694,1.5578
-D8,all,AutoML,0.6*gradient_boosting + 0.38*random_forest + 0.02*gradient_boosting,,579.8295,42.342,49.5337,0.8548,43200.0982,,66.3313,0,st5,37.0,KiralyMSMApproximateClustering,0.8145,4.2157
-D9,all,AutoML,0.8*gradient_boosting + 0.2*gradient_boosting,,940.4119,91.6553,94.9241,0.9656,43195.2538,,63.7164,0,st5,27.0,KiralyMSMApproximateClustering,0.8788,9.5202
-D1,optuna,AutoML,0.38*extra_trees + 0.36*random_forest + 0.14*gradient_boosting + 0.1*k_nearest_neighbors + 0.02*gradient_boosting,,424.827,55.3459,78.4314,0.7057,43238.956,,239.6281,1,st5,1.0,UniqueMappingClustering,0.2659,5.8377
+D1,all,AutoML,0.88*random_forest + 0.08*gradient_boosting + 0.04*gradient_boosting,,538.598,54.8287,78.4314,0.6991,43440.672,,13.4146,1,st5,11.0,UniqueMappingClustering,0.75,
+D10,all,AutoML,0.88*random_forest + 0.06*gradient_boosting + 0.04*gradient_boosting + 0.02*k_nearest_neighbors,,2288.8816,17.2346,56.117,0.3071,43430.0451,,503.7444,1,st5,84.0,KiralyMSMApproximateClustering,0.8071,
+D2,all,AutoML,0.841*random_forest + 0.082*gradient_boosting + 0.065*gradient_boosting + 0.024*k_nearest_neighbors,,1568.3941,81.5544,85.8486,0.95,43453.541,,476.2028,1,st5,1.0,UniqueMappingClustering,0.753,
+D3,all,AutoML,0.88*random_forest + 0.08*gradient_boosting + 0.04*gradient_boosting,,23.5243,56.9019,59.1887,0.9614,43452.0678,,37.872,1,sminilm,3.0,UniqueMappingClustering,0.6,
+D4,all,AutoML,0.96*random_forest + 0.04*gradient_boosting,,3249.5067,98.451,98.6011,0.9985,43447.5507,,28.3302,1,st5,1.0,ConnectedComponentsClustering,0.8742,
+D5,all,AutoML,0.82*random_forest + 0.14*extra_trees + 0.04*gradient_boosting,,365.8662,26.7417,78.9235,0.3388,43493.2859,,52.7047,1,sminilm,6.0,ConnectedComponentsClustering,0.85,
+D6,all,AutoML,0.88*random_forest + 0.08*gradient_boosting + 0.04*gradient_boosting,,340.7414,32.7573,60.4225,0.5421,43445.624,,58.3347,1,st5,95.0,ConnectedComponentsClustering,0.8556,
+D7,all,AutoML,0.9*random_forest + 0.06*gradient_boosting + 0.04*gradient_boosting,,397.513,62.1735,67.76,0.9176,43438.5699,,67.9033,1,st5,1.0,UniqueMappingClustering,0.75,
+D8,all,AutoML,0.9*random_forest + 0.06*gradient_boosting + 0.04*gradient_boosting,,269.5959,40.2703,49.5337,0.813,43431.4983,,58.4841,1,st5,5.0,KiralyMSMApproximateClustering,0.7,
+D9,all,AutoML,0.94*random_forest + 0.06*gradient_boosting,,2076.766,94.3887,94.9241,0.9944,43430.4042,,40.3751,1,st5,92.0,KiralyMSMApproximateClustering,0.7,
+D1,all,AutoML,0.54*gradient_boosting + 0.36*random_forest + 0.1*gradient_boosting,,319.4926,57.1429,78.4314,0.7286,43218.6062,,61.9368,0,st5,1.0,KiralyMSMApproximateClustering,0.779,
+D10,all,AutoML,0.6*gradient_boosting + 0.36*random_forest + 0.04*gradient_boosting,,794.0894,55.3979,56.117,0.9872,43200.3256,,50.2222,0,st5,1.0,KiralyMSMApproximateClustering,0.1932,
+D2,all,AutoML,0.58*gradient_boosting + 0.32*random_forest + 0.1*gradient_boosting,,304.1842,78.4878,85.8486,0.9143,43197.9433,,36.7287,0,st5,8.0,KiralyMSMApproximateClustering,0.1311,
+D3,all,AutoML,0.62*gradient_boosting + 0.36*random_forest + 0.02*gradient_boosting,,211.4789,57.4176,59.1887,0.9701,43197.2472,,55.5973,0,st5,100.0,KiralyMSMApproximateClustering,0.3017,
+D4,all,AutoML,0.66*gradient_boosting + 0.32*random_forest + 0.02*gradient_boosting,,2148.723,98.1761,98.6011,0.9957,43201.8067,,69.0912,0,st5,21.0,KiralyMSMApproximateClustering,0.3019,
+D5,all,AutoML,0.58*gradient_boosting + 0.32*random_forest + 0.1*gradient_boosting,,239.3281,68.9032,78.9235,0.873,43196.6731,,74.6702,0,sminilm,37.0,KiralyMSMApproximateClustering,0.0622,
+D6,all,AutoML,0.34*random_forest + 0.32*gradient_boosting + 0.28*gradient_boosting + 0.06*gradient_boosting,,394.0728,41.0,60.4225,0.6786,43228.2408,,60.8154,0,st5,7.0,KiralyMSMApproximateClustering,0.6073,
+D7,all,AutoML,0.58*gradient_boosting + 0.36*random_forest + 0.06*gradient_boosting,,266.1762,65.4746,67.76,0.9663,43204.3003,,67.9615,0,sminilm,1.0,UniqueMappingClustering,0.6694,
+D8,all,AutoML,0.6*gradient_boosting + 0.38*random_forest + 0.02*gradient_boosting,,579.8295,42.342,49.5337,0.8548,43200.0982,,66.3313,0,st5,37.0,KiralyMSMApproximateClustering,0.8145,
+D9,all,AutoML,0.8*gradient_boosting + 0.2*gradient_boosting,,940.4119,91.6553,94.9241,0.9656,43195.2538,,63.7164,0,st5,27.0,KiralyMSMApproximateClustering,0.8788,
+D1,optuna,AutoML,0.38*extra_trees + 0.36*random_forest + 0.14*gradient_boosting + 0.1*k_nearest_neighbors + 0.02*gradient_boosting,,424.827,55.3459,78.4314,0.7057,43238.956,,239.6281,1,st5,1.0,UniqueMappingClustering,0.2659,
 D10,optuna,AutoML,0.78*extra_trees + 0.12*gradient_boosting + 0.1*extra_trees,,292.832,36.3098,56.117,0.647,43227.266,,67.7714,1,smpnet,1.0,KiralyMSMApproximateClustering,0.05,13.6454
-D2,optuna,AutoML,0.82*extra_trees + 0.12*gradient_boosting + 0.04*random_forest + 0.02*k_nearest_neighbors,,415.2661,81.9401,85.8486,0.9545,43221.143,,178.6551,1,st5,1.0,KiralyMSMApproximateClustering,0.1722,0.1823
+D2,optuna,AutoML,0.82*extra_trees + 0.12*gradient_boosting + 0.04*random_forest + 0.02*k_nearest_neighbors,,415.2661,81.9401,85.8486,0.9545,43221.143,,178.6551,1,st5,1.0,KiralyMSMApproximateClustering,0.1722,
 D3,optuna,AutoML,0.54*extra_trees + 0.16*extra_trees + 0.14*random_forest + 0.12*gradient_boosting + 0.04*k_nearest_neighbors,,223.0337,57.7941,59.1887,0.9764,43237.3137,,218.3301,1,st5,32.0,UniqueMappingClustering,0.05,2.9766
 D4,optuna,AutoML,0.5*extra_trees + 0.38*random_forest + 0.08*gradient_boosting + 0.04*k_nearest_neighbors,,2280.8802,98.3769,98.6011,0.9977,43224.6895,,215.1101,1,st5,1.0,KiralyMSMApproximateClustering,0.05,0.8333
-D5,optuna,AutoML,0.78*extra_trees + 0.1*gradient_boosting + 0.06*random_forest + 0.06*k_nearest_neighbors,,311.993,71.9689,78.9235,0.9119,43225.5253,,249.2466,1,smpnet,1.0,KiralyMSMApproximateClustering,0.6659,2.7683
-D6,optuna,AutoML,0.4*extra_trees + 0.18*random_forest + 0.18*gradient_boosting + 0.12*gradient_boosting + 0.12*k_nearest_neighbors,,309.2738,55.9806,60.4225,0.9265,43225.9136,,252.5683,1,sminilm,1.0,KiralyMSMApproximateClustering,0.6307,1.2301
-D7,optuna,AutoML,0.5*extra_trees + 0.24*random_forest + 0.2*gradient_boosting + 0.04*k_nearest_neighbors + 0.02*gradient_boosting,,341.6059,50.141,67.76,0.74,43221.8297,,227.4257,1,smpnet,1.0,UniqueMappingClustering,0.228,2.276
-D8,optuna,AutoML,0.52*extra_trees + 0.2*random_forest + 0.12*k_nearest_neighbors + 0.1*gradient_boosting + 0.06*gradient_boosting,,792.5619,40.7674,49.5337,0.823,43222.2741,,229.6457,1,st5,91.0,KiralyMSMApproximateClustering,0.0501,20.6557
-D9,optuna,AutoML,0.52*extra_trees + 0.28*random_forest + 0.14*gradient_boosting + 0.06*k_nearest_neighbors,,2037.7087,94.3686,94.9241,0.9941,43221.845,,222.3003,1,st5,100.0,KiralyMSMApproximateClustering,0.4767,61.1626
-D1,optuna,AutoML,0.74*extra_trees + 0.18*random_forest + 0.04*k_nearest_neighbors + 0.02*gradient_boosting + 0.02*adaboost,,444.348,57.1429,78.4314,0.7286,43201.3939,,55.9394,0,st5,1.0,KiralyMSMApproximateClustering,0.779,0.1106
-D10,optuna,AutoML,0.94*extra_trees + 0.02*random_forest + 0.02*gradient_boosting + 0.02*ard_regression,,802.9557,55.3979,56.117,0.9872,43236.6576,,28.4424,0,st5,1.0,UniqueMappingClustering,0.0853,13.3419
-D2,optuna,AutoML,0.92*extra_trees + 0.02*extra_trees + 0.02*gradient_boosting + 0.02*k_nearest_neighbors + 0.02*adaboost,,337.4461,78.6325,85.8486,0.9159,43205.8106,,60.6276,0,st5,12.0,KiralyMSMApproximateClustering,0.1117,0.4923
-D3,optuna,AutoML,0.82*extra_trees + 0.08*extra_trees + 0.06*gradient_boosting + 0.02*extra_trees + 0.02*k_nearest_neighbors,,238.7432,57.4176,59.1887,0.9701,43209.6093,,73.2937,0,st5,100.0,KiralyMSMApproximateClustering,0.3209,4.3223
-D4,optuna,AutoML,0.74*extra_trees + 0.22*random_forest + 0.02*gradient_boosting + 0.02*ard_regression,,1938.3059,98.1761,98.6011,0.9957,43238.1494,,40.3322,0,st5,21.0,KiralyMSMApproximateClustering,0.3019,1.135
+D5,optuna,AutoML,0.78*extra_trees + 0.1*gradient_boosting + 0.06*random_forest + 0.06*k_nearest_neighbors,,311.993,71.9689,78.9235,0.9119,43225.5253,,249.2466,1,smpnet,1.0,KiralyMSMApproximateClustering,0.6659,
+D6,optuna,AutoML,0.4*extra_trees + 0.18*random_forest + 0.18*gradient_boosting + 0.12*gradient_boosting + 0.12*k_nearest_neighbors,,309.2738,55.9806,60.4225,0.9265,43225.9136,,252.5683,1,sminilm,1.0,KiralyMSMApproximateClustering,0.6307,
+D7,optuna,AutoML,0.5*extra_trees + 0.24*random_forest + 0.2*gradient_boosting + 0.04*k_nearest_neighbors + 0.02*gradient_boosting,,341.6059,50.141,67.76,0.74,43221.8297,,227.4257,1,smpnet,1.0,UniqueMappingClustering,0.228,
+D8,optuna,AutoML,0.52*extra_trees + 0.2*random_forest + 0.12*k_nearest_neighbors + 0.1*gradient_boosting + 0.06*gradient_boosting,,792.5619,40.7674,49.5337,0.823,43222.2741,,229.6457,1,st5,91.0,KiralyMSMApproximateClustering,0.0501,
+D9,optuna,AutoML,0.52*extra_trees + 0.28*random_forest + 0.14*gradient_boosting + 0.06*k_nearest_neighbors,,2037.7087,94.3686,94.9241,0.9941,43221.845,,222.3003,1,st5,100.0,KiralyMSMApproximateClustering,0.4767,
+D1,optuna,AutoML,0.74*extra_trees + 0.18*random_forest + 0.04*k_nearest_neighbors + 0.02*gradient_boosting + 0.02*adaboost,,444.348,57.1429,78.4314,0.7286,43201.3939,,55.9394,0,st5,1.0,KiralyMSMApproximateClustering,0.779,
+D10,optuna,AutoML,0.94*extra_trees + 0.02*random_forest + 0.02*gradient_boosting + 0.02*ard_regression,,802.9557,55.3979,56.117,0.9872,43236.6576,,28.4424,0,st5,1.0,UniqueMappingClustering,0.0853,
+D2,optuna,AutoML,0.92*extra_trees + 0.02*extra_trees + 0.02*gradient_boosting + 0.02*k_nearest_neighbors + 0.02*adaboost,,337.4461,78.6325,85.8486,0.9159,43205.8106,,60.6276,0,st5,12.0,KiralyMSMApproximateClustering,0.1117,
+D3,optuna,AutoML,0.82*extra_trees + 0.08*extra_trees + 0.06*gradient_boosting + 0.02*extra_trees + 0.02*k_nearest_neighbors,,238.7432,57.4176,59.1887,0.9701,43209.6093,,73.2937,0,st5,100.0,KiralyMSMApproximateClustering,0.3209,
+D4,optuna,AutoML,0.74*extra_trees + 0.22*random_forest + 0.02*gradient_boosting + 0.02*ard_regression,,1938.3059,98.1761,98.6011,0.9957,43238.1494,,40.3322,0,st5,21.0,KiralyMSMApproximateClustering,0.3019,
 D5,optuna,AutoML,0.74*extra_trees + 0.1*k_nearest_neighbors + 0.06*random_forest + 0.04*random_forest + 0.04*gradient_boosting + 0.02*k_nearest_neighbors,,278.9575,62.8471,78.9235,0.7963,43212.5706,,95.4209,0,sdistilroberta,32.0,KiralyMSMApproximateClustering,0.05,3.948
-D6,optuna,AutoML,0.86*extra_trees + 0.04*extra_trees + 0.04*gradient_boosting + 0.04*k_nearest_neighbors + 0.02*ard_regression,,427.5353,51.1573,60.4225,0.8467,43211.8789,,56.0087,0,sminilm,1.0,UniqueMappingClustering,0.2,1.5787
-D7,optuna,AutoML,0.88*extra_trees + 0.04*random_forest + 0.02*gradient_boosting + 0.02*k_nearest_neighbors + 0.02*gradient_boosting + 0.02*k_nearest_neighbors,,269.0321,65.3846,67.76,0.9649,43213.823,,197.5819,0,st5,1.0,KiralyMSMApproximateClustering,0.8292,1.3814
-D8,optuna,AutoML,0.9*extra_trees + 0.02*gradient_boosting + 0.02*adaboost + 0.02*k_nearest_neighbors + 0.02*random_forest + 0.02*random_forest,,791.6615,47.0485,49.5337,0.9498,43213.0313,,62.4086,0,st5,1.0,UniqueMappingClustering,0.896,6.1263
-D9,optuna,AutoML,0.86*extra_trees + 0.1*random_forest + 0.04*gradient_boosting,,1011.2043,94.3887,94.9241,0.9944,43240.4427,,25.2851,0,st5,21.0,KiralyMSMApproximateClustering,0.3019,16.4665
+D6,optuna,AutoML,0.86*extra_trees + 0.04*extra_trees + 0.04*gradient_boosting + 0.04*k_nearest_neighbors + 0.02*ard_regression,,427.5353,51.1573,60.4225,0.8467,43211.8789,,56.0087,0,sminilm,1.0,UniqueMappingClustering,0.2,0.8253710269927979
+D7,optuna,AutoML,0.88*extra_trees + 0.04*random_forest + 0.02*gradient_boosting + 0.02*k_nearest_neighbors + 0.02*gradient_boosting + 0.02*k_nearest_neighbors,,269.0321,65.3846,67.76,0.9649,43213.823,,197.5819,0,st5,1.0,KiralyMSMApproximateClustering,0.8292,
+D8,optuna,AutoML,0.9*extra_trees + 0.02*gradient_boosting + 0.02*adaboost + 0.02*k_nearest_neighbors + 0.02*random_forest + 0.02*random_forest,,791.6615,47.0485,49.5337,0.9498,43213.0313,,62.4086,0,st5,1.0,UniqueMappingClustering,0.896,
+D9,optuna,AutoML,0.86*extra_trees + 0.1*random_forest + 0.04*gradient_boosting,,1011.2043,94.3887,94.9241,0.9944,43240.4427,,25.2851,0,st5,21.0,KiralyMSMApproximateClustering,0.3019,
 D1,gridsearch,AutoML,0.62*gradient_boosting + 0.38*random_forest,,345.2841,19.2982,78.4314,0.2461,43279.9262,,47.1224,1,sdistilroberta,1.0,ConnectedComponentsClustering,0.55,1.9444820880889893
 D10,gridsearch,AutoML,0.76*gradient_boosting + 0.24*random_forest,,647.5369,29.8483,56.117,0.5319,43338.3617,,10.9145,1,sminilm,47.0,KiralyMSMApproximateClustering,0.55,19.14986824989319
-D2,gridsearch,AutoML,0.76*gradient_boosting + 0.18*random_forest + 0.06*extra_trees,,1254.1471,68.8019,85.8486,0.8014,43427.6676,,18.5218,1,sminilm,1.0,ConnectedComponentsClustering,0.65,5.123471736907959
+D2,gridsearch,AutoML,0.76*gradient_boosting + 0.18*random_forest + 0.06*extra_trees,,1254.1471,68.8019,85.8486,0.8014,43427.6676,,18.5218,1,sminilm,1.0,ConnectedComponentsClustering,0.65,
 D3,gridsearch,AutoML,0.78*gradient_boosting + 0.22*random_forest,,183.4991,40.7589,59.1887,0.6886,43290.3557,,61.8833,1,st5,1.0,ConnectedComponentsClustering,0.45,0.7603440284729004
 D4,gridsearch,AutoML,0.76*gradient_boosting + 0.24*random_forest,,2829.653,97.6881,98.6011,0.9907,43312.0484,,62.6318,1,sminilm,1.0,UniqueMappingClustering,0.4,0.5781216621398926
-D5,gridsearch,AutoML,0.82*gradient_boosting + 0.14*random_forest + 0.04*extra_trees,,803.1593,71.2832,78.9235,0.9032,43466.5675,,25.148,1,st5,1.0,ConnectedComponentsClustering,0.7,6.055248498916626
-D6,gridsearch,AutoML,0.74*gradient_boosting + 0.26*random_forest,,326.6301,45.5549,60.4225,0.7539,43306.8554,,64.944,1,sminilm,1.0,UniqueMappingClustering,0.7,0.7905290126800537
+D5,gridsearch,AutoML,0.82*gradient_boosting + 0.14*random_forest + 0.04*extra_trees,,803.1593,71.2832,78.9235,0.9032,43466.5675,,25.148,1,st5,1.0,ConnectedComponentsClustering,0.7,
+D6,gridsearch,AutoML,0.74*gradient_boosting + 0.26*random_forest,,326.6301,45.5549,60.4225,0.7539,43306.8554,,64.944,1,sminilm,1.0,UniqueMappingClustering,0.7,
 D7,gridsearch,AutoML,0.76*gradient_boosting + 0.24*random_forest,,409.1263,57.5722,67.76,0.8496,43313.777,,53.3935,1,sminilm,1.0,UniqueMappingClustering,0.55,19.868253231048584
-D8,gridsearch,AutoML,0.72*gradient_boosting + 0.28*random_forest,,1329.3703,34.6102,49.5337,0.6987,43359.9604,,22.0695,1,smpnet,1.0,UniqueMappingClustering,0.65,2.6435203552246094
+D8,gridsearch,AutoML,0.72*gradient_boosting + 0.28*random_forest,,1329.3703,34.6102,49.5337,0.6987,43359.9604,,22.0695,1,smpnet,1.0,UniqueMappingClustering,0.65,
 D9,gridsearch,AutoML,0.74*gradient_boosting + 0.26*random_forest,,1417.0373,94.3686,94.9241,0.9941,43329.1528,,17.3715,1,st5,99.0,KiralyMSMApproximateClustering,0.55,74.74114656448364
-D1,gridsearch,AutoML,0.52*random_forest + 0.22*decision_tree + 0.16*adaboost + 0.1*ard_regression,,256.7627,55.873,78.4314,0.7124,43228.7849,,7.0127,0,st5,73.0,KiralyMSMApproximateClustering,0.75,0.886815071105957
-D10,gridsearch,AutoML,0.68*random_forest + 0.22*adaboost + 0.08*liblinear_svr + 0.02*ard_regression,,805.8773,41.7267,56.117,0.7436,43219.298,,5.5964,0,st5,76.0,KiralyMSMApproximateClustering,0.75,30.534343004226685
-D2,gridsearch,AutoML,0.8*random_forest + 0.1*adaboost + 0.1*ard_regression,,290.4618,78.1955,85.8486,0.9109,43225.16,,7.0918,0,st5,77.0,KiralyMSMApproximateClustering,0.75,5.575294256210327
-D3,gridsearch,AutoML,0.6*random_forest + 0.28*adaboost + 0.12*ard_regression,,216.7241,56.1757,59.1887,0.9491,43224.2766,,7.498,0,st5,1.0,KiralyMSMApproximateClustering,0.75,5.752828359603882
-D4,gridsearch,AutoML,0.58*random_forest + 0.3*adaboost + 0.12*ard_regression,,2253.3801,98.1761,98.6011,0.9957,43197.8977,,8.6415,0,st5,78.0,KiralyMSMApproximateClustering,0.7,2.4884634017944336
-D5,gridsearch,AutoML,0.72*random_forest + 0.14*adaboost + 0.12*ard_regression + 0.02*adaboost,,243.0956,72.8713,78.9235,0.9233,43198.1702,,16.8349,0,st5,81.0,KiralyMSMApproximateClustering,0.7,6.511429071426392
-D6,gridsearch,AutoML,0.78*gradient_boosting + 0.16*random_forest + 0.02*ard_regression + 0.02*gradient_boosting + 0.02*gradient_boosting,,388.1291,49.5256,60.4225,0.8197,43197.319,,24.5741,0,st5,3.0,KiralyMSMApproximateClustering,0.75,1.6755921840667725
-D7,gridsearch,AutoML,0.56*gradient_boosting + 0.26*adaboost + 0.1*ard_regression + 0.06*random_forest + 0.02*liblinear_svr,,274.9201,52.7853,67.76,0.779,43219.6041,,18.9368,0,st5,1.0,KiralyMSMApproximateClustering,0.7,2.692744970321656
-D8,gridsearch,AutoML,0.72*gradient_boosting + 0.16*random_forest + 0.12*gradient_boosting,,518.3562,38.8343,49.5337,0.784,43216.4479,,20.8246,0,st5,1.0,KiralyMSMApproximateClustering,0.75,96.1344301700592
-D9,gridsearch,AutoML,0.721*random_forest + 0.163*adaboost + 0.12*ard_regression + 0.024*mlp,,939.4617,94.2827,94.9241,0.9932,43196.9623,,5.2864,0,st5,1.0,KiralyMSMApproximateClustering,0.75,7.596729516983032
+D1,gridsearch,AutoML,0.52*random_forest + 0.22*decision_tree + 0.16*adaboost + 0.1*ard_regression,,256.7627,55.873,78.4314,0.7124,43228.7849,,7.0127,0,st5,73.0,KiralyMSMApproximateClustering,0.75,
+D10,gridsearch,AutoML,0.68*random_forest + 0.22*adaboost + 0.08*liblinear_svr + 0.02*ard_regression,,805.8773,41.7267,56.117,0.7436,43219.298,,5.5964,0,st5,76.0,KiralyMSMApproximateClustering,0.75,
+D2,gridsearch,AutoML,0.8*random_forest + 0.1*adaboost + 0.1*ard_regression,,290.4618,78.1955,85.8486,0.9109,43225.16,,7.0918,0,st5,77.0,KiralyMSMApproximateClustering,0.75,
+D3,gridsearch,AutoML,0.6*random_forest + 0.28*adaboost + 0.12*ard_regression,,216.7241,56.1757,59.1887,0.9491,43224.2766,,7.498,0,st5,1.0,KiralyMSMApproximateClustering,0.75,
+D4,gridsearch,AutoML,0.58*random_forest + 0.3*adaboost + 0.12*ard_regression,,2253.3801,98.1761,98.6011,0.9957,43197.8977,,8.6415,0,st5,78.0,KiralyMSMApproximateClustering,0.7,
+D5,gridsearch,AutoML,0.72*random_forest + 0.14*adaboost + 0.12*ard_regression + 0.02*adaboost,,243.0956,72.8713,78.9235,0.9233,43198.1702,,16.8349,0,st5,81.0,KiralyMSMApproximateClustering,0.7,
+D6,gridsearch,AutoML,0.78*gradient_boosting + 0.16*random_forest + 0.02*ard_regression + 0.02*gradient_boosting + 0.02*gradient_boosting,,388.1291,49.5256,60.4225,0.8197,43197.319,,24.5741,0,st5,3.0,KiralyMSMApproximateClustering,0.75,
+D7,gridsearch,AutoML,0.56*gradient_boosting + 0.26*adaboost + 0.1*ard_regression + 0.06*random_forest + 0.02*liblinear_svr,,274.9201,52.7853,67.76,0.779,43219.6041,,18.9368,0,st5,1.0,KiralyMSMApproximateClustering,0.7,
+D8,gridsearch,AutoML,0.72*gradient_boosting + 0.16*random_forest + 0.12*gradient_boosting,,518.3562,38.8343,49.5337,0.784,43216.4479,,20.8246,0,st5,1.0,KiralyMSMApproximateClustering,0.75,
+D9,gridsearch,AutoML,0.721*random_forest + 0.163*adaboost + 0.12*ard_regression + 0.024*mlp,,939.4617,94.2827,94.9241,0.9932,43196.9623,,5.2864,0,st5,1.0,KiralyMSMApproximateClustering,0.75,
 D1,all,DL-SKLEARN,LinearRegression,247.1241,9.87297446005863e+22,55.3459,78.4314,0.7057,0.4103,0.326,0.0147,1,st5,1.0,KiralyMSMApproximateClustering,0.05,0.2369
 D2,all,DL-SKLEARN,LinearRegression,241.8828,6.6547508996021055e+22,81.9401,85.8486,0.9545,0.2646,0.2393,0.0027,1,st5,1.0,KiralyMSMApproximateClustering,0.05,0.2036
 D3,all,DL-SKLEARN,LinearRegression,270.4079,1.1380669042156172e+25,55.9823,59.1887,0.9458,0.2557,0.3289,0.0026,1,st5,1.0,KiralyMSMApproximateClustering,0.05,0.4788
@@ -69,26 +69,26 @@ D7,all,DL-SKLEARN,LinearRegression,254.9566,3.843764838138442e+22,48.4848,67.76,
 D8,all,DL-SKLEARN,LinearRegression,279.2682,6.014745922896272e+22,38.0861,49.5337,0.7689,0.2728,0.2092,0.0021,1,st5,1.0,KiralyMSMApproximateClustering,0.05,1.6269
 D9,all,DL-SKLEARN,LinearRegression,228.6403,2.280802164194308e+25,92.8452,94.9241,0.9781,0.227,0.2081,0.0025,1,st5,1.0,KiralyMSMApproximateClustering,0.05,4.2272
 D10,all,DL-SKLEARN,LinearRegression,261.5896,25893028.7451,55.3979,56.117,0.9872,0.2224,0.2068,0.0021,1,st5,1.0,KiralyMSMApproximateClustering,0.05,12.5363
-D1,all,DL-SKLEARN,RandomForestRegressor,114.997,285.3983,55.3459,78.4314,0.7057,4551.7262,77.5193,0.8489,1,,,,,
-D2,all,DL-SKLEARN,RandomForestRegressor,104.6702,845.7212,78.4566,85.8486,0.9139,7094.0096,124.3614,1.5714,1,,,,,
-D3,all,DL-SKLEARN,RandomForestRegressor,113.0901,526.7141,55.9823,59.1887,0.9458,6715.0952,99.152,1.197,1,,,,,
-D4,all,DL-SKLEARN,RandomForestRegressor,106.2961,2319.8217,98.1761,98.6011,0.9957,6125.1111,221.2447,2.2515,1,,,,,
-D5,all,DL-SKLEARN,RandomForestRegressor,104.7636,394.8071,76.2613,78.9235,0.9663,7761.5787,196.8184,2.5271,1,,,,,
-D6,all,DL-SKLEARN,RandomForestRegressor,115.2205,391.7454,47.6932,60.4225,0.7893,6022.2469,121.009,1.3155,1,,,,,
-D7,all,DL-SKLEARN,RandomForestRegressor,112.1949,271.7571,64.2428,67.76,0.9481,5075.9145,31.8871,0.2999,1,,,,,
-D8,all,DL-SKLEARN,RandomForestRegressor,127.3059,674.0332,40.7814,49.5337,0.8233,7154.0789,140.8174,1.3669,1,,,,,
-D9,all,DL-SKLEARN,RandomForestRegressor,83.8295,1642.1227,94.3686,94.9241,0.9941,5639.3148,38.8682,0.4088,1,,,,,
-D10,all,DL-SKLEARN,RandomForestRegressor,115.7211,505.2327,4.2453,56.117,0.0757,7763.4908,228.7473,2.3821,1,,,,,
-D1,gridsearch,DL-SKLEARN,RandomForestRegressor,119.3839,220.4054,54.4892,78.4314,0.6947,5214.2434,130.0101,1.8,1,,,,,
-D2,gridsearch,DL-SKLEARN,RandomForestRegressor,106.5136,684.6463,78.4566,85.8486,0.9139,2585.847,34.8466,0.5553,1,,,,,
-D3,gridsearch,DL-SKLEARN,RandomForestRegressor,114.436,456.7947,56.8619,59.1887,0.9607,4756.9512,124.0709,1.9523,1,,,,,
-D4,gridsearch,DL-SKLEARN,RandomForestRegressor,106.0727,2400.4931,98.3769,98.6011,0.9977,4507.5555,97.9924,1.354,1,,,,,
-D5,gridsearch,DL-SKLEARN,RandomForestRegressor,108.2126,387.8172,74.0866,78.9235,0.9387,3669.3189,120.9351,1.8199,1,,,,,
-D6,gridsearch,DL-SKLEARN,RandomForestRegressor,118.5162,379.2313,42.4207,60.4225,0.7021,4035.471,107.2406,1.1579,1,,,,,
-D7,gridsearch,DL-SKLEARN,RandomForestRegressor,115.1623,259.291,57.3189,67.76,0.8459,3328.6428,44.2116,0.4559,1,,,,,
-D8,gridsearch,DL-SKLEARN,RandomForestRegressor,129.6469,820.1457,40.7534,49.5337,0.8227,4453.0628,179.1631,1.8909,1,,,,,
-D9,gridsearch,DL-SKLEARN,RandomForestRegressor,83.5265,1422.4247,94.3485,94.9241,0.9939,3290.615,56.9342,0.7015,1,,,,,
-D10,gridsearch,DL-SKLEARN,RandomForestRegressor,116.9934,665.1313,54.8765,56.117,0.9779,3865.1069,23.0463,0.2923,1,,,,,
+D1,all,DL-SKLEARN,RandomForestRegressor,116.03315555931027,292.0489067082487,56.7742,78.4314,0.7239,3486.61425280571,130.5516083240509,1.598823070526123,1,st5,1.0,UniqueMappingClustering,0.7335633260163261,2.8753
+D2,all,DL-SKLEARN,RandomForestRegressor,104.54882306621737,727.3019898294366,78.4566,85.8486,0.9139,2384.2625749111176,87.52312541007996,1.1971850395202637,1,st5,100.0,KiralyMSMApproximateClustering,0.3456940190573055,13.7161
+D3,all,DL-SKLEARN,RandomForestRegressor,114.61312745517112,499.3744398317248,55.9823,59.1887,0.9458,2801.645585298538,38.57391881942749,0.4822719097137451,1,st5,1.0,KiralyMSMApproximateClustering,0.2,5.0174524784088135
+D4,all,DL-SKLEARN,RandomForestRegressor,106.65248655563096,2383.72036644351,98.1761,98.6011,0.9957,3104.593712091446,115.5228009223938,1.391538143157959,1,st5,100.0,KiralyMSMApproximateClustering,0.1283030732112443,5.3053
+D5,all,DL-SKLEARN,RandomForestRegressor,104.31600410317571,391.7862112125439,76.2613,78.9235,0.9663,2053.723527908325,69.29313921928406,1.0254569053649902,1,sminilm,1.0,KiralyMSMApproximateClustering,0.6624574112699669,1.3894
+D6,all,DL-SKLEARN,RandomForestRegressor,115.17531210852272,434.7947463788122,42.6462,60.4225,0.7058,2064.535068511963,17.855390548706055,0.1856625080108642,1,st5,1.0,KiralyMSMApproximateClustering,0.8,1.2969164848327637
+D7,all,DL-SKLEARN,RandomForestRegressor,112.70219668022916,270.09618073936696,58.4911,67.76,0.8632,1526.4084558486938,27.509838581085205,0.2970950603485107,1,sminilm,1.0,KiralyMSMApproximateClustering,0.5607159857422135,1.7427
+D8,all,DL-SKLEARN,RandomForestRegressor,127.1858455983172,763.94224465494,40.7814,49.5337,0.8233,1524.9254183769226,27.476651191711422,0.2872798442840576,1,st5,100.0,KiralyMSMApproximateClustering,0.2199448242520678,28.7949
+D9,all,DL-SKLEARN,RandomForestRegressor,84.67394816694846,1543.2101893538015,94.3686,94.9241,0.9941,2387.7185611724854,67.96199083328247,0.7973034381866455,1,st5,100.0,KiralyMSMApproximateClustering,0.3756248115456757,60.205
+D10,all,DL-SKLEARN,RandomForestRegressor,116.2965210937793,464.2850536098684,4.2453,56.117,0.0757,1942.752686738968,44.88830900192261,0.5565531253814697,1,st5,1.0,KiralyMSMApproximateClustering,0.8599238144090521,10.4494
+D1,gridsearch,DL-SKLEARN,RandomForestRegressor,119.46202542740284,222.66150157258852,55.3459,78.4314,0.7057,1999.2039151191711,73.09736633300781,1.2082343101501465,1,st5,1.0,KiralyMSMApproximateClustering,0.2,4.105453968048096
+D2,gridsearch,DL-SKLEARN,RandomForestRegressor,106.43488855014115,739.964408200803,78.4607,85.8486,0.9139,1340.0571103096008,10.10425066947937,0.1814744472503662,1,st5,16.0,KiralyMSMApproximateClustering,0.1,5.100506544113159
+D3,gridsearch,DL-SKLEARN,RandomForestRegressor,115.22285235983708,452.5321070387837,56.8619,59.1887,0.9607,1364.9401099681854,10.218032360076904,0.1759481430053711,1,st5,2.0,KiralyMSMApproximateClustering,0.6000000000000001,0.5469865798950195
+D4,gridsearch,DL-SKLEARN,RandomForestRegressor,106.16161323444533,2446.936741658565,98.2417,98.6011,0.9964,1968.864902973175,65.25512075424194,1.0045990943908691,1,st5,2.0,KiralyMSMApproximateClustering,0.2,1.7042839527130127
+D5,gridsearch,DL-SKLEARN,RandomForestRegressor,108.53684163835828,386.8546955388105,74.1636,78.9235,0.9397,1708.4651505947113,53.34379839897156,0.9435505867004396,1,sminilm,1.0,KiralyMSMApproximateClustering,0.7000000000000001,2.0470404624938965
+D6,gridsearch,DL-SKLEARN,RandomForestRegressor,117.87809696051777,381.80267633305647,45.4387,60.4225,0.752,1839.02392244339,42.49723601341248,0.5087125301361084,1,sminilm,1.0,KiralyMSMApproximateClustering,0.7000000000000001,1.2040183544158936
+D7,gridsearch,DL-SKLEARN,RandomForestRegressor,115.72603303243932,264.4320909638824,62.1178,67.76,0.9167,1425.209182024002,38.81349301338196,0.470412015914917,1,sminilm,1.0,KiralyMSMApproximateClustering,0.6000000000000001,1.5752086639404297
+D8,gridsearch,DL-SKLEARN,RandomForestRegressor,129.6018165874877,788.8585454615234,40.7814,49.5337,0.8233,1530.5537688732147,24.269431114196777,0.2803108692169189,1,st5,99.0,KiralyMSMApproximateClustering,0.25,33.104527950286865
+D9,gridsearch,DL-SKLEARN,RandomForestRegressor,83.07103504554792,1355.2332413711404,94.3485,94.9241,0.9939,1291.4855337142944,42.13788199424744,0.5433125495910645,1,st5,74.0,KiralyMSMApproximateClustering,0.35,60.761006116867065
+D10,gridsearch,DL-SKLEARN,RandomForestRegressor,117.15639525421884,597.02299632421,54.9106,56.117,0.9785,1850.009040594101,48.67229509353638,0.667424201965332,1,st5,27.0,KiralyMSMApproximateClustering,0.5,37.546969175338745
 D1,gridsearch,DL-SKLEARN,XGBRegressor,0.0786,745.8629,52.381,78.4314,0.6679,90449.891,1399.8004,0.1899,1,,,,,
 D2,gridsearch,DL-SKLEARN,XGBRegressor,0.0789,2012.476,77.2575,85.8486,0.8999,88646.8109,1223.0311,0.1962,1,,,,,
 D3,gridsearch,DL-SKLEARN,XGBRegressor,32.794,518.9043,56.8776,59.1887,0.961,111010.1468,2168.8693,0.2585,1,,,,,
@@ -199,16 +199,26 @@ D7,all,DL-SKLEARN,XGBRegressor,0.3925,332.75,57.5722,67.76,0.8496,77902.0978,548
 D8,all,DL-SKLEARN,XGBRegressor,0.2793,335.0176,38.0983,49.5337,0.7691,46705.8111,266.1391,0.0679,1,,,,,
 D9,all,DL-SKLEARN,XGBRegressor,0.206,2524.2461,92.8452,94.9241,0.9781,30427.662,671.119,0.1101,1,,,,,
 D10,all,DL-SKLEARN,XGBRegressor,0.1327,294.6406,0.2883,56.117,0.0051,17825.7751,2.8574,0.0344,1,,,,,
-D1,optuna,DL-SKLEARN,RandomForestRegressor,88.7365,407.884,56.7742,78.4314,0.7239,1851.4139,31.6342,0.2879,1,,,,,
-D2,optuna,DL-SKLEARN,RandomForestRegressor,82.274,548.1504,78.4566,85.8486,0.9139,2717.7467,74.916,0.6696,1,,,,,
-D3,optuna,DL-SKLEARN,RandomForestRegressor,90.4631,639.1842,56.0706,59.1887,0.9473,2917.8228,105.1953,0.9375,1,,,,,
-D4,optuna,DL-SKLEARN,RandomForestRegressor,87.4395,2002.7846,98.1761,98.6011,0.9957,2346.2065,45.9955,0.4469,1,,,,,
-D5,optuna,DL-SKLEARN,RandomForestRegressor,84.722,369.1141,76.9588,78.9235,0.9751,2395.7917,91.5009,0.8181,1,,,,,
-D6,optuna,DL-SKLEARN,RandomForestRegressor,91.9507,376.4498,41.3707,60.4225,0.6847,2198.5986,21.8822,0.2085,1,,,,,
-D7,optuna,DL-SKLEARN,RandomForestRegressor,89.1187,271.3531,62.1979,67.76,0.9179,2178.7676,38.8226,0.3609,1,,,,,
-D8,optuna,DL-SKLEARN,RandomForestRegressor,101.3946,637.1424,40.7814,49.5337,0.8233,2940.6945,97.8676,0.9151,1,,,,,
-D9,optuna,DL-SKLEARN,RandomForestRegressor,72.2265,1510.7514,94.3686,94.9241,0.9941,2681.6149,75.1076,0.6862,1,,,,,
-D10,optuna,DL-SKLEARN,RandomForestRegressor,95.6149,400.5354,4.2453,56.117,0.0757,2365.0389,57.6562,0.5549,1,,,,,
+D1,optuna,DL-SKLEARN,RandomForestRegressor,89.865476744772,399.4008419716007,56.7742,78.4314,0.7239,1072.3565802574158,35.0744366645813,0.3414645195007324,1,st5,1.0,UniqueMappingClustering,0.7335633260163261,2.8753
+D2,optuna,DL-SKLEARN,RandomForestRegressor,83.0733605444179,587.2551994185305,78.4566,85.8486,0.9139,1004.1753375530244,26.28316116333008,0.2660024166107178,1,st5,100.0,KiralyMSMApproximateClustering,0.2037640652850374,1.2817
+D3,optuna,DL-SKLEARN,RandomForestRegressor,89.44288160757785,474.18109507944814,56.0706,59.1887,0.9473,633.6262822151184,9.169187307357788,0.0916650295257568,1,st5,1.0,UniqueMappingClustering,0.2944231877019549,9.3147
+D4,optuna,DL-SKLEARN,RandomForestRegressor,86.87032085363653,2028.00133347786,97.9929,98.6011,0.9938,1118.4070913791656,29.46460223197937,0.2585039138793945,1,st5,6.0,UniqueMappingClustering,0.7253830296420516,0.9969
+D5,optuna,DL-SKLEARN,RandomForestRegressor,84.24259713659758,386.6355869029279,76.7503,78.9235,0.9725,774.7291314601898,5.2482123374938965,0.0542056560516357,1,sminilm,1.0,UniqueMappingClustering,0.6518794833105156,1.9094
+D6,optuna,DL-SKLEARN,RandomForestRegressor,93.37355003295748,377.58384888232666,53.3129,60.4225,0.8823,983.2380933761596,20.299803018569943,0.1935405731201172,1,sminilm,1.0,KiralyMSMApproximateClustering,0.6475415027956186,1.3422
+D7,optuna,DL-SKLEARN,RandomForestRegressor,89.71771241658803,280.5164885298872,58.4911,67.76,0.8632,1234.3078136444092,42.251601219177246,0.415442943572998,1,sminilm,1.0,KiralyMSMApproximateClustering,0.5607159857422135,1.7427
+D8,optuna,DL-SKLEARN,RandomForestRegressor,101.3822850234821,653.1686133213286,40.7814,49.5337,0.8233,1107.3978645801544,22.46783471107483,0.2074065208435058,1,st5,100.0,KiralyMSMApproximateClustering,0.6139023497269371,22.8024
+D9,optuna,DL-SKLEARN,RandomForestRegressor,72.67381958915084,1538.4169249450044,94.3686,94.9241,0.9941,951.791337966919,18.91744899749756,0.1839053630828857,1,st5,100.0,KiralyMSMApproximateClustering,0.2315726387129368,69.9395
+D10,optuna,DL-SKLEARN,RandomForestRegressor,94.40016889136032,422.381853952875,4.2453,56.117,0.0757,1094.5759501457214,21.993683576583862,0.2329599857330322,1,st5,1.0,KiralyMSMApproximateClustering,0.8599238144090521,10.4494
+D1,gridsearch,DL-SKLEARN,RandomForestRegressor,543.6458626403629,235.4903323773507,55.873,78.4314,0.7124,1158.1467370986938,9.74265742301941,0.188173770904541,0,st5,86.0,KiralyMSMApproximateClustering,0.7500000000000001,2.5927982330322266
+D2,gridsearch,DL-SKLEARN,RandomForestRegressor,538.7408001369054,314.51089217209216,78.1955,85.8486,0.9109,1318.479911327362,16.58462119102478,0.331817626953125,0,st5,99.0,KiralyMSMApproximateClustering,0.7500000000000001,5.221143960952759
+D3,gridsearch,DL-SKLEARN,RandomForestRegressor,560.6238834450543,220.2032347257681,56.7164,59.1887,0.9582,1620.5064494609833,25.42432188987732,0.5087411403656006,0,st5,96.0,KiralyMSMApproximateClustering,0.7500000000000001,1.9182102680206297
+D4,gridsearch,DL-SKLEARN,RandomForestRegressor,340.4123581301261,2297.6389651085337,98.1982,98.6011,0.9959,1450.7946412563324,15.000088214874268,0.3157012462615967,0,st5,99.0,KiralyMSMApproximateClustering,0.7500000000000001,3.4490513801574707
+D5,gridsearch,DL-SKLEARN,RandomForestRegressor,544.4036085509563,246.69860664179976,72.8713,78.9235,0.9233,1784.5709581375122,71.60682010650635,1.4788970947265625,0,st5,90.0,KiralyMSMApproximateClustering,0.7000000000000001,3.1757400035858154
+D6,gridsearch,DL-SKLEARN,RandomForestRegressor,530.0616633542243,383.1105744793393,49.2424,60.4225,0.815,1574.4779908657074,27.497759342193604,0.3827433586120605,0,st5,5.0,KiralyMSMApproximateClustering,0.7500000000000001,2.15447998046875
+D7,gridsearch,DL-SKLEARN,RandomForestRegressor,542.4567455838634,267.6859087243706,46.0523,67.76,0.6796,2146.176647901535,66.19005036354065,1.020557880401611,0,st5,100.0,KiralyMSMApproximateClustering,0.6000000000000001,10.875906229019163
+D8,gridsearch,DL-SKLEARN,RandomForestRegressor,516.5517331247662,497.4741734205131,38.2457,49.5337,0.7721,1418.4677093029022,40.880876541137695,0.585482120513916,0,st5,1.0,KiralyMSMApproximateClustering,0.7000000000000001,2.483438014984131
+D9,gridsearch,DL-SKLEARN,RandomForestRegressor,471.85543430287584,1017.7204265243494,94.5097,94.9241,0.9956,1283.3343160152435,31.8873987197876,0.4972000122070312,0,st5,96.0,KiralyMSMApproximateClustering,0.7500000000000001,32.9868905544281
+D10,gridsearch,DL-SKLEARN,RandomForestRegressor,487.3134435997888,755.5600455984043,41.5148,56.117,0.7398,1594.7380347251892,52.09990191459656,0.7942526340484619,0,st5,1.0,KiralyMSMApproximateClustering,0.7500000000000001,21.5847110748291
 D1,optuna,DL-SKLEARN,LinearRegression,544.4438,547.9948,55.3459,78.4314,0.7057,0.0523,0.0223,0.0011,0,st5,1.0,KiralyMSMApproximateClustering,0.05,0.2369
 D2,optuna,DL-SKLEARN,LinearRegression,552.8827,419.6181,81.9401,85.8486,0.9545,0.0495,0.0216,0.0011,0,st5,1.0,KiralyMSMApproximateClustering,0.05,0.2036
 D3,optuna,DL-SKLEARN,LinearRegression,571.387,245.9041,55.9823,59.1887,0.9458,0.1048,0.0218,0.0011,0,st5,1.0,KiralyMSMApproximateClustering,0.05,0.4788
@@ -219,6 +229,16 @@ D7,optuna,DL-SKLEARN,LinearRegression,566.5076,281.4961,48.4848,67.76,0.7155,0.0
 D8,optuna,DL-SKLEARN,LinearRegression,531.8614,652.0668,38.0861,49.5337,0.7689,0.046,0.0211,0.0011,0,st5,1.0,KiralyMSMApproximateClustering,0.05,1.6269
 D9,optuna,DL-SKLEARN,LinearRegression,504.4922,897.8795,92.8452,94.9241,0.9781,0.0502,0.021,0.0011,0,st5,1.0,KiralyMSMApproximateClustering,0.05,4.2272
 D10,optuna,DL-SKLEARN,LinearRegression,518.4466,743.4674,55.3979,56.117,0.9872,0.0466,0.0211,0.0011,0,st5,1.0,KiralyMSMApproximateClustering,0.05,12.5363
+D1,optuna,DL-SKLEARN,RandomForestRegressor,447.9699797639336,393.8431429548737,10.0,78.4314,0.1275,1141.2008061408997,25.09790802001953,0.2544581890106201,0,word2vec,1.0,ConnectedComponentsClustering,0.05,4.4994
+D2,optuna,DL-SKLEARN,RandomForestRegressor,451.1112759711417,357.2913553315275,78.6325,85.8486,0.9159,1097.264675617218,27.845093727111816,0.2845828533172607,0,st5,12.0,KiralyMSMApproximateClustering,0.1116888525292676,0.4923
+D3,optuna,DL-SKLEARN,RandomForestRegressor,459.6392914830257,208.00158341041467,56.1687,59.1887,0.949,1127.098842382431,28.73692536354065,0.30354905128479,0,st5,1.0,KiralyMSMApproximateClustering,0.7204566026393792,7.3611
+D4,optuna,DL-SKLEARN,RandomForestRegressor,301.58301064873314,1919.3148601947264,97.5556,98.6011,0.9894,1129.5351662635803,42.46401572227478,0.4331626892089844,0,st5,10.0,UniqueMappingClustering,0.1249843586461435,0.711
+D5,optuna,DL-SKLEARN,RandomForestRegressor,459.3053958267931,228.40300125327963,68.9032,78.9235,0.873,838.408055305481,13.10114049911499,0.1387734413146972,0,sminilm,37.0,KiralyMSMApproximateClustering,0.0621617998517821,3.3744
+D6,optuna,DL-SKLEARN,RandomForestRegressor,439.505056203858,398.5064180334689,44.6445,60.4225,0.7389,1182.07985830307,39.37965178489685,0.4061722755432129,0,st5,34.0,KiralyMSMApproximateClustering,0.05,4.4865
+D7,optuna,DL-SKLEARN,RandomForestRegressor,456.0792503507734,234.78413692827675,65.3846,67.76,0.9649,1105.5376093387604,30.002211809158325,0.3193273544311523,0,st5,1.0,KiralyMSMApproximateClustering,0.8292461192210443,1.3814
+D8,optuna,DL-SKLEARN,RandomForestRegressor,419.79181499597416,662.4249308917449,42.342,49.5337,0.8548,1078.5540254116058,27.73008179664612,0.2792179584503174,0,st5,31.0,KiralyMSMApproximateClustering,0.8147191103484894,4.3574
+D9,optuna,DL-SKLEARN,RandomForestRegressor,394.0445310734692,950.6740678932524,94.4089,94.9241,0.9946,1088.0406110286713,26.718817234039307,0.2744019031524658,0,st5,18.0,KiralyMSMApproximateClustering,0.1739228646611409,13.713
+D10,optuna,DL-SKLEARN,RandomForestRegressor,406.2667769301255,735.4882114138793,55.3442,56.117,0.9862,1012.6710078716278,22.68221092224121,0.2400746345520019,0,st5,10.0,KiralyMSMApproximateClustering,0.0741374358787617,16.5126
 D1,all,DL-SKLEARN,LinearRegression,576.861,398.7234,55.3459,78.4314,0.7057,0.0991,0.0772,0.0015,0,st5,1.0,KiralyMSMApproximateClustering,0.05,0.2369
 D2,all,DL-SKLEARN,LinearRegression,574.1558,412.0306,81.9401,85.8486,0.9545,0.1128,0.0847,0.0016,0,st5,1.0,KiralyMSMApproximateClustering,0.05,0.2036
 D3,all,DL-SKLEARN,LinearRegression,589.2323,271.3371,55.9823,59.1887,0.9458,0.1029,0.0767,0.0016,0,st5,1.0,KiralyMSMApproximateClustering,0.05,0.4788
@@ -239,3 +259,13 @@ D7,gridsearch,DL-SKLEARN,LinearRegression,601.8142,282.4391,48.4848,67.76,0.7155
 D8,gridsearch,DL-SKLEARN,LinearRegression,584.1296,444.5389,38.0861,49.5337,0.7689,0.0931,0.0551,0.0014,0,st5,1.0,KiralyMSMApproximateClustering,0.05,1.6269
 D9,gridsearch,DL-SKLEARN,LinearRegression,523.643,1045.9317,92.8452,94.9241,0.9781,0.088,0.0579,0.0013,0,st5,1.0,KiralyMSMApproximateClustering,0.05,4.2272
 D10,gridsearch,DL-SKLEARN,LinearRegression,550.8442,763.3144,55.3994,56.117,0.9872,0.0854,0.0425,0.0012,0,st5,1.0,KiralyMSMApproximateClustering,0.05,12.5363
+D1,all,DL-SKLEARN,RandomForestRegressor,511.3599158947881,303.8170825019429,57.7049,78.4314,0.7357,3153.626233816147,65.56799626350403,0.8015491962432861,0,st5,17.0,KiralyMSMApproximateClustering,0.8743226840278511,0.2611
+D2,all,DL-SKLEARN,RandomForestRegressor,509.61587542815903,344.5684768570056,81.8792,85.8486,0.9538,3496.460916996002,85.85542488098145,1.0416994094848633,0,st5,1.0,KiralyMSMApproximateClustering,0.6953674234653642,5.6464
+D3,all,DL-SKLEARN,RandomForestRegressor,519.2850120329073,213.750755060132,57.7127,59.1887,0.9751,2658.279117822647,66.30052185058594,0.8138659000396729,0,st5,100.0,UniqueMappingClustering,0.1482038713919421,7.907
+D4,all,DL-SKLEARN,RandomForestRegressor,331.74857379224113,2156.063799460202,98.3311,98.6011,0.9973,3836.448414087296,90.10681819915771,1.2461495399475098,0,st5,100.0,KiralyMSMApproximateClustering,0.8160718062460619,4.2974
+D5,all,DL-SKLEARN,RandomForestRegressor,517.8960352966383,237.25935929327085,75.733,78.9235,0.9596,2972.177060365677,81.23649263381958,1.353297233581543,0,st5,1.0,KiralyMSMApproximateClustering,0.714829939684642,3.1842
+D6,all,DL-SKLEARN,RandomForestRegressor,501.9077052479844,393.9062943936525,56.7892,60.4225,0.9399,2949.510396957397,102.62302303314208,1.275425672531128,0,smpnet,1.0,KiralyMSMApproximateClustering,0.5021882849120562,1.3293
+D7,all,DL-SKLEARN,RandomForestRegressor,515.6863329106675,267.705727003101,65.3846,67.76,0.9649,3215.793855190277,88.80313372612,0.9342718124389648,0,st5,1.0,KiralyMSMApproximateClustering,0.8292461192210443,1.3814
+D8,all,DL-SKLEARN,RandomForestRegressor,486.5350600258397,543.4762142814304,47.0485,49.5337,0.9498,4133.762493371964,63.97436475753784,0.5783271789550781,0,st5,1.0,UniqueMappingClustering,0.8959570521076154,6.1263
+D9,all,DL-SKLEARN,RandomForestRegressor,450.2966817815524,992.5363879726884,91.6553,94.9241,0.9656,2628.478030204773,86.65357422828674,0.830263614654541,0,st5,27.0,KiralyMSMApproximateClustering,0.8787722113821267,9.5202
+D10,all,DL-SKLEARN,RandomForestRegressor,464.7015651798302,741.441712303078,55.3979,56.117,0.9872,3224.4509620666504,105.49857974052428,1.107485294342041,0,st5,1.0,KiralyMSMApproximateClustering,0.1765053908757876,15.0811

@@ -1,0 +1,13 @@
+{
+    "name": "D2",
+    "format": "csv",
+    "type": "ccer",
+    "dir": "D2",
+    "d1": "abt",
+    "d1_id": "id",
+    "d2": "buy",
+    "d2_id": "id",
+    "gt": "gt",
+    "separator": "|",
+    "engine": "python"
+}

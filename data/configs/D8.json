@@ -1,0 +1,13 @@
+{
+    "name": "D8",
+    "format": "csv",
+    "type": "ccer",
+    "dir": "D8",
+    "d1": "walmart",
+    "d1_id": "id",
+    "d2": "amazon",
+    "d2_id": "id",
+    "gt": "gt",
+    "separator": "|",
+    "engine": "python"
+}

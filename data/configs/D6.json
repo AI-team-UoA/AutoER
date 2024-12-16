@@ -1,0 +1,13 @@
+{
+    "name": "D6",
+    "format": "csv",
+    "type": "ccer",
+    "dir": "D6",
+    "d1": "imdb",
+    "d1_id": "id",
+    "d2": "tvdb",
+    "d2_id": "id",
+    "gt": "gt",
+    "separator": "|",
+    "engine": "python"
+}

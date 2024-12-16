@@ -1,0 +1,13 @@
+{
+    "name": "D9",
+    "format": "csv",
+    "type": "ccer",
+    "dir": "D9",
+    "d1": "dblp",
+    "d1_id": "id",
+    "d2": "scholar",
+    "d2_id": "id",
+    "gt": "gt",
+    "separator": ">",
+    "engine": "python"
+}

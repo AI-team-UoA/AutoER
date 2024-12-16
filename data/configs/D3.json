@@ -1,0 +1,13 @@
+{
+    "name": "D3",
+    "format": "csv",
+    "type": "ccer",
+    "dir": "D3",
+    "d1": "amazon",
+    "d1_id": "id",
+    "d2": "gp",
+    "d2_id": "id",
+    "gt": "gt",
+    "separator": "#",
+    "engine": "python"
+}

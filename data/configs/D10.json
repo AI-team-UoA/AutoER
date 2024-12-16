@@ -1,0 +1,13 @@
+{
+    "name": "D10",
+    "format": "csv",
+    "type": "ccer",
+    "dir": "D10",
+    "d1": "imdb",
+    "d1_id": "id",
+    "d2": "dbpedia",
+    "d2_id": "id",
+    "gt": "gt",
+    "separator": "|",
+    "engine": null
+}

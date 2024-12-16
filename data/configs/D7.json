@@ -1,0 +1,13 @@
+{
+    "name": "D7",
+    "format": "csv",
+    "type": "ccer",
+    "dir": "D7",
+    "d1": "tmdb",
+    "d1_id": "id",
+    "d2": "tvdb",
+    "d2_id": "id",
+    "gt": "gt",
+    "separator": "|",
+    "engine": "python"
+}

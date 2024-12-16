@@ -1,0 +1,13 @@
+{
+    "name": "D4",
+    "format": "csv",
+    "type": "ccer",
+    "dir": "D4",
+    "d1": "dblp",
+    "d1_id": "id",
+    "d2": "acm",
+    "d2_id": "id",
+    "gt": "gt",
+    "separator": "%",
+    "engine": "python"
+}
