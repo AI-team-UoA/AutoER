@@ -14,6 +14,9 @@ data/D*/
 data/census/*
 data/dbpedia/
 
+# ditto data
+baseline/DITTO/ready_for_ditto_input/*
+
 # with_gt
 with_gt/dbs/*
 with_gt/logs/*

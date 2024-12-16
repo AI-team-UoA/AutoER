@@ -175,6 +175,47 @@ where:
     2. `conda activate ZeroER`
 4. Run all exps `./run.sh ./logs`
 
+## DITTO
+
+Downloading NVIDIA container toolkit:
+```
+chmod +x nvidia_installation.sh
+./nvidia_installation.sh
+```
+
+Creating the environment:
+```
+sudo docker build -t ditto ditto
+```
+
+Configuration:
+```
+CUDA_VISIBLE_DEVICES=0 python train_ditto.py --task AutoER/D2  --batch_size 16 --max_len 256 --lr 3e-5 --n_epochs 5 --lm roberta --fp16 --da del --dk product --summarize
+```
+
+Moving files inside docker container:
+```
+docker cp ./configs.json acc70a93a256:/workspace/ditto     
+docker cp ./ready_for_ditto_input/ acc70a93a256:/workspace/ditto/data/./ready_for_ditto_input/  
+docker cp ./train_ditto.py acc70a93a256:/workspace/ditto
+docker cp ./run_all_inside.sh 54d79d32d83d:/workspace/ditto
+``` 
+
+Entering docker:
+```
+sudo docker run -it --gpus all --entrypoint=/bin/bash ditto       
+```
+
+Inside docker:
+```
+cd /workspace/ditto
+mkdir logs
+chmod +x run_all_inside.sh
+nohup ./run_all_inside.sh > nohup.out 2>&1 & 
+```
+
+Results will be in `./workspace/ditto/logs/`.
+
 # Resources
 
 | Spec    | Exp. P1 & P2                             | Exp. P2 - AutoML                                                   |
