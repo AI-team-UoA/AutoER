@@ -1,0 +1,53 @@
+\begin{table}[t]
+{\small
+\begin{center}  
+\setlength{\tabcolsep}{2pt}
+\caption{Performance of Random Forest on Problem 2.} 
+\vspace{-10pt}
+\label{tab:lr-with-data-features}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{Dat.} & Insta. & \multirow{2}{*}{F1} & Train.  & Predic.  & ETEER  & \multirow{2}{*}{LM} & \multirow{2}{*}{k} & Clust & Thre \\
+ & gen. & & time (s) & time (s) &  time (s) &  &  & ering & shold \\
+\hline
+\hline
+D1 & all & 56.77 & 0.72 & 0.02 & 2.88 & st5 & 1 & UMC & 0.73 \\
+D2 & grid. & 78.46 & 0.91 & 0.01 & 5.10 & st5 & 16 & KC & 0.10 \\
+D3 & grid. & 56.86 & 0.96 & 0.01 & 0.55 & st5 & 2 & KC & 0.60 \\
+D4 & grid. & 98.24 & 1.00 & 0.01 & 1.70 & st5 & 2 & KC & 0.20 \\
+D5 & opt. & 76.75 & 0.97 & $\ll$0.01 & 1.91 & sminilm & 1 & UMC & 0.65 \\
+D6 & opt. & 53.31 & 0.88 & 0.01 & 1.34 & sminilm & 1 & KC & 0.65 \\
+D7 & grid. & 62.12 & 0.92 & 0.01 & 1.58 & sminilm & 1 & KC & 0.60 \\
+D8 & all & 40.78 & 0.82 & 0.01 & 28.79 & st5 & 100 & KC & 0.22 \\
+D9 & all & 94.37 & 0.99 & 0.01 & 60.20 & st5 & 100 & KC & 0.38 \\
+D10 & grid. & 54.91 & 0.98 & 0.01 & 37.55 & st5 & 27 & KC & 0.50 \\
+\hline
+\end{tabular}
+\end{center}  
+}
+\vspace{-10pt}
+\end{table}
+%\toprule
+% D1 & all & RFR & 56.77 & 78.43 & 0.72 & 130.55 & 1.60 & 2.88 & st5 & 1 & UMC & 0.733563 \\
+% D2 & gridsearch & RFR & 78.46 & 85.85 & 0.91 & 10.10 & 0.18 & 5.10 & st5 & 16 & KC & 0.10 \\
+% D3 & gridsearch & RFR & 56.86 & 59.19 & 0.96 & 10.22 & 0.18 & 0.55 & st5 & 2 & KC & 0.60 \\
+% D4 & gridsearch & RFR & 98.24 & 98.60 & 1.00 & 65.26 & 1.00 & 1.70 & st5 & 2 & KC & 0.20 \\
+% D5 & optuna & RFR & 76.75 & 78.92 & 0.97 & 5.25 & 0.05 & 1.91 & sminilm & 1 & UMC & 0.651879 \\
+% D6 & optuna & RFR & 53.31 & 60.42 & 0.88 & 20.30 & 0.19 & 1.34 & sminilm & 1 & KC & 0.647542 \\
+% D7 & gridsearch & RFR & 62.12 & 67.76 & 0.92 & 38.81 & 0.47 & 1.58 & sminilm & 1 & KC & 0.60 \\
+% D8 & all & RFR & 40.78 & 49.53 & 0.82 & 27.48 & 0.29 & 28.79 & st5 & 100 & KC & 0.219945 \\
+% D9 & all & RFR & 94.37 & 94.92 & 0.99 & 67.96 & 0.80 & 60.20 & st5 & 100 & KC & 0.375625 \\
+% D10 & gridsearch & RFR & 54.91 & 56.12 & 0.98 & 48.67 & 0.67 & 37.55 & st5 & 27 & KC & 0.50 \\
+%Test set & Trials training set & Regressor & F1 & GB-F1 & F1-Ratio & Training time (s) & Prediction time (s) & ETEER runtime (s) & LM & k & Clustering & Threshold \\
+%\midrule
+%D1 & all & LR & 55.35 & 78.43 & 0.71 & 0.33 & 0.01 & 0.24 & st5 & 1 & KC & 0.05 \\
+%D2 & all & LR & 81.94 & 85.85 & 0.95 & 0.24 & $\ll$0.01 & 0.20 & st5 & 1 & KC & 0.05 \\
+%D3 & all & LR & 55.98 & 59.19 & 0.95 & 0.33 & $\ll$0.01 & 0.48 & st5 & 1 & KC & 0.05 \\
+%D4 & all & LR & 98.38 & 98.60 & 1.00 & 0.21 & $\ll$0.01 & 0.83 & st5 & 1 & KC & 0.05 \\
+%D5 & all & LR & 69.39 & 78.92 & 0.88 & 0.21 & $\ll$0.01 & 0.79 & st5 & 1 & KC & 0.05 \\
+%D6 & optuna & LR & 46.65 & 60.42 & 0.77 & 0.06 & $\ll$0.01 & 10.24 & st5 & 100 & KC & 0.05 \\
+%D7 & all & LR & 48.48 & 67.76 & 0.72 & 0.21 & $\ll$0.01 & 1.62 & st5 & 1 & KC & 0.05 \\
+%D8 & all & LR & 38.09 & 49.53 & 0.77 & 0.21 & $\ll$0.01 & 1.63 & st5 & 1 & KC & 0.05 \\
+%D9 & all & LR & 92.85 & 94.92 & 0.98 & 0.21 & $\ll$0.01 & 4.23 & st5 & 1 & KC & 0.05 \\
+%D10 & gridsearch & LR & 55.40 & 56.12 & 0.99 & 0.22 & 0.01 & 12.54 & st5 & 1 & KC & 0.05 \\
+%\bottomrule

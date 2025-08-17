@@ -1,0 +1,42 @@
+\section{Related Work}\label{sec:related_work}
+
+%In~\cite{DBLP:conf/bigdataconf/EfthymiouIKKMNPSVZ23}, we envisioned a self-configurable, end-to-end ER framework that can operate in different domains, focusing on geo-spatial interlinking, while also supporting ethical constraints, like fairness. As a follow-up to this work, we are now providing a practical implementation of many of those envisioned features, leaving out domain adaptations and ethical considerations, as they are orthogonal to the topic of this work.
+
+%\textbf{Auto-ER Approaches.} 
+\textbf{Entity Resolution.} There has been limited research on automatically configuring 
+%Entity Resolution (
+ER pipelines, with most relevant works
+%and ER problems in general. Most existing work on auto-configuring ER 
+focusing on the Entity Matching step ( i.e., on Verification), rather than end-to-end ER, as in our case. More specifically, 
+%the study in introduces 
+a transfer-learning framework that utilizes pre-trained Entity Matching models derived from extensive knowledge bases (KBs) is proposed in \cite{AutoER_WWW}. However, this approach is domain-specific, heavily relying on relevant and well-curated KBs, which limits its applicability in real-world scenarios where such KBs are unavailable. In contrast, our ETEER methodology is domain-agnostic and holistic, also covering Filtering, and can be applied across various data types. 
+%{\color{red}Is it only about matching?}
+
+%Another study  attempts 
+Another approach to constructing a purely automatic 
+%AutoML 
+Entity Matching pipeline using AutoML is presented in \cite{AutoER_EDBT}, which uses auto-sklearn to predict whether a pair of entities is a match/non-match by transforming the textual description of entities through BERT-based pre-trained language models. It differs from the tasks examined in our work in that it completely disregards Filtering.
+%This approach yields suboptimal results compared to ETEER; for example, the highest F1 score achieved in dataset D2 is 66.37\%, while ETEER achieves 85.39\%. 
+
+Lastly, the 
+%AutoML-EM 
+framework in \cite{AutoER_ICDE}
+%, which shares similarities with our approach by using 
+uses AutoML models to predict the optimal Random Forest configuration. Again, it disregards Filtering, treating it as an orthogonal problem, while the proposed solution %However, this work 
+is limited to a specific type of classifier for Verification. It relies on an active learning and self-training strategy, which necessitates a human-in-the-loop algorithm when ground truth pairs are scarce. In contrast, our ETEER methodology requires no human involvement.
+
+%\textbf{ER Tools.} Several ER tools are designed to require minimal or no configuration. Some of the most hands-off approaches are described in papers like \cite{}. For example, Ditto \cite{DBLP:journals/pvldb/0001LSDT20} extends the BERT-based EMTransformer by integrating external, domain-specific knowledge, such as Part-of-Speech (POS) tagging, and employing data augmentation techniques to create synthetic training instances. However, Ditto requires configuration of several deep learning parameters, such as learning rate and epochs. Similarly, DeepMatcher \cite{DEEPMATCHER} is a comprehensive framework for deep learning-based matching algorithms, supporting various pre-trained static embeddings, including GloVe and FastText, with FastText as the default choice. While DeepMatcher involves fewer configuration parameters, users still need to specify word embeddings, and no auto-configuration component has been proposed. Finally, ZeroER \cite{DBLP:conf/sigmod/WuCSCT20} is an unsupervised-learning approach, used for ER with almost none parameters to be configured \textcolor{red}{(maybe we should compare it with P1?)},
+
+%\textbf{Hyperparameter Optimization Frameworks.} Several toolkits have been developed for automatically configuring hyperparameters, such as SMAC \cite{AUTOCONF:Lindauer_SMAC3_A_Versatile_2022}, Hyperopt \cite{AUTOCONF:hyperopt}, Autotune \cite{AutoTune}, and Vizier \cite{oss_vizier, google_vizier}. These frameworks utilize various algorithms for parameter sampling, which selects combinations of parameters from a predefined search space. For instance, Spearmint \cite{SpearMint:NIPS2012_05311655} uses Gaussian Processes, while Hyperopt employs the tree-structured Parzen estimator (TPE). SMAC \cite{AUTOCONF:Lindauer_SMAC3_A_Versatile_2022} introduced a method based on random forests. More recent frameworks, such as Google Vizier \cite{oss_vizier, google_vizier} and Tune \cite{AutoTune}, incorporate pruning algorithms, which aim to minimize the search time: they assess the intermediate outcomes of each trial and terminate as soon as the trial is not in the top-k most promising trials ranking, thereby accelerating the configuration search process. This is akin to the early-stopping technique commonly used in various machine learning tasks.
+
+{
+\textbf{Entity Alignment.} ER is similar to Entity Alignment (EA), which focuses on detecting matching entities across two knowledge graphs (KGs) \cite{DBLP:books/sp/ZhaoZT23}. In this context, a work similar to ours is presented in \cite{DBLP:conf/dasfaa/ZengZTLLZ21}, which proposes \textsf{UEA}, an unsupervised approach that requires no labelled instances. \textsf{UEA} computes the semantic and syntactic distances of entity names, while taking special care to detect and filter out entities that appear only in one of the two input KGs. This information is then combined with structural evidence about neighboring entities from graph convolutional networks, generating preliminary aligned pairs. These pairs are progressively augmented to improve the quality of KG embeddings and enhance the alignment performance. A gradually increasing threshold is used to distinguish between the matching and non-matching pairs in each iteration.
+
+Another similar EA approach,  CEAFF\cite{DBLP:journals/tois/ZengZTLG21}, combines complementary evidence from structural, semantic and string-level features through a novel adaptive strategy that generates a fused similarity matrix. This matrix is then used for taking collective alignment decisions that consider the neighbors of the matched entities, while taking into account the coherence and exclusiveness constraints through the framework's reward.
+
+Unfortunately, these works cannot be adapted to ER, because they rely on the structural information of KGs involved in EA. This kind of information is rarely available in ER, which may integrate flat, relational or even unstructured data that lack any structural information.
+
+\textbf{AutoML.} AutoML is the research field that aims to democratize the creation of ML pipelines, allowing even novice users to automatically build powerful solutions \cite{DBLP:books/sp/HKV2019}. First, it identifies the design choices and then, it generates performance-optimized models through a search strategy that optimizes hyperparameters \cite{DBLP:journals/air/BaratchiWLRHBO24}. The latest developments in this field include EDCA \cite{DBLP:conf/evoapps/SimoesC25}, a framework that improves energy and time efficiency by combining genetic algorithms with data quality techniques,  reinforcement learning for neural architecture search and hyperparameter optimization, e.g., through Sequential Policy Gradient modeling, \cite{DBLP:journals/corr/abs-2506-15051}, as well as efforts to improve AutoML approaches with guidance from LLMs \cite{DBLP:journals/tmlr/TornedeDEGMRSTT24}, e.g., for hyperparameter optimization \cite{DBLP:journals/corr/abs-2312-04528} and for Graph Neural Architecture Search \cite{DBLP:journals/corr/abs-2502-10459}. 
+
+To the best of our knowledge, this work is the first to apply AutoML techniques to ER,  confining the search space to the configuration space of the end-to-end pipeline in Figure~\ref{fig:eeter_pipeline}, while using the ER evaluation measures for assessing its performance. For hyperparameter optimization, we use sampling algorithms in case the ground truth is available and trained ML models in case it is not. We can replace these search algorithms with any other from the literature.
+}

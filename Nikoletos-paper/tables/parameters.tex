@@ -1,0 +1,14 @@
+\begin{table}[t]
+    \centering
+    \caption{Configuration parameters and their domains.}
+    % \vspace{-8pt}
+    \label{tab:parameter-values}
+    \begin{tabular}{|p{3cm}|p{4.5cm}|}
+        \hline
+         \multicolumn{1}{|c|}{\textbf{Parameters ($P$)}} & \multicolumn{1}{|c|}{\textbf{Possible values ($V$)}} \\ \hline
+        Language model (LM) & smpnet, S-GTR-T5, sdistilroberta, sminilm, sent\_glove, fasttext, word2vec \\ \hline
+        $k$ & $[1, 100]$ with a step of 1\\ \hline
+        Clustering algorithm & Unique Mapping Clustering (UMC), Kiraly Clustering (KC), Connected Components (CCC) \\ \hline
+        Similarity Threshold & $[0.05, 0.95]$ with a step of 0.05\\ \hline
+    \end{tabular}
+\end{table}

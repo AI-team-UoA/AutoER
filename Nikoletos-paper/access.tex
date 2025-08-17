@@ -1,0 +1,91 @@
+\documentclass{ieeeaccess}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{url}
+% -------------------- Custom imports ------------------ %
+% \theoremstyle{definition}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\newcommand{\guides}[1]{\textcolor{blue}{#1}}
+\newcommand{\comments}[1]{\textcolor{red}{#1}}
+\usepackage{multirow}
+\usepackage{subfigure}  % support sub-figure
+
+% compiler error without following two lines
+\usepackage{caption,setspace}
+\captionsetup{font={sf,small,stretch=0.80},labelfont={bf,color=accessblue}}
+
+
+\newtheorem{definition}{Definition}
+\newtheorem{problem}{Problem}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+
+\begin{document}
+\history{Date of publication xxxx 00, 0000, date of current version xxxx 00, 0000.}
+\doi{10.1109/ACCESS.2017.DOI}
+
+\title{Auto-Configuring Entity Resolution Pipelines}
+\author{\uppercase{Konstantinos Nikoletos}\authorrefmark{1}, \uppercase{Vasilis Efthymiou\authorrefmark{2}, George Papadakis\authorrefmark{3} and Kostas Stefanidis}.\authorrefmark{4}}
+\address[1]{National and Kappodistrian University of Athens, Athens, Greece (email: k.nikoletos@di.uoa.gr)}
+\address[2]{Harokopio University of Athens, Athens, Greece (email: vefthym@hua.gr)}
+\address[3]{National and Kappodistrian University of Athens, Athens, Greece (email: gpapadis@di.uoa.gr)}
+\address[4]{Tampere University, Tampere, Finland (e-mail: konstantinos.stefanidis@tuni.fi)}
+\tfootnote{This work was supported in part by the Horizon Europe project STELAR.}
+
+\markboth
+{Nikoletos \headeretal: Auto-Configuring Entity Resolution Pipelines}
+{Nikoletos \headeretal: Auto-Configuring Entity Resolution Pipelines}
+
+\corresp{Corresponding author: Konstantinos Nikoletos (e-mail: k.nikoletos@di.uoa.gr).}
+
+\begin{abstract}
+The same real-world entity (e.g., a movie, a restaurant, a person) may be described in various ways on different datasets. Entity Resolution (ER) aims to find such different descriptions of the same entity, this way improving data quality and, therefore, data value. However, an ER pipeline typically involves several steps (e.g., blocking, similarity estimation, clustering), with each step requiring its own configurations and tuning. The choice of the best configuration, among a vast number of possible combinations, is a dataset-specific and labor-intensive task both for novice and expert users, while it often requires some ground truth knowledge of real matches. In this work, we examine ways of automatically configuring a state-of-the-art end-to-end ER pipeline based on pre-trained language models under two settings: (i) When ground truth is available. In this case, sampling strategies that are typically used for hyperparameter optimization can significantly restrict the search of the configuration space. We experimentally compare their relative effectiveness and time efficiency, applying them to ER pipelines for the first time. (ii) When no ground truth is available. In this case, labelled data extracted from other datasets with available ground truth can be used to train a regression model that predicts the relative effectiveness of parameter configurations. Experimenting with 11 ER benchmark datasets, we evaluate the relative performance of existing techniques that address each problem, but have not been applied to ER before.
+\end{abstract}
+
+\begin{keywords}
+Data Management, Entity Resolution, AutoML
+\end{keywords}
+
+\titlepgskip=-15pt
+
+\maketitle
+
+
+\input{1_intro}
+\input{2_problem_definition}
+\input{3_ETEER_pipeline}
+\input{4_methodology_p1}
+\input{5_experiments_p1}
+\input{6_methodology_p2}
+\input{7_experiments_p2}
+\vspace{-5pt}
+\input{8_related_work}
+\vspace{-5pt}
+\input{9_conclusions}
+
+\bibliographystyle{IEEEtran}
+\bibliography{sample}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{Nikoletos-paper/profiles-pics/nikoletos.png}}]{Konstantinos Nikoletos} is a PhD candidate at Utrecht University and an affiliate researcher at University of Athens and the University of Trento. He holds a B.Sc. (2022) and an M.Sc. (2024) in Computer Science from the University of Athens, with a specialization in Data, Information, and Knowledge Management. Before joining Utrecht University, he has been for several years, a member of the AI Team at the University of Athens. In-between he served as a Research Fellow at the University of Trento Italy, where he remains an active member. His expertise focuses on Data Management, Entity Resolution and Data Sustainability.
+\end{IEEEbiography}
+\vspace{-30pt}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{Nikoletos-paper/profiles-pics/efthymiou.png}}]{Vasilis Efthymiou} is an Assistant Professor at the Department of Informatics and Telematics of Harokopio University of Athens (HUA), Greece. He received his PhD on the topic of entity resolution in the Web of data in 2017, from the Computer Science Department of University of Crete (UOC), Greece. Before joining HUA, he was a postdoctoral researcher at the database group of IBM Research in Almaden Research Center, CA, USA, a postdoctoral researcher at the Information Systems Laboratory of FORTH-ICS, Greece, and a visiting instructor at UOC. After his PhD research internship at IBM T.J. Watson Research Center, NY, USA, on matching Web tables to Knowledge Graphs (KGs), he has been co-organizing the SemTab challenges at ISWC, an effort to benchmark systems dealing with the tabular data to KG matching problem, and the Tabular Data Analysis (TaDA) workshop at VLDB. He has co-authored two books, more than 70 papers, and co-invented four US patents. 
+\end{IEEEbiography}
+\vspace{-30pt}
+\begin{IEEEbiography}
+[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{Nikoletos-paper/profiles-pics/papadakis.png}}]
+{George Papadakis} is a senior researcher at the University of Athens. He has also worked at the NCSR ``Demokritos'', the National Technical University of Athens (NTUA) and the ``Athena'' Research Center in Greece and at the L3S Research Center in Germany. He holds a PhD in Computer Science from Leibniz University of Hanover and a Diploma in Electrical and Computer Engineering from NTUA. His research focuses on web data mining.
+\end{IEEEbiography}
+\vspace{-30pt}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{Nikoletos-paper/profiles-pics/stefanidis.jpg}}]{Kostas Stefanidis}is a Professor on Data Science at the Faculty of Information Technology and Communication Sciences of the Tampere University in Finland, where he also leads the Data Science Research Centre and the Group on Recommender Systems. He has more than 10 years of experience in different roles at ICS-FORTH in Greece, NTNU in Norway and CUHK in Hong Kong. He received his Ph.D in personalized data management from the University of Ioannina in Greece. His research interests include the broader area of big data. His work focuses on personalization and recommender systems, entity resolution, data exploration and data analytics, with a special focus on socio-technical aspects in data management such as fairness and transparency, and has been published in more than 100 papers in top-tier conferences and journals. He has been involved in several international and national research projects, and is also actively serving the scientific community. Currently, he is the General co-chair of the ADBIS 2025, TPDL 2025, and EDBT/ICDT 2026.
+\end{IEEEbiography}
+
+\EOD
+
+\end{document}

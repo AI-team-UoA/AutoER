@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\begin{center}  
+\small 
+\caption{Performance of the two baseline methods for Problem 1: (a) the default workflow (st5, 10, UniqueMappingClustering, 0.5), and (b) the best grid-search trial. For the latter, we also report the parameter configuration.}
+\label{tab:best-gridesearch-trials}
+\begin{tabular}{|c||c|c||c|c|c|c||c|c|c|}
+\hline
+\multirow{2}{*}{Dataset} & \multicolumn{2}{c||}{Default configuration} & \multicolumn{7}{c|}{Best grid-search configuration} \\
+& F1-score & Runtime (sec) & LM & K & Clustering & Threshold & F1-score & Runtime (sec) & Grid search time (hrs) \\
+\hline
+\hline
+D1 & 47.44 & 1.90 & smpnet & 3 & CCC & 0.90 & 75.53 & 2.87 & 41 \\
+D2 & 85.85 & 3.28 & st5 & 10 & UMC & 0.35 & 85.85 & 2.51 & 38 \\
+D3 & 57.35 & 1.49 & sminilm & 7 & UMC & 0.45 & 59.19 & 1.43 & 45 \\
+D4 & 97.56 & 4.45 & st5 & 1 & UMC & 0.80 & 98.60 & 1.43 & 45 \\
+D5 & 57.74 & 5.05 & st5 & 6 & KC & 0.75 & 78.73 & 2.98 & 60 \\
+D6 & 30.39 & 1.81 & sminilm & 1 & UMC & 0.55 & 60.25 & 0.91 & 71 \\
+D7 & 35.68 & 2.21 & sminilm & 93 & CCC & 0.80 & 67.36 & 28.64 & 74 \\
+D8 & 35.82 & 4.46 & st5 & 4 & KC & 0.90 & 47.56 & 3.19 & 145 \\
+D9 & 92.04 & 13.11 & st5 & 42 & KC & 0.80 & 94.89 & 21.37 & 329 \\
+D10 & 53.63 & 27.96 & st5 & 2 & KC & 0.65 & 56.12 & 28.77 & 320 \\
+\hline
+\end{tabular}
+% \vspace{-8pt}
+\end{center}  
+\end{table*}

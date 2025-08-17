@@ -1,0 +1,33 @@
+\begin{table*}[t]
+\setlength{\tabcolsep}{3pt}
+%\footnotesize
+\centering
+\caption{Performance over $D_{11}$ in the context of Problem 2.
+%{\color{red}  ETEER Runtime (h): xana trexv ta grid,all,optuna gia na parv xronous me pre calcualated embeddings gia na mhn exei diafora me ta alla.. } 
+}
+% \vspace{-8pt}
+\label{tab:dbpedia-results}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{LM} & \multirow{2}{*}{K} & Cluste & Thres & Training & Prediction & F1 & ETEER  & Inst. \\
+ & & ring & hold& Time (h) & Time (s) & score & Runtime (h) &  gen. \\
+\hline
+\hline
+st5 & 10 & UMC & 0.50 & - & - & 83.22 & 14.66 & - \\
+\hline
+\multicolumn{9}{c}{(a) Default configuration}\\
+\hline
+st5 & 51 & KC & 0.15 & 0.02 & 1.00 & 84.89 & 18.04 & grid \\
+st5 & 1 & KC & 0.55 & 0.00 & 0.45 & 84.83 & 13.37 & sampl. \\
+st5 & 100 & KC & 0.30 & 0.03 & 0.61 & 84.98 & 15.97 & all \\
+\hline
+\multicolumn{9}{c}{(b) Random Forest}\\
+\hline
+smpnet & 85 & KC & 0.55 & 12 & 17.22 & 74.26 & 16.93 & grid. \\
+st5 & 1 & KC & 0.05 & 12 & 15.54 & 84.84 & 13.40 & sampl. \\
+st5 & 18 & KC & 0.05 & 12 & 13.07 & 84.84 & 16.93 &  all \\
+\hline
+\multicolumn{9}{c}{(c) AutoML}
+\end{tabular}
+\vspace{-9pt}
+\end{table*} 

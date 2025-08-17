@@ -1,0 +1,53 @@
+\section{Conclusion}\label{sec:conclusion}
+
+We have defined two problems for auto-configuring end-to-end entity resolution (ETEER) pipelines: one applicable to datasets for which some known matches are available for training, and another one for a setting in which there is no ground truth of matches for the given dataset. We adapted existing techniques to solve each problem, based on a state-of-the-art ETEER pipeline.
+
+For the first problem, we adapt established search algorithms for hyperparameter optimization to ETEER. Our thorough experimental analysis over 10 popular real-world datasets demonstrates that these algorithms match or exceed the effectiveness of grid search, while reducing the number of trials and the corresponding search time by 2 or even 3 orders of magnitude. 
+
+For the second problem, we consider 12 generic features that can be efficiently extracted from each dataset, regardless of its format and ER setting. To learn the relations between these features, labelled instances are generated from datasets with an available ground truth and used to train a regression model using Random Forest (RF) or AutoML -- both are state-of-the-art learning algorithms that inherently perform feature selection. 
+Experiments over 11 real-world datasets demonstrate the high importance of most features, with the best performance in terms of effectiveness and time efficiency corresponding to RF with grid search instances. 
+
+In the future, we plan to generalize our approach so that it is independent of the ETEER pipeline: given a dataset, we should be able to recommend the best pipeline (not necessarily the one in Figure \ref{fig:eeter_pipeline}) along with its best hyperparameters.
+
+\section*{Acknowledgements}
+This work was partially funded by the EU project STELAR (Horizon Europe -- Grant No. 101070122).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% %\begin{itemize}
+%     %\item Add all pyjedai pipelines. Maybe in parallel, and 3 separate best configurations
+%     %\item Repeat for more datasets
+% %\end{itemize}
+
+% We have defined two problems for fine-tuning ETEER pipelines: one aiming to identify the best configuration parameters in datasets with known ground truth, one in datasets without any knowledge about the true matches. Based on a specific, state-of-the-art ETEER pipeline, we adapted existing techniques to solve each problem. 
+
+% For the first one, we adapt to ETEER existing established search algorithms for hyperparameter optimization. Our thorough experimental analysis over 10 popular datasets demonstrates that these algorithms match or exceed the effectiveness of grid search even though they reduce the number of trials and the corresponding search time by 2 or even 3 orders of magnitude. 
+
+% For the second problem, we consider
+% %propose a dataset profiling approach that extracts 
+% 12 generic, efficient and effective features that are extracted from each dataset, regardless of its format and type of ER. To learn the relations between these features, labelled instances are generated from datasets with an available groundtruth and used to train a regression model using Random Forest or AutoML -- both are state-of-the-art learning algorithms that inherently perform feature selection. 
+% %The model can be simple, leveraging linear regression (LR), or complex, leveraging a linear combination of individual regressors, based on AutoML. Our 
+% Experiments over 11 real-world datasets demonstrate the high importance of most features, with the best performance in terms of effectiveness and time efficiency corresponding to RF with grid search instances. 
+% %of our methodology as well as a clear trade-off between the two regression models: LR trades slightly lower F1 for significantly higher time efficiency (i.e., lower training and prediction times), and vice versa for AutoML.
+
+% In the future, we plan to generalize our approach so that it is independent of the ETEER pipeline: given a dataset, we should be able to recommend the best pipeline (not necessarily the one in Figure \ref{fig:eeter_pipeline}) along with its best hyperparameters.
+
+% %Future work: Only receive the entity collections as input and suggest not just the best configurations, but also the best pipeline. 

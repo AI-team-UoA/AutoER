@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+\small 
+\setlength{\tabcolsep}{2.5pt}
+\caption{The highest F1-score among the configurations considered by the sampling-based search algorithms in Section~\ref{sec:problem-1}.}
+\label{tab:global-bestf1s}
+\begin{tabular}{|c|c|c|c|c|c|c|r|}
+\hline
+Dat. & LM & k & Clustering & Threshold & Sampler & F1 & RT (s) \\
+\hline
+\hline
+D1 & st5 & 73 & CCC & 0.874280 & tpe & 78.43 & 0.95 \\
+D2 & st5 & 10 & UMC & 0.594537 & tpe & 85.85 & 0.38 \\
+D3 & sminilm & 10 & UMC & 0.429178 & random & 58.97 & 0.43 \\
+D4 & st5 & 1 & UMC & 0.759879 & gps & 98.56 & 6.58 \\
+D5 & st5 & 1 & CCC & 0.765179 & gps & 78.92 & 3.67 \\
+D6 & sminilm & 1 & UMC & 0.555229 & gps & 60.42 & 1.30 \\
+D7 & sminilm & 84 & CCC & 0.811881 & gps & 67.76 & 5.22 \\
+D8 & st5 & 75 & KC & 0.920773 & tpe & 49.53 & 6.45 \\
+D9 & st5 & 65 & KC & 0.830563 & tpe & 94.92 & 16.83 \\
+D10 & st5 & 2 & KC & 0.269090 & tpe & 56.11 & 14.03 \\
+\hline
+\end{tabular}
+\end{table}

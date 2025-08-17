@@ -1,0 +1,78 @@
+\section{ETEER pipeline}\label{sec:eteer_pipeline}
+
+We now present the ETEER pipeline that we use to address
+%will be used in our solutions to 
+Problems~\ref{pr:pr1} and \ref{pr:pr2}. 
+%As is common in the literature, our ETEER pipeline 
+Due to the quadratic complexity of the brute-force approach, it consists of two steps:
+\begin{itemize}[leftmargin=*]
+    \item \emph{Filtering}, which reduces the computational cost by identifying a set of promising \emph{candidate pairs} to be matched.
+    \item \emph{Verification}, which analytically examines each pair of candidates.
+\end{itemize}
+
+Based on a recent experimental study \cite{DBLP:journals/pvldb/ZeakisPSK23}, our solution relies on the ETEER pipeline shown in Figure~\ref{fig:eeter_pipeline}, which leverages language models. This approach not only combines high effectiveness with high time efficiency, but also requires the fine-tuning of a limited set of configuration parameters.
+
+%\section{Methodology}\label{sec:methodology}
+%\comments{Wouldn't it be better to state it like With and Without Ground-truth file?}
+
+%\guides{Here we need an overview of the approach and how it is presented in that section, say that we will present the parameters to be configured next, say that we can handle both cases when we have and when we don't have a ground truth and also say what difference it makes in our approach, i.e., HOW we handle those two cases.}
+
+%\begin{figure*}[t]
+%    \centering
+%    \includegraphics[width=0.8\linewidth]{figures/pyjedai/Allpipelines.PNG}
+%    \caption{PyJedAI pipelines. (a) Similarity Joins pipeline (b) Blocking-based pipeline (c) Nearest Neighbors using Pre-trained LMs pipeline.}
+%    \label{fig:pipelines}
+%\end{figure*}
+
+The first step of this ETEER pipeline is Vectorization, where the input entities are transformed into embedding vectors using pre-trained LMs, either static ones like Word2Vec \cite{DBLP:journals/corr/abs-1301-3781} and GloVe \cite{DBLP:conf/emnlp/PenningtonSM14}, or dynamic ones, like BERT \cite{DBLP:conf/naacl/DevlinCLT19} and SentenceBERT~\cite{DBLP:conf/emnlp/ReimersG19}.
+% available via PyTorch, 
+The former are context-agnostic, assigning each word to the same vector regardless of its context, while the latter are context-aware, generating different embeddings for different meanings of the same word (e.g., trunk as part of a tree or an elephant). Therefore, selecting the appropriate language model is crucial for achieving good results. Following \cite{DBLP:journals/pvldb/ZeakisPSK23}, we restrict our configurations to five state-of-the-art SentenceBERT models and two static models, listed in Table \ref{tab:parameter-values} 
+%parameter our study aims to configure 
+\textbf{(Parameter: LM)}. 
+%The reason is that the 
+Pre-trained BERT models yield scores of very low distinctiveness, failing to distinguish between matching and non-matching pairs, unless
+%in case 
+they are fine-tuned \cite{DBLP:journals/pvldb/ZeakisPSK23}.
+%Overall, the four SBERT models listed in  are considered - 
+Describing them in more detail goes beyond the scope of this work.
+
+\input{tables/parameters}
+
+Note that we apply a schema-agnostic serialization scheme, which simply concatenates all attribute values into a sentence describing each entity (i.e., all attribute names are excluded). This way, we inherently address noise in the form of misplaced values, while also achieving very high performance under versatile settings~\cite{DBLP:journals/pvldb/ZeakisPSK23}.
+
+The second step is Indexing. It receives as input all embedding vectors of $\mathcal{E}_1$ and organizes them in a data structure that facilitates their retrieval in descending distance from a given query, i.e., an embedding vector of $\mathcal{E}_2$. 
+%Each entity is transformed into an embedding vector, and these embeddings are then indexed in the ep. 
+Based on a recent experimental study \cite{DBLP:journals/is/AumullerBF20}, we employ 
+%Queries are performed on this indexing module using 
+FAISS \cite{DBLP:journals/corr/abs-2401-08281} for this purpose, due to its excellent balance between effectiveness and time efficiency.
+%, a vector similarity search tool developed by Meta. 
+We actually use a FAISS configuration that returns exact results, which does not require parameter tuning.\footnote{{The exact functionality of FAISS provides the real $k$-nearest neighbors in terms of cosine similarity, whereas the approximate functionality achieves a lower run-time at the cost of returning candidates that are not among the $k$ most similar ones.}}
+%No parameter needs to be configured in this step, given that we employ the configuration returning the exact results.
+For datasets with more than 10,000 entities, the approximate search should be applied to ensure high time efficiency, but its configuration is also straightforward.\footnote{For more details, please refer to \underline{https://github.com/facebookresearch/faiss/wiki/Guidelines-to-choose-an-index}.}
+
+The third step is Querying. It receives as input all embedding vectors of $\mathcal{E}_2$ and uses each vector/entity as a query to the FAISS index. The result of each query consists of the $k$ most similar entities from $\mathcal{E}_1$ in terms of cosine similarity. The $k$ parameter is the sole configuration parameter of this step, playing a major role in the performance of ETEER. The higher the value of $k$, the higher the filtering recall, at the cost of lower precision. Note that the filtering recall sets the upper bound of the overall ETEER recall, given that the subsequent steps do not detect new matches. Hence, $k$ is the second configuration parameter of the pipeline \textbf{(Parameter:~$\mathbf{k}$)}.
+
+%Note also that t
+The first three steps together implement the Filtering approach, which reduces the computational cost to the $k$ most similar $\mathcal{E}_2$ entities per $\mathcal{E}_1$ entity. %This means that 
+It receives as input the entity collections and returns as output a set of candidate pairs.% $P$.
+
+%\comments{We need to be consistent in the description here and the steps shown in the figure. E.g., Which step or series of steps corresponds to the $kNN$ step mentioned here? In the text, we skip the Entity Matching step and go directly to clustering. Filtering is only shown in the figure, but never explained in text}
+
+Subsequently, the set of candidate pairs 
+%$P$ 
+is transformed into a \textit{similarity graph} {by Matching, the fourth step of our ETEER pipeline, which estimates the similarity score between all candidate pairs. In the similarity graph, the nodes correspond to entities, while the edges connect the candidate pairs, with their weights indicating their similarity, i.e., the cosine similarity returned by FAISS.} 
+%where every node is an entity and every edge represents a candidate pair, weighted according to . 
+Note that the similarity graph is bipartite in the Record Linkage settings we are considering. 
+%This transformation is carried out by Matching,  {
+No configuration parameter is involved in this process. 
+
+The final step of the ETEER pipeline is Clustering, which applies bipartite graph matching algorithms to the similarity graph generated by the previous step. Based on a recent experimental study~\cite{DBLP:journals/vldb/PapadakisETHC23}, three established algorithms combine high time efficiency with high effectiveness: Connected Components (i.e., transitive closure), Unique Mapping Clustering \cite{DBLP:conf/kdd/Lacoste-JulienPDKGG13}, and Kiraly Clustering~\cite{DBLP:journals/algorithms/Kiraly13} \textbf{(Parameter: Clustering)}.\footnote{A more detailed description of their functionality lies out of the scope of this work, but the interested reader can refer to \cite{DBLP:journals/vldb/PapadakisETHC23} and the original publications of each algorithm.}
+All algorithms are configured by 
+%Perhaps the most important parameter is 
+a similarity threshold \textbf{(Parameter: Threshold)}, which prunes the edges with a lower weight.
+
+Note that Clustering is the only step that 
+%differs, 
+depends on the type of ER task at hand. In the case of Dirty ER, the state-of-the-art unconstrained algorithms for undirected similarity graphs are experimentally evaluated in \cite{DBLP:journals/pvldb/HassanzadehCML09}. Among them, Markov Clustering exhibits a performance that is robust to noise and portion of duplicates, while achieving high effectiveness and scalability. For Multi-source ER, the main clustering techniques are evaluated in \cite{DBLP:journals/csimq/SaeediNPR18}, with CLIP~\cite{DBLP:conf/esws/SaeediPR18} outperforming all others -- CLIP essentially generalizes Unique Mapping Clustering to Multi-source~ER.
+
+The configuration space of our pipeline is summarized in Table~\ref{tab:parameter-values}. Note that grid search should consider 39,900 different parameter combinations per dataset in order to maximize the corresponding F1 (7 pre-trained language models $\times$ 100 values for $k$ $\times$ 3 clustering algorithms $\times$ 19 values for similarity threshold). Our goal is to experimentally evaluate algorithms that converge to the maximum performance, while minimizing the trials in this search space.

@@ -1,0 +1,30 @@
+\begin{table}[t]
+\centering
+\small 
+\setlength{\tabcolsep}{2.5pt}
+\caption{{The F-Measure of the best solution to Problem 1 in Table \ref{tab:global-bestf1s} (Best Sampling) and the best solutions to Problem 2 (Best AutoML from Table \ref{tab:autosklearn-results} and Best RF from Table \ref{tab:lr-with-data-features}) in comparison with 
+%the main traditional end-to-end ER tools: 
+Magellan \cite{DBLP:journals/pvldb/KondaDCDABLPZNP16} and JedAI \cite{DBLP:journals/is/PapadakisMGSTGB20}. In each dataset, the best performance is highlighed in bold.}}
+\label{tab:baselines}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+Dat. & Best Sampling & Best AutoML & Best RF & Magellan & JedAI \\
+\hline
+\hline
+D1	& 78.43	& 55.35	& 55.35	& \textbf{84.44}	& 64.26\\
+D2	& 85.85	& 81.94	& 78.46	& 43.48	& \textbf{86.73}\\
+D3	& \textbf{58.97} & 57.79 & 56.86 & 45.48 & 58.65\\
+D4	& \textbf{98.56} & 98.38 & 98.24 & 94.81 & 98.19\\
+D5	& \textbf{78.92} & 71.97 & 74.16 & 70.51 & 67.59\\
+D6	& 60.42	& 55.98	& 45.44	& \textbf{60.90} & 41.75\\
+D7	& 67.76	& 50.14	& 62.12	& \textbf{67.88}	& 45.45\\
+D8	& 49.53	& 40.77	& 40.78	& \textbf{63.67}	& 45.84\\
+D9	& \textbf{94.92}	& 94.37	& 94.35	& 87.76	& 91.89 \\
+D10	& 56.11	& 36.31	& 54.91	& 60.79	& \textbf{86.94} \\
+%D11 & - & 84.84 & \textbf{84.98}  & - & 81.31 \\
+\hline
+\hline
+Mean & 72.95 & 64.30 & 66.07 & 67.97 & 68.73 \\
+\hline
+\end{tabular}
+\end{table}
