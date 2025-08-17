@@ -15,6 +15,7 @@ from sklearn.inspection import permutation_importance
 
 import json
 import os
+import random
 
 import argparse
 import time
@@ -38,6 +39,20 @@ OVERALL_RUNTIME_HOURS = config['overall_runtime_h']
 ENSEMBLE_SIZE = int(config['ensemble'])
 TOPK = int(config['topk'])
 WITH_DATA_FEATURES = int(config['with_data_features'])
+
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------  REPRODUCIBILITY SEED    ----------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- # 
+
+RANDOM_STATE = 42
+random.seed(RANDOM_STATE)
+np.random.seed(RANDOM_STATE)
+from sklearn.utils import check_random_state
+random_state = check_random_state(RANDOM_STATE)
+print("sklearn: random state ", random_state)
+os.environ['PYTHONHASHSEED'] = str(RANDOM_STATE)
 
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #

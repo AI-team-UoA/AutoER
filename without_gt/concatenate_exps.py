@@ -15,7 +15,7 @@ def process_automl_file(file_path, dataset_name):
 
 directories = {
     'automl': 'automl',
-    'dl': 'dl',
+    # 'dl': 'dl',
     'sklearn': 'sklearn'
 }
 
@@ -27,7 +27,7 @@ automl_dfs = [process_automl_file(os.path.join('automl', file), file) for file i
 #     df['WITH_DATA_FEATURES'] = 1
 
 
-dl_files = [os.path.join('dl', f) for f in os.listdir('dl') if (f.endswith('.csv') and 'importance' not in f)]
+# dl_files = [os.path.join('dl', f) for f in os.listdir('dl') if (f.endswith('.csv') and 'importance' not in f)]
 sklearn_files = [os.path.join('sklearn', f) for f in os.listdir('sklearn') if (f.endswith('.csv') and 'importance' not in f)]
 sklearn_files_ablation = [os.path.join('sklearn/ablation', f) for f in os.listdir('sklearn/ablation') if (f.endswith('.csv') and 'importance' not in f)]
 

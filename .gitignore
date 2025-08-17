@@ -7,6 +7,8 @@
 *.tar.gz
 *.pkl
 
+prev/
+
 # data
 data/*_data.csv
 data/trials*.csv

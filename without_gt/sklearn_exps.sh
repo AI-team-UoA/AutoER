@@ -8,8 +8,8 @@
 datasets=("optuna" "gridsearch" "all")
 regressors=("RF")
 
-echo "Regressors:  ${regressors[@]}"
-echo "Datasets:    ${datasets[@]}"
+echo "Running experiments\n\tfor the following regressors: ${regressors[@]}"
+echo "\tfor the following datasets: ${datasets[@]}"
 
 # read input cmd flag --ablation
 
@@ -69,3 +69,13 @@ for regressor in "${regressors[@]}"; do
 done
 
 echo "All tasks completed."
+
+wait
+
+python concatenate_exps.py
+
+wait 
+
+cd ./sklearn
+python concatenate_feature_importance.py 
+

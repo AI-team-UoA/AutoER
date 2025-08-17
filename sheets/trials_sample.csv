@@ -1,6 +1,6 @@
 dataset,InputEntityProfiles,NumberOfAttributes,NumberOfDistinctValues,NumberOfNameValuePairs,AverageNVPairsPerEntity,AverageDistinctValuesPerEntity,AverageNVpairsPerAttribute,AverageDistinctValuesPerAttribute,NumberOfMissingNVpairs,AverageValueLength,AverageValueTokens,MaxValuesPerEntity,lm,k,clustering,threshold,f1
-D3,4393,4,9674,14412,3.28,2.2,3603.0,2418.5,3160.0,585.15,103.27,4,smpnet,100,KiralyMSMApproximateClustering,0.5,53.2898
-D10,50797,10,424346,971445,19.12,8.35,97144.5,42434.6,65400000.0,283.02,62.72,1306,word2vec,76,KiralyMSMApproximateClustering,0.5,27.1331
-D10,50797,10,424346,971445,19.12,8.35,97144.5,42434.6,65400000.0,283.02,62.72,1306,fasttext,85,UniqueMappingClustering,0.7500000000000001,25.4137
-D8,24628,6,62834,128458,5.22,2.55,21409.67,10472.33,19310.0,102.34,23.85,6,fasttext,72,ConnectedComponentsClustering,0.05,0.0
-D2,2152,3,4383,4876,2.27,2.04,1625.33,1461.0,1580.0,197.28,39.85,3,fasttext,92,ConnectedComponentsClustering,0.25,0.0
+D3,4393,4,9674,14412,3.28,2.2,3603.0,2418.5,3160.0,585.15,103.27,4,sdistilroberta,91,KiralyMSMApproximateClustering,0.7500000000000001,37.307
+D9,63869,4,129067,208065,3.26,2.02,52016.25,32266.75,47411.0,108.15,19.38,4,sminilm,53,ConnectedComponentsClustering,0.7000000000000001,44.7051
+D7,13866,31,13834,44663,3.22,1.0,1440.74,446.26,232657.0,100.66,20.4,20,fasttext,97,UniqueMappingClustering,0.95,40.0895
+D3,4393,4,9674,14412,3.28,2.2,3603.0,2418.5,3160.0,585.15,103.27,4,word2vec,15,KiralyMSMApproximateClustering,0.3,29.9123
+D9,63869,4,129067,208065,3.26,2.02,52016.25,32266.75,47411.0,108.15,19.38,4,smpnet,6,ConnectedComponentsClustering,0.6500000000000001,12.7023

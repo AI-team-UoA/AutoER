@@ -12,6 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.inspection import permutation_importance
 
 import argparse
+import xgboost as xgb
 
 from sklearn.svm import SVR
 from xgboost import XGBRegressor
@@ -21,6 +22,7 @@ from sklearn.linear_model import Lasso, Ridge, LinearRegression
 
 import time
 import optuna
+import random
 
 # read args
 parser = argparse.ArgumentParser()
@@ -34,6 +36,20 @@ with_data_features = args.with_data_features
 
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- #
+# -------------------------  REPRODUCIBILITY SEED    ----------------------- #
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- # 
+
+RANDOM_STATE = 42
+random.seed(RANDOM_STATE)
+np.random.seed(RANDOM_STATE)
+from sklearn.utils import check_random_state
+random_state = check_random_state(RANDOM_STATE)
+os.environ['PYTHONHASHSEED'] = str(RANDOM_STATE)
+xgb_rng = np.random.RandomState(RANDOM_STATE)
+
+# -------------------------------------------------------------------------- #
+# -------------------------------------------------------------------------- #
 # -------------------------          PARAMS          ----------------------- #
 # -------------------------------------------------------------------------- #
 # -------------------------------------------------------------------------- # 
@@ -42,7 +58,6 @@ DATA_DIR = '../data/'
 DIR = './sklearn/'
 TOPK = 20
 OPTUNA_NUM_OF_TRIALS = 50
-RANDOM_STATE = 42
 REGRESSORS = {
     'LASSO': Lasso, 
     'RIDGE': Ridge,
@@ -114,13 +129,15 @@ trials = trials[features + ['f1', 'dataset']]
 # -------------------------------------------------------------------------- # 
 
 filename = DIR+RESULTS_CSV_NAME+'.csv'
-f = open(filename, 'w')
-f.write('TEST_SET, DATASET, REGRESSOR, VALIDATION_MSE, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, OPTIMIZATION_TIME, BEST_REGRESSOR_FIT_TIME, BEST_REGRESSOR_PREDICTION_TIME, LM, K, CLUSTERING, THRESHOLD\n')
-f.flush()
+aggregated_results_csv_file = open(filename, 'w')
+aggregated_results_csv_file.write('TEST_SET, DATASET, REGRESSOR, VALIDATION_MSE, TEST_MSE, PREDICTED_F1, GLOBAL_BEST_F1, PERFORMANCE, OPTIMIZATION_TIME, BEST_REGRESSOR_FIT_TIME, BEST_REGRESSOR_PREDICTION_TIME, LM, K, CLUSTERING, THRESHOLD\n')
+aggregated_results_csv_file.flush()
+
 print("Writing to: ", filename)
 
 for D in datasets:
-
+    # if D!='D2':
+    #     continue
     STUDY_NAME = RESULTS_CSV_NAME+'_'+D
     
     print("\n\n-----------------------------------\n")
@@ -225,22 +242,23 @@ for D in datasets:
 
         model.fit(X_train_final, y_train_final)
 
-        if REGRESSOR == LinearRegression:
-            weights = model.coef_
-            intercepts = model.intercept_
+        # if REGRESSOR == LinearRegression:
+        #     weights = model.coef_
+        #     intercepts = model.intercept_
 
-            print("Weights: ", weights)
-            print("Intercept: ", model.intercept_)
+        #     print("Weights: ", weights)
+        #     print("Intercept: ", model.intercept_)
 
-            # export
-            if not os.path.exists(DIR+'weights'):
-                os.makedirs(DIR+'weights/')
+        #     # export
+        #     if not os.path.exists(DIR+'weights'):
+        #         os.makedirs(DIR+'weights/')
             
-            with open(DIR+'weights/'+RESULTS_CSV_NAME+'_'+D+'.csv', 'w') as f:
-                f.write("Feature,Weight\n")
-                f.write("Intercept,{}\n".format(intercepts))
-                for i, w in enumerate(weights):
-                    f.write("{},{}\n".format(X_train_dummy.columns[i], w))
+        #     with open(DIR+'weights/'+RESULTS_CSV_NAME+'_'+D+'.csv', 'w') as f:
+        #         f.write("Feature,Weight\n")
+        #         f.write("Intercept,{}\n".format(intercepts))
+        #         for i, w in enumerate(weights):
+        #             f.write("{},{}\n".format(X_train_dummy.columns[i], w))
+                    
 
         # Evaluate the model
         y_pred = model.predict(X_val)
@@ -277,6 +295,51 @@ for D in datasets:
     BEST_REGRESSOR_PREDICTION_TIME = time.time() - BEST_REGRESSOR_PREDICTION_TIME
 
     regressor_name = str(regressor).split('(')[0]
+
+    if REGRESSOR == RandomForestRegressor:
+        feature_names = X_train_dummy.columns
+        feature_importances = regressor.feature_importances_
+        print("Feature Importances: ", feature_importances)
+
+        # print("Estimators: ", model.estimator_)
+        # print("N Estimators: ", model.estimators_)
+        # print("N Features: ", model.n_features_in_)
+
+        # Create directory to save weights if it doesn't exist
+        if not os.path.exists(DIR + 'weights'):
+            os.makedirs(DIR + 'weights/')
+        
+        # Export feature importances
+        with open(DIR + 'weights/' + RESULTS_CSV_NAME + '_' + D + '.csv', 'w') as importance_csv_file:
+            importance_csv_file.write("Feature,Importance\n")
+            for i, importance in enumerate(feature_importances):
+                importance_csv_file.write("{},{}\n".format(X_train_dummy.columns[i], importance))
+
+                # Select a single sample to trace its decision path
+        # sample = X[0].reshape(1, -1)
+
+        # # Access the trees in the random forest
+        # for tree_idx, tree in enumerate(regressor.estimators_):
+        #     print(f"Decision Path for Tree {tree_idx + 1}:")
+            
+        #     # Get the decision path for the sample
+        #     decision_path = tree.decision_path(X_train_dummy)
+        #     node_indicator = decision_path.toarray()
+            
+        #     # Get feature thresholds and feature indices used in splits
+        #     feature = tree.tree_.feature
+        #     threshold = tree.tree_.threshold
+
+        # # Print the path with attribute names
+        #     for node_id in np.where(node_indicator[0] == 1)[0]:
+        #         if threshold[node_id] != -2:  # -2 indicates a leaf node
+        #             feature_name = feature_names[feature[node_id]] if feature[node_id] != -2 else "Leaf Node"
+        #             print(f"Node {node_id}: Split on '{feature_name}' "
+        #                 f"at threshold {threshold[node_id]}")
+        #         else:
+        #             print(f"Node {node_id}: Leaf Node")
+            
+        #     print("\n")
 
     # -------------------------------------------------------------------------- #
     # -------------------------------------------------------------------------- #
@@ -332,7 +395,7 @@ for D in datasets:
     # BEST_REGRESSOR_PREDICTION_TIME = round(BEST_REGRESSOR_PREDICTION_TIME, 4)
     # OPTUNA_TRIALS_TIME = round(OPTUNA_TRIALS_TIME, 4)
 
-    f.write("{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
+    aggregated_results_csv_file.write("{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
                                                               dataset,
                                                   regressor_name, 
                                                   VALIDATION_MSE,
@@ -347,7 +410,7 @@ for D in datasets:
                                                     BEST_K,
                                                     BEST_CLUSTERING,
                                                     BEST_THRESHOLD))
-    f.flush()
+    aggregated_results_csv_file.flush()
 
     print("{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}\n".format(D,
                                                               dataset,
@@ -398,4 +461,4 @@ for D in datasets:
 
     # feature_importance.to_csv(DIR+'importance/'+RESULTS_CSV_NAME+'_'+D+".csv", index=False)
 
-f.close()
+aggregated_results_csv_file.close()
