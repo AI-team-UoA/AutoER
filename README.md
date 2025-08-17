@@ -1,19 +1,64 @@
-# AutoER: Auto Configuring Entity Resolution pipelines
+<div align="center">
+    <br><b><h1>Auto-Configuring Entity Resolution Pipelines</h1></b>
+</div>
+<div align="center">
+Leveraging pre-trained language models and AutoML techniques to build efficient,<br> 
+end-to-end ER workflows.
+</div>
 
-This is the repository of the relevant submitted paper.
+---
 
-Contains:
-- `data/`: datasets used for this paper.
-- `figures/`: contains all figures created for paper
-- `sheets/`: csv and spearsheets containing results
-- `without_gt/`: all code and scripts to build P1s results
-- `with_gt/`: all code and scripts to build P2s results (AutoML & LinearRegression)
-- `baseline/`: code used to replicate ZeroER
-- `benchmarking/`: code used for evaluating ETEER pipeline in DBpedia
-- `results.ipynd`: a view in results, figures and tables generator
+# Overview
 
-Bellow, you'll find instructions to build & execute this project, experiment by experiment.
+Entity Resolution (ER) is the task of identifying records that refer to the same real-world entity across different datasets (e.g., restaurants, movies, authors).  
+Traditional ER pipelines require careful tuning of multiple parameters (blocking, similarity thresholds, clustering algorithms), which is time-consuming and dataset-specific.
 
+**AutoER** introduces the first *automatic configuration framework* for ER pipelines, under two settings:
+
+1. **With Ground Truth** – uses sampling-based hyperparameter optimization to efficiently search the parameter space.  
+2. **Without Ground Truth** – learns regression models (Random Forest, AutoML) trained on other datasets to predict the best configurations.
+
+We evaluate AutoER on **11 real-world benchmark datasets** and show it achieves competitive F1-scores with drastically reduced search time.
+
+---
+
+# Pipeline
+
+<div align="center">
+    <img src="./Nikoletos-paper/figures/pyjedai/pipeline-AutoER.png" alt="ETEER Pipeline" width="650"/>
+  <br>Figure 1: End-to-End ER (ETEER) pipeline leveraged by AutoER.
+</div>
+
+
+
+---
+
+# Motivation
+
+Different configurations of the same ER pipeline can lead to drastically different results:
+
+<div align="center">
+    <img src="./figures/f1_distribution.png" alt="Distribution of F1 Scores" width="650"/>
+</div>
+
+*Figure 2: Distribution of F1 scores across 39,900 configurations on multiple datasets.*
+
+This highlights the need for **automatic configuration**, which AutoER addresses.
+
+---
+
+# Repository Structure
+
+- `data/` – datasets used in experiments.  
+- `figures/` – figures from the paper (pipeline, results, etc.).  
+- `sheets/` – CSV and spreadsheets with experimental results.  
+- `with_gt/` – code & scripts for **Problem 1** (auto-config with ground truth).  
+- `without_gt/` – code & scripts for **Problem 2** (auto-config without ground truth).  
+- `baseline/` – replication of ZeroER & DITTO baselines.  
+- `benchmarking/` – scalability evaluation on DBpedia.  
+- `results.ipynb` – notebook to generate figures and tables.  
+
+---
 # Datasets
 
 Please in the initial directory execute commands to download and prepare datasets:
