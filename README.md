@@ -1,34 +1,50 @@
 <div align="center">
     <br><b><h1>Auto-Configuring Entity Resolution Pipelines</h1></b>
 </div>
-<div align="center">
-    Konstantinos Nikoletos<sup>1</sup>, Vasilis Efthymiou<sup>2</sup>, George Papadakis<sup>3</sup>, Kostas Stefanidis<sup>4</sup><br>
+
+<div align="center" style="font-size:20px; font-weight:bold;">
+    Konstantinos Nikoletos<sup>1</sup>, 
+    Vasilis Efthymiou<sup>2</sup>, 
+    George Papadakis<sup>3</sup>, 
+    Kostas Stefanidis<sup>4</sup>
+</div>
+
+<div align="center" style="font-size:14px; font-weight:normal; margin-top:6px;">
     <sup>1</sup>National and Kapodistrian University of Athens, Greece (<i>k.nikoletos@di.uoa.gr</i>)<br>
     <sup>2</sup>Harokopio University of Athens, Greece (<i>vefthym@hua.gr</i>)<br>
     <sup>3</sup>National and Kapodistrian University of Athens, Greece (<i>gpapadis@di.uoa.gr</i>)<br>
     <sup>4</sup>Tampere University, Finland (<i>konstantinos.stefanidis@tuni.fi</i>)
 </div>
 
+
 ---
 
-# Overview
+## Overview
 
-Entity Resolution (ER) is the task of identifying records that refer to the same real-world entity across different datasets (e.g., restaurants, movies, authors).  
-Traditional ER pipelines require careful tuning of multiple parameters (blocking, similarity thresholds, clustering algorithms), which is time-consuming and dataset-specific.
+Entity Resolution (ER) is the task of identifying and linking different descriptions of the same real-world entity (e.g., a person, product, publication, or location) across diverse datasets. While ER is essential for improving data quality and enabling downstream applications such as analytics and machine learning, building an effective ER pipeline is far from trivial.  
 
-**AutoER** introduces the first *automatic configuration framework* for ER pipelines, under two settings:
+An end-to-end ER workflow typically consists of multiple steps — such as **blocking**, **similarity estimation**, and **clustering** — each of which requires careful selection and tuning of algorithms and parameters. The search space for possible configurations is enormous, and the performance of a given pipeline is highly sensitive to these choices. Traditionally, this tuning process has been manual, time-consuming, and dependent on the availability of ground truth labels, making ER both labor-intensive and error-prone.
 
-1. **With Ground Truth** – uses sampling-based hyperparameter optimization to efficiently search the parameter space.  
-2. **Without Ground Truth** – learns regression models (Random Forest, AutoML) trained on other datasets to predict the best configurations.
+This project tackles the challenge by introducing **Auto-Configuring Entity Resolution Pipelines**, a framework that leverages **pre-trained language models** and **AutoML techniques** to automatically configure efficient, high-performing ER workflows. The framework addresses two key scenarios:
 
-We evaluate AutoER on **11 real-world benchmark datasets** and show it achieves competitive F1-scores with drastically reduced search time.
+1. **Ground-Truth Aware Auto-Configuration**  
+   When a portion of ground truth matches is available, we frame parameter tuning as a hyperparameter optimization problem. By integrating **sampling-based search techniques** (e.g., Random, TPE, QMC, Bayesian optimization), our approach drastically reduces the number of trials needed to approximate the optimal configuration, achieving near-optimal effectiveness in **orders of magnitude less time** compared to exhaustive grid search.
 
-# Pipeline
+2. **Ground-Truth Agnostic Auto-Configuration**  
+   When no ground truth is available, we introduce a **regression-based approach** that predicts the effectiveness of pipeline configurations. Using dataset profiling features and configurations from other datasets with ground truth, we train models (Random Forest and AutoML ensembles) to generalize and recommend effective configurations for unseen datasets.
 
 <div align="center">
     <img src="./Nikoletos-paper/figures/pyjedai/pipeline-AutoER.png" alt="ETEER Pipeline" width="650"/>
   <br>Figure 1: End-to-End ER (ETEER) pipeline leveraged by AutoER.
 </div>
+
+### Key Contributions
+- **Problem Definition:** Formalization of two novel ER problems — automatic pipeline configuration *with* and *without* ground truth — not previously explored in ER research.  
+- **Sampling for ER:** First application of hyperparameter optimization methods (Random, TPE, QMC, Bayesian search) to ER pipelines, demonstrating they can achieve near-optimal F1 with only a fraction of the search cost.  
+- **Regression-Based Auto-Configuration:** First regression-based solution for ER configuration without ground truth, leveraging dataset features and supervised learning to predict effective pipeline setups.  
+- **Extensive Evaluation:** Empirical results on **11 real-world benchmark datasets** show that the proposed approaches consistently balance high effectiveness with significant runtime efficiency.  
+- **Open-Source Implementation:** The framework is released openly to foster reproducibility and further research in automated ER.  
+
 
 # Repository Structure
 
