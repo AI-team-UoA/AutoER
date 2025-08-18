@@ -2,9 +2,14 @@
     <br><b><h1>Auto-Configuring Entity Resolution Pipelines</h1></b>
 </div>
 <div align="center">
-Leveraging pre-trained language models and AutoML techniques to build efficient,<br> 
-end-to-end ER workflows.
+    Konstantinos Nikoletos<sup>1</sup>, Vasilis Efthymiou<sup>2</sup>, George Papadakis<sup>3</sup>, Kostas Stefanidis<sup>4</sup><br>
+    <sup>1</sup>National and Kapodistrian University of Athens, Greece (<i>k.nikoletos@di.uoa.gr</i>)<br>
+    <sup>2</sup>Harokopio University of Athens, Greece (<i>vefthym@hua.gr</i>)<br>
+    <sup>3</sup>National and Kapodistrian University of Athens, Greece (<i>gpapadis@di.uoa.gr</i>)<br>
+    <sup>4</sup>Tampere University, Finland (<i>konstantinos.stefanidis@tuni.fi</i>)
 </div>
+
+---
 
 # Overview
 
@@ -108,7 +113,7 @@ python concatenate.py --exp 12_4_0
 
 where `--exp` stands for the experiment name executed before.
 
-## Linear Regression
+## Regression
 
 
 ### Build
@@ -154,7 +159,7 @@ Executing this will create the top-1 workflow suggested per training trials type
 nohup ./run_dbpedia_exps.sh > ./logs/dbpedia.log  2>&1 &
 ```
 
-## Using LR approach
+## Using Regression approach
 
 Create predictions for all instances:
 
